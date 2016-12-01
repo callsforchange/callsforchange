@@ -2,10 +2,10 @@ service: tfp52calls52weeks
 provider:
   name: aws
   runtime: nodejs4.3
+  region: us-west-2
 
 # you can overwrite defaults here
 #  stage: dev
-#  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
