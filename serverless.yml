@@ -1,4 +1,4 @@
-service: 52calls/52weeks
+service: tfp52calls52weeks
 provider:
   name: aws
   runtime: nodejs4.3
