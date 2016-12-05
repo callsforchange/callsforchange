@@ -14,6 +14,12 @@ provider:
       Action:
         - "SNS:Publish"
       Resource: "arn:aws:sns:${self:provider.region}:*:refresh-users"
+# TODO(jon): Explore ETL'ing of http://www.senate.gov/general/contact_information/senators_cfm.xml
+#            to local storage?
+#     - Effect: "Allow"
+#       Action:
+#         - "SNS:Publish"
+#       Resource: "arn:aws:sns:${self:provider.region}:*:refresh-senators"
 
 # you can define service wide environment variables here
 #  environment:
@@ -32,8 +38,15 @@ functions:
   schedule-fanout:
     handler: functions/schedule_fanout.handler
     events:
-      - sns: schedule-fanout
       - schedule: cron(0/15 * * * ? *)
+  submit-user:
+    handler: functions/submit_user.handler
+    events:
+      - http:
+          integration: lambda
+          path: users/register
+          method: post
+          cors: true
 
 # resources:
 #   Resources:

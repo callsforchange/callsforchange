@@ -1,0 +1,22 @@
+{
+  "name": "52calls-52weeks",
+  "version": "1.0.0",
+  "description": "A service to remind folks to call their local representatives",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technologists-for-progress/52calls-52weeks.git"
+  },
+  "author": "Jon Tomas Gretarsson <jon.gretarsson@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/technologists-for-progress/52calls-52weeks/issues"
+  },
+  "homepage": "https://github.com/technologists-for-progress/52calls-52weeks#readme",
+  "dependencies": {
+    "googleapis": "^14.2.0"
+  }
+}
