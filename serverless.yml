@@ -47,6 +47,8 @@ functions:
           method: get
   submit-user:
     handler: functions/submit_user.handler
+    environment:
+      GOOGLE_API: ${env:GOOGLE_API}
     events:
       - http:
           integration: lambda

@@ -1,12 +1,11 @@
 'use strict';
 
 var AWS = require('aws-sdk');
-var google = require('googleapis');
+var google = require('../libs/google');
 var civicinfo = google.civicinfo('v2');
 
-
 module.exports.handler = (event, context, callback) => {
-  civicinfo.elections.electionQuery({}, {}, (err, elections) => {
+  civicinfo.elections.electionQuery({}, (err, elections) => {
     if (err) {
       callback(err);
       return;
