@@ -4,6 +4,7 @@ provider:
   runtime: nodejs4.3
   region: us-west-2
   cfLogs: true
+  
 
   iamRoleStatements:
     - Effect: "Allow"
