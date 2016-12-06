@@ -39,6 +39,12 @@ functions:
     handler: functions/schedule_fanout.handler
     events:
       - schedule: cron(0/15 * * * ? *)
+  robots:
+    handler: functions/robots.handler
+    events:
+      - http:
+          path: robots.txt
+          method: get
   submit-user:
     handler: functions/submit_user.handler
     events:
