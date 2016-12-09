@@ -14,6 +14,10 @@ provider:
       Action:
         - "SNS:Publish"
       Resource: "arn:aws:sns:${self:provider.region}:*:refresh-users"
+    - Effect: "Allow"
+      Action:
+        - "lambda:InvokeFunction"
+      Resource: "arn:aws:lambda:${self:provider.region}:*:function:${self:service}-${opt:stage}-notify-user"
 # TODO(jon): Explore ETL'ing of http://www.senate.gov/general/contact_information/senators_cfm.xml
 #            to local storage?
 #     - Effect: "Allow"
@@ -37,8 +41,12 @@ provider:
 functions:
   schedule-fanout:
     handler: functions/schedule_fanout.handler
+    environment:
+      SUBMIT_USER_FUNCTION_NAME: ${self:service}-${opt:stage}-notify-user
     events:
       - schedule: cron(0/15 * * * ? *)
+  notify-user:
+    handler: functions/notify_user.handler
   robots:
     handler: functions/robots.handler
     events:
