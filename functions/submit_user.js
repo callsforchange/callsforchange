@@ -1,22 +1,33 @@
 'use strict';
 
-var AWS = require('aws-sdk');
-var google = require('../libs/google');
-var civicinfo = google.civicinfo('v2');
+var mailchimp = require('../libs/mailchimp');
 
 module.exports.handler = (event, context, callback) => {
-  civicinfo.elections.electionQuery({}, (err, elections) => {
-    if (err) {
-      callback(err);
-      return;
-    }
-    const response = {
+  console.log({
+    message: 'Received a message!',
+    context: context,
+    event: event,
+  });
+
+  mailchimp.lists.subscribe({id: process.env.MAILCHIMP_LIST_ID, email:{email:event.body.email}}, function(data) {
+    console.log('User subscribed successfully to ' + process.env.MAILCHIMP_LIST_ID + '! Look for the confirmation email.');
+
+    callback(null, {
       event: event,
       context: context,
-      elections: elections,
-    };
+      data: data
+    });
 
-    // callback(new Error("[400] Bad Monkey"));
-    callback(null, response);
+  },
+  function(error) {
+    if (error.error) {
+      console.log(error.code + ": " + error.error);
+    } else {
+      console.log('There was an error subscribing that user');
+    }
+    callback(JSON.stringify({
+      message: 'Something interesting!',
+      error: error
+    }));
   });
 };

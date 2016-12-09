@@ -3,6 +3,7 @@ provider:
   name: aws
   runtime: nodejs4.3
   region: us-west-2
+  stage: dev
   cfLogs: true
 
   iamRoleStatements:
@@ -57,6 +58,8 @@ functions:
     handler: functions/submit_user.handler
     environment:
       GOOGLE_API: ${env:GOOGLE_API}
+      MAILCHIMP_API: ${env:MAILCHIMP_API}
+      MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
     events:
       - http:
           integration: lambda
