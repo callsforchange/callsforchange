@@ -2,10 +2,10 @@
 
 module.exports.handler = (event, context, callback) => {
   console.log({
-    context: context,
+    message: 'MailChimp Summary message received!',
     event: event,
+    context: context
   });
-
   const response = {
     statusCode: 200,
     headers: {
@@ -16,3 +16,5 @@ module.exports.handler = (event, context, callback) => {
 
   callback(null, response);
 };
+
+

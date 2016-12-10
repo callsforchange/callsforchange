@@ -66,6 +66,12 @@ functions:
           path: users/register
           method: post
           cors: true
+  mc-subscribe:
+    handler: functions/mc-subscribe.handler
+  mc-unsubscribe:
+    handler: functions/mc-unsubscribe.handler
+  mc-summary:
+    handler: functions/mc-summary.handler
 
 # resources:
 #   Resources:

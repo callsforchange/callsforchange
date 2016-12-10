@@ -9,7 +9,9 @@ module.exports.handler = (event, context, callback) => {
     event: event,
   });
 
-  mailchimp.lists.subscribe({id: process.env.MAILCHIMP_LIST_ID, email:{email:event.body.email}}, function(data) {
+  mailchimp.lists.subscribe({id: process.env.MAILCHIMP_LIST_ID,
+    email:{email:event.body.email},
+  }, function(data) {
     console.log('User subscribed successfully to ' + process.env.MAILCHIMP_LIST_ID + '! Look for the confirmation email.');
 
     callback(null, {
