@@ -72,6 +72,8 @@ functions:
     handler: functions/mc-unsubscribe.handler
   mc-summary:
     handler: functions/mc-summary.handler
+  noreply:
+    handler: functions/echo.handler
 
 # resources:
 #   Resources:
