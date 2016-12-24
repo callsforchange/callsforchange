@@ -1,10 +1,47 @@
 @import "webfonts";
 
+$brand-blue: #1B45E1;
+$brand-red: #EC1A3D;
+$brand-black: #122C3F;
+
+$brand-transition-curve: cubic-bezier(0.43, 0.58, 0.1, 0.9);
+
 
 html, body {
 	font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
+	color: $brand-black;
 }
 
 h1 {
 	font-weight: bold;
+}
+
+.btn-default {
+	height: 48px;
+	line-height: 36px;
+	background: $brand-red;
+
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: 0.1px;
+	box-shadow: 0 0 0 0 $brand-red, 0 5px 9px 0 rgba(0,0,0,0.1);
+	border-radius: 8px;
+	border: none;
+
+	transition: all 0.3s $brand-transition-curve;
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 0 0 1px $brand-red, 0 7px 9px 0 rgba(0,0,0,0.08);
+		background: $brand-red;
+		color: #fff;
+		border: none;
+	}
+}
+
+
+.home-hero {
+	background: $brand-blue;
+	height: 360px;
 }

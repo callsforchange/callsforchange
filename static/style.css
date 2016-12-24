@@ -15,9 +15,33 @@
   font-style: italic;
   src: url("assets/fonts/Fabriga/Fabriga-BoldItalic.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff") format("woff"); }
 html, body {
-  font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif; }
+  font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
+  color: #122C3F; }
 
 h1 {
   font-weight: bold; }
+
+.btn-default {
+  height: 48px;
+  line-height: 36px;
+  background: #EC1A3D;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.1px;
+  box-shadow: 0 0 0 0 #EC1A3D, 0 5px 9px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
+  .btn-default:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 0 1px #EC1A3D, 0 7px 9px 0 rgba(0, 0, 0, 0.08);
+    background: #EC1A3D;
+    color: #fff;
+    border: none; }
+
+.home-hero {
+  background: #1B45E1;
+  height: 360px; }
 
 /*# sourceMappingURL=style.css.map */
