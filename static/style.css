@@ -1,3 +1,23 @@
+@font-face {
+  font-family: "Fabriga";
+  src: url("assets/fonts/Fabriga/Fabriga-Regular.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Regular.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Regular.woff") format("woff"); }
+@font-face {
+  font-family: "Fabriga";
+  font-style: italic;
+  src: url("assets/fonts/Fabriga/Fabriga-Italic.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Italic.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Italic.woff") format("woff"); }
+@font-face {
+  font-family: "Fabriga";
+  font-weight: bold;
+  src: url("assets/fonts/Fabriga/Fabriga-Bold.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Bold.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Bold.woff") format("woff"); }
+@font-face {
+  font-family: "Fabriga";
+  font-weight: bold;
+  font-style: italic;
+  src: url("assets/fonts/Fabriga/Fabriga-BoldItalic.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff") format("woff"); }
+html, body {
+  font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif; }
 
+h1 {
+  font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */
