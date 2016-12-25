@@ -16,32 +16,118 @@
   src: url("assets/fonts/Fabriga/Fabriga-BoldItalic.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff") format("woff"); }
 html, body {
   font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
-  color: #122C3F; }
+  color: #122C3F;
+  height: 100%;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+a {
+  font-weight: bold;
+  color: #1B45E1; }
 
 h1 {
   font-weight: bold; }
 
+p {
+  font-size: 1.25em;
+  line-height: 1.6; }
+
 .btn-default {
   height: 48px;
-  line-height: 36px;
+  line-height: 28px;
   background: #EC1A3D;
   color: #fff;
-  font-size: 16px;
+  font-size: 1em;
   font-weight: bold;
   letter-spacing: 0.1px;
-  box-shadow: 0 0 0 0 #EC1A3D, 0 5px 9px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 9px 0 rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  border: none;
+  border: 2px solid #EC1A3D;
   transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
-  .btn-default:hover {
+  .btn-default:hover, .btn-default:focus {
+    outline: none;
     transform: translateY(-4px);
-    box-shadow: 0 0 0 1px #EC1A3D, 0 7px 9px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: 0 7px 9px 0 rgba(0, 0, 0, 0.08);
     background: #EC1A3D;
     color: #fff;
-    border: none; }
+    border: 2px solid #EC1A3D; }
+  .btn-default:focus {
+    border: 2px solid #7c0a1d; }
+  .btn-default:active:focus {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.14);
+    background: #EC1A3D;
+    color: #fff;
+    border: 2px solid #EC1A3D; }
+
+.btn-secondary {
+  font-weight: bold;
+  font-size: 1em;
+  height: 48px;
+  line-height: 28px;
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
+  .btn-secondary:hover {
+    color: #1B45E1;
+    border: 2px solid rgba(0, 0, 0, 0.4); }
+  .btn-secondary.inverted {
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.25); }
+    .btn-secondary.inverted:hover {
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.4); }
+
+input[type=text] {
+  display: block;
+  height: 60px;
+  font-size: 20px;
+  width: 100%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  margin-bottom: 1em;
+  padding: 0 0.5em;
+  transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
+  input[type=text]:focus {
+    outline: none;
+    border: 2px solid #1B45E1; }
 
 .home-hero {
   background: #1B45E1;
   height: 360px; }
+  .home-hero .logo {
+    margin-top: 87px; }
+  .home-hero h2 {
+    font-size: 24px;
+    color: #fff;
+    font-weight: normal; }
+
+nav {
+  text-align: right;
+  margin-top: 40px; }
+  nav a {
+    display: inline-block;
+    margin: 0 12px;
+    height: 48px;
+    color: rgba(255, 255, 255, 0.95);
+    transition: color 0.3s; }
+    nav a:hover {
+      color: #fff;
+      text-decoration: none; }
+
+.signup-form {
+  background: #FFFFFF;
+  box-shadow: 0 13px 54px 0 rgba(0, 0, 0, 0.23);
+  border-radius: 8px;
+  padding: 24px;
+  position: relative;
+  top: -120px; }
+
+.icon-call {
+  margin: 0.5em 1em 2em 0; }
 
 /*# sourceMappingURL=style.css.map */

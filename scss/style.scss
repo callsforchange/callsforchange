@@ -10,33 +10,116 @@ $brand-transition-curve: cubic-bezier(0.43, 0.58, 0.1, 0.9);
 html, body {
 	font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
 	color: $brand-black;
+	height: 100%;
+	font-size: 16px;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a {
+	font-weight: bold;
+	color: $brand-blue;
 }
 
 h1 {
 	font-weight: bold;
 }
 
+p {
+	font-size: 1.25em;
+	line-height: 1.6;
+}
+
+// BUTTONS
+
 .btn-default {
 	height: 48px;
-	line-height: 36px;
+	line-height: 28px;
 	background: $brand-red;
 
 	color: #fff;
-	font-size: 16px;
+	font-size: 1em;
 	font-weight: bold;
 	letter-spacing: 0.1px;
-	box-shadow: 0 0 0 0 $brand-red, 0 5px 9px 0 rgba(0,0,0,0.1);
+	box-shadow: 0 5px 9px 0 rgba(0,0,0,0.1);
 	border-radius: 8px;
-	border: none;
+	border: 2px solid $brand-red;
+
+	transition: all 0.3s $brand-transition-curve;
+
+	&:hover, &:focus {
+		outline: none;
+		transform: translateY(-4px);
+		box-shadow: 0 7px 9px 0 rgba(0,0,0,0.08);
+		background: $brand-red;
+		color: #fff;
+		border: 2px solid $brand-red;
+
+	}
+
+	&:focus {
+		border: 2px solid darken($brand-red, 25%);
+	}
+
+	&:active:focus {
+		outline: none;
+		transform: translateY(-1px);
+		box-shadow: 0 3px 9px 0 rgba(0,0,0,0.14);
+		background: $brand-red;
+		color: #fff;
+		border: 2px solid $brand-red;
+	}
+}
+
+.btn-secondary {
+	//font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 1em;
+	height: 48px;
+	line-height: 28px;
+	background: transparent;
+
+	border: 2px solid rgba(0,0,0,0.25);
+	border-radius: 8px;
 
 	transition: all 0.3s $brand-transition-curve;
 
 	&:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 0 0 1px $brand-red, 0 7px 9px 0 rgba(0,0,0,0.08);
-		background: $brand-red;
+		color: $brand-blue;
+		border: 2px solid rgba(0,0,0,0.4);
+	}
+
+	&.inverted {
 		color: #fff;
-		border: none;
+		border: 2px solid rgba(255,255,255,0.25);
+		
+		&:hover {
+			color: #fff;
+			border: 2px solid rgba(255,255,255,0.4);
+		}
+	}
+
+}
+
+
+// FORMS
+
+input[type=text] {
+	display: block;
+	height: 60px;
+	font-size: 20px;
+	width: 100%;
+	border: 2px solid rgba(0,0,0,0.15);
+	border-radius: 8px;
+	margin-bottom: 1em;
+	padding: 0 0.5em;
+
+	transition: all 0.3s $brand-transition-curve;
+
+	&:focus {
+		outline: none;
+		border: 2px solid $brand-blue;
 	}
 }
 
@@ -44,4 +127,52 @@ h1 {
 .home-hero {
 	background: $brand-blue;
 	height: 360px;
+
+	.logo {
+		margin-top: 87px;
+	}
+
+	h2 {
+		font-size: 24px;
+		color: #fff;
+		font-weight: normal;
+	}
+}
+
+nav {
+	text-align: right;
+	margin-top: 40px;
+
+	a {
+		display: inline-block;
+		margin: 0 12px;
+		height: 48px;
+		color: rgba(255,255,255,0.95);
+		transition: color 0.3s;
+
+		&:hover {
+			color: #fff;
+			text-decoration: none;
+		}
+	}
+}
+
+
+.signup-form {
+	background: #FFFFFF;
+	box-shadow: 0 13px 54px 0 rgba(0,0,0,0.23);
+	border-radius: 8px;
+
+	padding: 24px;
+
+	position: relative;
+	top: -120px;
+}
+
+.icon-call {
+	margin: 0.5em 1em 2em 0;
+}
+
+#signup {
+	
 }
