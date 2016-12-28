@@ -1,0 +1,20 @@
+#!/bin/sh
+
+STAGE=${1:-dev}
+
+case $STAGE in
+  dev)
+    REGION=us-east-1
+    ;;
+  prod)
+    REGION=us-west-2
+    ;;
+  *)
+    echo 'Unknown stage specified. Please run `deploy <stage>`' >&2
+    exit 1
+esac
+
+export GOOGLE_API=$(aws kms decrypt --cipher-text fileb://<(echo $GOOGLE_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext')
+export MAILCHIMP_API=$(aws kms decrypt --cipher-text fileb://<(echo $MAILCHIMP_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext')
+
+./node_modules/.bin/serverless deploy --region $REGION --stage $STAGE
