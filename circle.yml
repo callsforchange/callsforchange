@@ -11,7 +11,9 @@ deployment:
     branch: production
     commands:
       - ./node_modules/.bin/serverless deploy --region us-west-2 --stage prod
+      - aws s3 sync static/ s3://callsforchange.com/
   staging:
     branch: master
     commands:
       - ./node_modules/.bin/sls deploy --verbose --region us-east-1 --stage dev
+      - aws s3 sync static/ s3://www.52calls-52weeks.com/
