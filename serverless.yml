@@ -2,9 +2,10 @@ service: tfp52calls52weeks
 provider:
   name: aws
   runtime: nodejs4.3
-  region: us-west-2
-  stage: dev
   cfLogs: true
+  # Prod deploys to us-west-2
+  region: us-east-1
+  stage: dev
 
   iamRoleStatements:
     - Effect: "Allow"
