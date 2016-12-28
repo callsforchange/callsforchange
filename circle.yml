@@ -10,8 +10,8 @@ deployment:
   production:
     branch: production
     commands:
-      - ./node_modules/serverless deploy --region us-west-2 --stage prod
+      - ./node_modules/.bin/serverless deploy --region us-west-2 --stage prod
   staging:
     branch: master
     commands:
-      - ./node_modules/serverless deploy --region us-east-1 --stage dev
+      - ./node_modules/.bin/serverless deploy --region us-east-1 --stage dev
