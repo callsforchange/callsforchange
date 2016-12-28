@@ -1,11 +1,12 @@
 'use strict';
 
 module.exports.handler = (event, context, callback) => {
-  console.log({
+  console.log(JSON.stringify({
     message: 'MailChimp Summary message received!',
-    event: JSON.stringify(event),
+    event: event,
     context: context
-  });
+  }));
+
   const response = {
     statusCode: 200,
     headers: {
