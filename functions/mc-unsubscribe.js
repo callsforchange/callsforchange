@@ -3,7 +3,7 @@
 module.exports.handler = (event, context, callback) => {
   console.log({
     message: 'MailChimp Unsubscribe message received!',
-    event: event,
+    event: JSON.stringify(event),
     context: context
   });
   const response = {

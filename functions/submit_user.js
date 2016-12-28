@@ -5,8 +5,8 @@ var mailchimp = require('../libs/mailchimp');
 module.exports.handler = (event, context, callback) => {
   console.log({
     message: 'Received a message!',
-    context: context,
-    event: event,
+    context: JSON.stringify(context),
+    event: JSON.stringify(event),
   });
 
   mailchimp.lists.subscribe({id: process.env.MAILCHIMP_LIST_ID,
