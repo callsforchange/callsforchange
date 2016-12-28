@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports.handler = (event, context, callback) => {
-  console.log({
+  console.log(JSON.stringify({
     context: context,
-    event: JSON.stringify(event),
-  });
+    event: event,
+  }));
   callback(null, {});
 };
