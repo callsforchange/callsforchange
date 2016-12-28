@@ -14,4 +14,4 @@ deployment:
   staging:
     branch: master
     commands:
-      - ./node_modules/.bin/serverless deploy -v --region us-east-1 --stage dev
+      - ./node_modules/.bin/sls deploy --verbose --region us-east-1 --stage dev
