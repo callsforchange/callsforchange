@@ -9,27 +9,30 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
-  mailchimp.lists.subscribe({
-    id: process.env.MAILCHIMP_LIST_ID,
-    email: { email:event.body.email },
-  },
-  function(data) {
-    console.log('User subscribed successfully to ' + process.env.MAILCHIMP_LIST_ID + '! Look for the confirmation email.');
+  mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
+    email_address: event.body.email,
+    status: 'subscribed'
+  })
+
+  .then(data => {
+    console.log(`User subscribed successfully to ${data.list_id}! Look for the confirmation email.`);
+    console.log(JSON.stringify(data))
 
     callback(null, {
       event: event,
       context: context,
       data: data
     });
-  },
-  function(error) {
+  })
+
+  .catch(error => {
     if (error.error) {
       console.log(error.code + ": " + error.error);
     } else {
       console.log('There was an error subscribing that user');
     }
     callback(JSON.stringify({
-      message: 'Something interesting!',
+      message: 'There was an error subscribing this user',
       error: error
     }));
   });

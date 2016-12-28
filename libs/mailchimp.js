@@ -1,3 +1,3 @@
-var mcapi = require('mailchimp-api');
+var Mailchimp = require('mailchimp-api-v3');
 
-module.exports = new mcapi.Mailchimp(process.env.MAILCHIMP_API);
+module.exports = new Mailchimp(process.env.MAILCHIMP_API)

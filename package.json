@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "googleapis": "^14.2.0",
-    "mailchimp-api": "^2.0.7"
+    "mailchimp-api-v3": "^1.7.0"
   }
 }
