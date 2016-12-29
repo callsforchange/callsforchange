@@ -20,8 +20,8 @@ case $STAGE in
     exit 1
 esac
 
-export GOOGLE_API=$(aws kms decrypt --cipher-text fileb://<(echo $GOOGLE_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext')
-export MAILCHIMP_API=$(aws kms decrypt --cipher-text fileb://<(echo $MAILCHIMP_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext')
+export GOOGLE_API=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $GOOGLE_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext')
+export MAILCHIMP_API=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $MAILCHIMP_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext')
 export MAILCHIMP_LIST_ID
 
 ./node_modules/.bin/serverless deploy --region $REGION --stage $STAGE
