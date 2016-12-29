@@ -1,6 +1,5 @@
 'use strict';
 
-var Promise = require('bluebird');
 var civicinfo = require('../libs/google').civicinfo('v2');
 var mailchimp = require('../libs/mailchimp');
 
@@ -11,11 +10,16 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
-  Promise.promisify(civicinfo.representatives.representativeInfoByAddress)({
-    address: event.body.address,
-    levels: ['country'],
-    roles: ['legislatorLowerBody', 'legislatorUpperBody'],
-    fields: 'officials(name,phones,photoUrl)'
+  new Promise((resolve, reject) => {
+    civicinfo.representatives.representativeInfoByAddress({
+      address: event.body.address,
+      levels: ['country'],
+      roles: ['legislatorLowerBody', 'legislatorUpperBody'],
+      fields: 'officials(name,phones,photoUrl)'
+    }, function(err, data) {
+      if (err) reject(err);
+      else resolve(data);
+    });
   })
 
   .then(data => {

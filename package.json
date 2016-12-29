@@ -20,7 +20,6 @@
     "serverless": "~1.2.1"
   },
   "dependencies": {
-    "bluebird": "^3.4.7",
     "googleapis": "^14.2.0",
     "mailchimp-api-v3": "^1.7.0"
   }
