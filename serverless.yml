@@ -40,6 +40,13 @@ provider:
 #    - exclude-me.js
 #    - exclude-me-dir/**
 
+package:
+  include:
+    - functions/*
+    - lib/**
+  exclude:
+    - .git/**
+
 functions:
   schedule-fanout:
     handler: functions/schedule_fanout.handler
@@ -75,6 +82,11 @@ functions:
     handler: functions/mc-summary.handler
   noreply:
     handler: functions/echo.handler
+  migrate:
+    handler: functions/migrate.handler
+    environment:
+      MAILCHIMP_API: ${env:MAILCHIMP_API}
+      MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
 
 # resources:
 #   Resources:
