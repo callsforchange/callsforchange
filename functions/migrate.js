@@ -5,6 +5,7 @@
  *   creating indices and prepared data structures in dynamodb, &c.
  */
 
+var config = require('../libs/config');
 var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
 
@@ -48,19 +49,43 @@ function list_field_migrate() {
   });
 }
 
-const expected_webhooks = {
-  subscribe: {},
-  unsubscribe: {}
-};
+const expected_webhooks = [
+  {
+    url: `${config.api_hostname[process.env.STAGE]}/mailchimp/subscribe`,
+    sources: { user: true, admin: true, api: true },
+    events: { subscribe: true }
+  },
+  {
+    url: `${config.api_hostname[process.env.STAGE]}/mailchimp/unsubscribe`,
+    sources: { user: true, admin: true, api: true },
+    events: { unsubscribe: true }
+  }
+];
 
 function list_webhook_register() {
-  // return mailchimp.get(`/lists/${process.env.MAILCHIMP_LIST_ID}/
+  var url = `/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`;
+  return mailchimp.get(url)
+  .then(existing_hooks => {
+    console.log('Existing webhooks: ' + JSON.stringify(existing_hooks));
+
+    const existing_hook_urls = new Map(existing_hooks.webhooks.map(hook => [hook.url, hook]));
+    console.log('Existing webhook urls: ' + JSON.stringify(Array.from(existing_hook_urls.keys())));
+
+    const missing_hooks = expected_webhooks
+      .filter(hook => !existing_hook_urls.has(hook.url));
+    console.log('Missing webhooks: ' + JSON.stringify(missing_hooks));
+
+    const missing_hooks_promises = missing_hooks
+      .map(missing_hook => mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`, missing_hook));
+
+    return Promise.all(missing_hooks_promises);
+  });
 }
 
 module.exports.handler = (event, context, callback) => {
   Promise.all([
-    list_field_migrate()
-
+    list_field_migrate(),
+    list_webhook_register()
   ]).then(values => {
     callback(null, { values: values });
   })
