@@ -74,12 +74,18 @@ functions:
           path: users/register
           method: post
           cors: true
+
   mc-subscribe:
     handler: functions/mc-subscribe.handler
     environment:
       MAILCHIMP_API: ${env:MAILCHIMP_API}
       MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
     events:
+      - http:
+          integration: lambda
+          path: mailchimp/hook/subscribe
+          method: get
+          cors: true
       - http:
           integration: lambda
           path: mailchimp/hook/subscribe
@@ -91,6 +97,11 @@ functions:
       MAILCHIMP_API: ${env:MAILCHIMP_API}
       MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
     events:
+      - http:
+          path: mailchimp/hook/unsubscribe
+          integration: lambda
+          method: get
+          cors: true
       - http:
           path: mailchimp/hook/unsubscribe
           integration: lambda
