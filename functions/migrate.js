@@ -51,12 +51,12 @@ function list_field_migrate() {
 
 const expected_webhooks = [
   {
-    url: `${config.api_hostname[process.env.STAGE]}/mailchimp/subscribe`,
+    url: `${config.api_hostname[process.env.STAGE]}/mailchimp/hook/subscribe`,
     sources: { user: true, admin: true, api: true },
     events: { subscribe: true }
   },
   {
-    url: `${config.api_hostname[process.env.STAGE]}/mailchimp/unsubscribe`,
+    url: `${config.api_hostname[process.env.STAGE]}/mailchimp/hook/unsubscribe`,
     sources: { user: true, admin: true, api: true },
     events: { unsubscribe: true }
   }
