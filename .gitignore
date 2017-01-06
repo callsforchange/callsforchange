@@ -41,3 +41,11 @@ jspm_packages
 # Ignore sass docs files
 .sass-cache
 .sass-cache/*
+
+.idea/52calls-52weeks.iml
+
+.idea/modules.xml
+
+.idea/vcs.xml
+
+.idea/workspace.xml
