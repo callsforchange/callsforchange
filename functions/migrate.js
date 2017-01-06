@@ -10,15 +10,15 @@ var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
 
 const expected_merge_fields = {
-  REP1_NAME:  { name: 'REP1_NAME',  tag: 'REP1_NAME',  type: 'text' },
-  REP1_PHOTO: { name: 'REP1_PHOTO', tag: 'REP1_PHOTO', type: 'imageurl', required: true },
-  REP1_PHONE: { name: 'REP1_PHONE', tag: 'REP1_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
-  REP2_NAME:  { name: 'REP2_NAME',  tag: 'REP2_NAME',  type: 'text' },
-  REP2_PHOTO: { name: 'REP2_PHOTO', tag: 'REP2_PHOTO', type: 'imageurl', required: true },
-  REP2_PHONE: { name: 'REP2_PHONE', tag: 'REP2_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
-  REP3_NAME:  { name: 'REP3_NAME',  tag: 'REP3_NAME',  type: 'text' },
-  REP3_PHOTO: { name: 'REP3_PHOTO', tag: 'REP3_PHOTO', type: 'imageurl', required: true },
-  REP3_PHONE: { name: 'REP3_PHONE', tag: 'REP3_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } }
+  HOUSE_REP_NAME:  { name: 'REP1_NAME',  tag: 'REP1_NAME',  type: 'text' },
+  HOUSE_REP_PHOTO: { name: 'REP1_PHOTO', tag: 'REP1_PHOTO', type: 'imageurl', required: true },
+  HOUSE_REP_PHONE: { name: 'REP1_PHONE', tag: 'REP1_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
+  SENATE_REP1_NAME:  { name: 'REP2_NAME',  tag: 'REP2_NAME',  type: 'text' },
+  SENATE_REP1_PHOTO: { name: 'REP2_PHOTO', tag: 'REP2_PHOTO', type: 'imageurl', required: true },
+  SENATE_REP1_PHONE: { name: 'REP2_PHONE', tag: 'REP2_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
+  SENATE_REP2_NAME:  { name: 'REP3_NAME',  tag: 'REP3_NAME',  type: 'text' },
+  SENATE_REP2_PHOTO: { name: 'REP3_PHOTO', tag: 'REP3_PHOTO', type: 'imageurl', required: true },
+  SENATE_REP2_PHONE: { name: 'REP3_PHONE', tag: 'REP3_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } }
 };
 
 function list_field_migrate() {
