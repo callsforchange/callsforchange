@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var civicinfo = require('../libs/google').civicinfo('v2');
 var mailchimp = require('../libs/mailchimp');

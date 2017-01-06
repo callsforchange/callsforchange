@@ -92,7 +92,7 @@ module.exports.handler = (event, context, callback) => {
 
   .catch(error => {
     if (error.error) {
-      console.log(error.code + ": " + error.error);
+      console.log(error.code + ': ' + error.error);
     } else {
       console.log('There was an error performing migrations!');
     }
