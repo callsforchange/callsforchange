@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "googleapis": "^14.2.0",
-    "mailchimp-api-v3": "^1.7.0"
+    "mailchimp-api-v3": "^1.7.0",
+    "twilio": "^2.11.1"
   }
 }
