@@ -43,7 +43,7 @@ functions:
   schedule-fanout:
     handler: functions/schedule_fanout.handler
     environment:
-      SUBMIT_USER_FUNCTION_NAME: ${self:service}-${opt:stage}-notify-user
+      NOTIFY_USER_FUNCTION_NAME: ${self:service}-${opt:stage}-notify-user
     events:
       - schedule: cron(0/15 * * * ? *)
   notify-user:
@@ -103,7 +103,7 @@ functions:
 #         ProvisionedThroughput:
 #           ReadCapacityUnits: 5
 #           WriteCapacityUnits: 5
-# 
+#
 #     scheduleTable:
 #       Type: AWS::DynamoDB::Table
 #       Properties:

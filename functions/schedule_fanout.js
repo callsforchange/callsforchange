@@ -17,7 +17,7 @@ module.exports.handler = (event, context, callback) => {
   };
 
   lambda.invoke({
-    FunctionName: process.env.SUBMIT_USER_FUNCTION_NAME,
+    FunctionName: process.env.NOTIFY_USER_FUNCTION_NAME,
     InvocationType: 'Event',
     Payload: JSON.stringify({
       some_variable: 'some_value'
