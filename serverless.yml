@@ -20,27 +20,26 @@ provider:
       Action:
         - "lambda:InvokeFunction"
       Resource: "arn:aws:lambda:${self:provider.region}:*:function:${self:service}-${opt:stage}-notify-user"
-# TODO(jon): Explore ETL'ing of http://www.senate.gov/general/contact_information/senators_cfm.xml
-#            to local storage?
-#     - Effect: "Allow"
-#       Action:
-#         - "SNS:Publish"
-#       Resource: "arn:aws:sns:${self:provider.region}:*:refresh-senators"
 
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
+environment:
+  STAGE: ${opt:stage}
+  GOOGLE_API: ${env:GOOGLE_API}
+  MAILCHIMP_API: ${env:MAILCHIMP_API}
+  MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
 
 functions:
+# =--= MIGRATION AND MISC. OPERATIONAL SCRIPTS =-----------------------------------------=
+  migrate:
+    handler: functions/migrate.handler
+
+  robots:
+    handler: functions/robots.handler
+    events:
+      - http:
+          path: robots.txt
+          method: get
+
+# =--= OUTREACH =------------------------------------------------------------------------=
   schedule-fanout:
     handler: functions/schedule_fanout.handler
     environment:
@@ -49,32 +48,45 @@ functions:
       - schedule: cron(0/15 * * * ? *)
   notify-user:
     handler: functions/notify_user.handler
-  robots:
-    handler: functions/robots.handler
-    events:
-      - http:
-          path: robots.txt
-          method: get
+
+# =--= REGISTRATION AND USER MANAGEMENT =------------------------------------------------=
   submit-user:
     handler: functions/submit_user.handler
-    environment:
-      GOOGLE_API: ${env:GOOGLE_API}
-      MAILCHIMP_API: ${env:MAILCHIMP_API}
-      MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
     events:
       - http:
           integration: lambda
           path: users/register
           method: post
           cors: true
+
   mc-subscribe:
     handler: functions/mc-subscribe.handler
+    events:
+      - http:
+          integration: lambda
+          path: mailchimp/hook/subscribe
+          method: get
+          cors: true
+      - http:
+          integration: lambda
+          path: mailchimp/hook/subscribe
+          method: post
+          cors: true
   mc-unsubscribe:
     handler: functions/mc-unsubscribe.handler
-  mc-summary:
-    handler: functions/mc-summary.handler
-  noreply:
-    handler: functions/echo.handler
+    events:
+      - http:
+          path: mailchimp/hook/unsubscribe
+          integration: lambda
+          method: get
+          cors: true
+      - http:
+          path: mailchimp/hook/unsubscribe
+          integration: lambda
+          method: post
+          cors: true
+
+# =--= MISC. AWS RESOURCES =-------------------------------------------------------------=
 
 # resources:
 #   Resources:
