@@ -25,3 +25,6 @@ export MAILCHIMP_API=$(aws --region $REGION kms decrypt --ciphertext-blob fileb:
 export MAILCHIMP_LIST_ID
 
 ./node_modules/.bin/serverless deploy --region $REGION --stage $STAGE
+
+# Do any necessary migrations on deploy
+./node_modules/.bin/serverless invoke --region $REGION --stage $STAGE -f migrate
