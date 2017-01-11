@@ -20,11 +20,16 @@ case $STAGE in
     exit 1
 esac
 
+echo -n 'Decrypt and export environment variables: '
 export GOOGLE_API=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $GOOGLE_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
+echo -n 'GOOGLE_API. '
 export MAILCHIMP_API=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $MAILCHIMP_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
+echo -n 'MAILCHIMP_API. '
 export MAILCHIMP_LIST_ID
+echo -n 'MAILCHIMP_LIST_ID. '
+echo 'Done'
 
-./node_modules/.bin/serverless deploy --region $REGION --stage $STAGE
+./node_modules/.bin/serverless deploy --region $REGION --stage $STAGE -v
 
-# Do any necessary migrations on deploy
+echo 'Running data migrations...'
 ./node_modules/.bin/serverless invoke --region $REGION --stage $STAGE -f migrate
