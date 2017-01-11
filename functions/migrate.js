@@ -10,23 +10,23 @@ var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
 
 const expected_merge_fields = {
-  HOUSE_REP_NAME:    { name: 'REP1_NAME',  tag: 'REP1_NAME',  type: 'text' },
-  HOUSE_REP_PHOTO:   { name: 'REP1_PHOTO', tag: 'REP1_PHOTO', type: 'imageurl', required: true },
-  HOUSE_REP_PHONE:   { name: 'REP1_PHONE', tag: 'REP1_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
-  SENATE_REP1_NAME:  { name: 'REP2_NAME',  tag: 'REP2_NAME',  type: 'text' },
-  SENATE_REP1_PHOTO: { name: 'REP2_PHOTO', tag: 'REP2_PHOTO', type: 'imageurl', required: true },
-  SENATE_REP1_PHONE: { name: 'REP2_PHONE', tag: 'REP2_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
-  SENATE_REP2_NAME:  { name: 'REP3_NAME',  tag: 'REP3_NAME',  type: 'text' },
-  SENATE_REP2_PHOTO: { name: 'REP3_PHOTO', tag: 'REP3_PHOTO', type: 'imageurl', required: true },
-  SENATE_REP2_PHONE: { name: 'REP3_PHONE', tag: 'REP3_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } }
+  HOUSE_REP_NAME:    { name: 'HOUSE_REP_NAME',    tag: 'HOUSE_REP_NAME',    type: 'text' },
+  HOUSE_REP_PHOTO:   { name: 'HOUSE_REP_PHOTO',   tag: 'HOUSE_REP_PHOTO',   type: 'imageurl', required: true },
+  HOUSE_REP_PHONE:   { name: 'HOUSE_REP_PHONE',   tag: 'HOUSE_REP_PHONE',   type: 'phone',    required: true, options: { phone_format: 'US' } },
+  SENATE_REP1_NAME:  { name: 'SENATE_REP1_NAME',  tag: 'SENATE_REP1_NAME',  type: 'text' },
+  SENATE_REP1_PHOTO: { name: 'SENATE_REP1_PHOTO', tag: 'SENATE_REP1_PHOTO', type: 'imageurl', required: true },
+  SENATE_REP1_PHONE: { name: 'SENATE_REP1_PHONE', tag: 'SENATE_REP1_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
+  SENATE_REP2_NAME:  { name: 'SENATE_REP2_NAME',  tag: 'SENATE_REP2_NAME',  type: 'text' },
+  SENATE_REP2_PHOTO: { name: 'SENATE_REP2_PHOTO', tag: 'SENATE_REP2_PHOTO', type: 'imageurl', required: true },
+  SENATE_REP2_PHONE: { name: 'SENATE_REP2_PHONE', tag: 'SENATE_REP2_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } }
 };
 
 function list_field_migrate() {
   // default is 10, but with FNAME and LNAME already available by default, lets just go to 50 and call it a day
-  const url = `/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields?count=50`;
-  console.log(`Fetching fields from ${url}`);
+  const field_url = `/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields?count=50`;
+  console.log(`Fetching fields from ${field_url}`);
 
-  return mailchimp.get(url)
+  return mailchimp.get(field_url)
   .then(fields => {
     const existing_field_tags = new Map(fields.merge_fields.map(f => [f.tag, f]));
     console.log('Existing fields: ' + JSON.stringify(Array.from(existing_field_tags.keys())));
@@ -66,9 +66,9 @@ const expected_webhooks = [
 ];
 
 function list_webhook_register() {
-  const url = `/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`;
-  console.log(`Fetching webhooks from ${url}`);
-  return mailchimp.get(url)
+  const webhook_url = `/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`;
+  console.log(`Fetching webhooks from ${webhook_url}`);
+  return mailchimp.get(webhook_url)
   .then(existing_hooks => {
     console.log('Existing webhooks: ' + JSON.stringify(existing_hooks));
 
