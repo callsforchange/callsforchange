@@ -21,11 +21,11 @@ provider:
         - "lambda:InvokeFunction"
       Resource: "arn:aws:lambda:${self:provider.region}:*:function:${self:service}-${opt:stage}-notify-user"
 
-environment:
-  STAGE: ${opt:stage}
-  GOOGLE_API: ${env:GOOGLE_API}
-  MAILCHIMP_API: ${env:MAILCHIMP_API}
-  MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
+  environment:
+    STAGE: ${opt:stage}
+    GOOGLE_API: ${env:GOOGLE_API}
+    MAILCHIMP_API: ${env:MAILCHIMP_API}
+    MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
 
 functions:
 # =--= MIGRATION AND MISC. OPERATIONAL SCRIPTS =-----------------------------------------=
@@ -122,7 +122,6 @@ resources:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
 
-# 
 #     scheduleTable:
 #       Type: AWS::DynamoDB::Table
 #       Properties:

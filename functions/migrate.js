@@ -10,20 +10,23 @@ var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
 
 const expected_merge_fields = {
-  HOUSE_REP_NAME:    { name: 'REP1_NAME',  tag: 'REP1_NAME',  type: 'text' },
-  HOUSE_REP_PHOTO:   { name: 'REP1_PHOTO', tag: 'REP1_PHOTO', type: 'imageurl', required: true },
-  HOUSE_REP_PHONE:   { name: 'REP1_PHONE', tag: 'REP1_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
-  SENATE_REP1_NAME:  { name: 'REP2_NAME',  tag: 'REP2_NAME',  type: 'text' },
-  SENATE_REP1_PHOTO: { name: 'REP2_PHOTO', tag: 'REP2_PHOTO', type: 'imageurl', required: true },
-  SENATE_REP1_PHONE: { name: 'REP2_PHONE', tag: 'REP2_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } },
-  SENATE_REP2_NAME:  { name: 'REP3_NAME',  tag: 'REP3_NAME',  type: 'text' },
-  SENATE_REP2_PHOTO: { name: 'REP3_PHOTO', tag: 'REP3_PHOTO', type: 'imageurl', required: true },
-  SENATE_REP2_PHONE: { name: 'REP3_PHONE', tag: 'REP3_PHONE', type: 'phone',    required: true, options: { phone_format: 'US' } }
+  H_NAME:    { display_order: 11, name: 'House Rep. Name',         tag: 'H_NAME',   type: 'text' },
+  H_PHOTO:   { display_order: 12, name: 'House Rep. Photo',        tag: 'H_PHOTO',  type: 'imageurl'},
+  H_PHONE:   { display_order: 13, name: 'House Rep. Phone',        tag: 'H_PHONE',  type: 'phone',   options: { phone_format: 'US' } },
+  S1_NAME:   { display_order: 14, name: 'Senate Rep. 1\'s Name',   tag: 'S1_NAME',  type: 'text' },
+  S1_PHOTO:  { display_order: 15, name: 'Senate Rep. 1\'s Photo',  tag: 'S1_PHOTO', type: 'imageurl'},
+  S1_PHONE:  { display_order: 16, name: 'Senate Rep. 1\'s Phone',  tag: 'S1_PHONE', type: 'phone',   options: { phone_format: 'US' } },
+  S2_NAME:   { display_order: 17, name: 'Senate Rep. 2\'s Name',   tag: 'S2_NAME',  type: 'text' },
+  S2_PHOTO:  { display_order: 18, name: 'Senate Rep. 2\'s Photo',  tag: 'S2_PHOTO', type: 'imageurl'},
+  S2_PHONE:  { display_order: 19, name: 'Senate Rep. 2\'s Phone',  tag: 'S2_PHONE', type: 'phone',   options: { phone_format: 'US' } }
 };
 
 function list_field_migrate() {
   // default is 10, but with FNAME and LNAME already available by default, lets just go to 50 and call it a day
-  return mailchimp.get(`/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields?count=50`)
+  const field_url = `/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields?count=50`;
+  console.log(`Fetching fields from ${field_url}`);
+
+  return mailchimp.get(field_url)
   .then(fields => {
     const existing_field_tags = new Map(fields.merge_fields.map(f => [f.tag, f]));
     console.log('Existing fields: ' + JSON.stringify(Array.from(existing_field_tags.keys())));
@@ -39,13 +42,17 @@ function list_field_migrate() {
     const modified_fields = Object.keys(expected_merge_fields)
       .filter(tag => existing_field_tags.has(tag))
       .map(tag => expected_merge_fields[tag])
-      .filter(f => existing_field_tags.get(f.tag).name !== f.name || existing_field_tags.get(f.tag).type !== f.type)
+      .filter(f => existing_field_tags.get(f.tag).name          !== f.name         ||
+                   existing_field_tags.get(f.tag).type          !== f.type         ||
+                   existing_field_tags.get(f.tag).required      !== f.required     ||
+                   existing_field_tags.get(f.tag).display_order !== f.display_order)
     console.log('Modified merge fields: ' + JSON.stringify(modified_fields));
 
     const modified_fields_promises = modified_fields
-      .map(modified_field => mailchimp.patch(`/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields/${existing_field_tags.get(f.tag).merge_id}`, modified_field));
+      .map(modified_field => mailchimp.patch(`/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields/${existing_field_tags.get(modified_field.tag).merge_id}`, modified_field));
 
-    return Promise.all(missing_fields_promises.concat(modified_fields_promises));
+    return Promise.all(missing_fields_promises.concat(modified_fields_promises))
+      .catch(error => console.log('There was an error during merge fields: ' + JSON.stringify(error)));
   });
 }
 
@@ -63,8 +70,9 @@ const expected_webhooks = [
 ];
 
 function list_webhook_register() {
-  var url = `/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`;
-  return mailchimp.get(url)
+  const webhook_url = `/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`;
+  console.log(`Fetching webhooks from ${webhook_url}`);
+  return mailchimp.get(webhook_url)
   .then(existing_hooks => {
     console.log('Existing webhooks: ' + JSON.stringify(existing_hooks));
 
@@ -78,7 +86,8 @@ function list_webhook_register() {
     const missing_hooks_promises = missing_hooks
       .map(missing_hook => mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`, missing_hook));
 
-    return Promise.all(missing_hooks_promises);
+    return Promise.all(missing_hooks_promises)
+      .catch(error => console.log('There was an error during web hooks: ' + JSON.stringify(error)));
   });
 }
 
