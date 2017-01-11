@@ -23,7 +23,10 @@ const expected_merge_fields = {
 
 function list_field_migrate() {
   // default is 10, but with FNAME and LNAME already available by default, lets just go to 50 and call it a day
-  return mailchimp.get(`/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields?count=50`)
+  const url = `/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields?count=50`;
+  console.log(`Fetching fields from ${url}`);
+
+  return mailchimp.get(url)
   .then(fields => {
     const existing_field_tags = new Map(fields.merge_fields.map(f => [f.tag, f]));
     console.log('Existing fields: ' + JSON.stringify(Array.from(existing_field_tags.keys())));
@@ -63,7 +66,8 @@ const expected_webhooks = [
 ];
 
 function list_webhook_register() {
-  var url = `/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`;
+  const url = `/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`;
+  console.log(`Fetching webhooks from ${url}`);
   return mailchimp.get(url)
   .then(existing_hooks => {
     console.log('Existing webhooks: ' + JSON.stringify(existing_hooks));
