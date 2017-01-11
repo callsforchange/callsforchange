@@ -51,7 +51,8 @@ function list_field_migrate() {
     const modified_fields_promises = modified_fields
       .map(modified_field => mailchimp.patch(`/lists/${process.env.MAILCHIMP_LIST_ID}/merge-fields/${existing_field_tags.get(modified_field.tag).merge_id}`, modified_field));
 
-    return Promise.all(missing_fields_promises.concat(modified_fields_promises));
+    return Promise.all(missing_fields_promises.concat(modified_fields_promises))
+      .catch(error => console.log('There was an error during merge fields: ' + JSON.stringify(error)));
   });
 }
 
@@ -85,7 +86,8 @@ function list_webhook_register() {
     const missing_hooks_promises = missing_hooks
       .map(missing_hook => mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/webhooks`, missing_hook));
 
-    return Promise.all(missing_hooks_promises);
+    return Promise.all(missing_hooks_promises)
+      .catch(error => console.log('There was an error during web hooks: ' + JSON.stringify(error)));
   });
 }
 
