@@ -103,7 +103,7 @@ functions:
 #         ProvisionedThroughput:
 #           ReadCapacityUnits: 5
 #           WriteCapacityUnits: 5
-# 
+#
 #     scheduleTable:
 #       Type: AWS::DynamoDB::Table
 #       Properties:
