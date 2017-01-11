@@ -21,9 +21,9 @@ case $STAGE in
 esac
 
 echo -n 'Decrypt and export environment variables: '
-export GOOGLE_API=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $GOOGLE_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
+export GOOGLE_API=$(aws --region us-east-1 kms decrypt --ciphertext-blob fileb://<(echo $GOOGLE_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
 echo -n 'GOOGLE_API. '
-export MAILCHIMP_API=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $MAILCHIMP_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
+export MAILCHIMP_API=$(aws --region us-east-1 kms decrypt --ciphertext-blob fileb://<(echo $MAILCHIMP_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
 echo -n 'MAILCHIMP_API. '
 export MAILCHIMP_LIST_ID
 echo -n 'MAILCHIMP_LIST_ID. '
