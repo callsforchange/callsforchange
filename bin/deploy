@@ -32,12 +32,11 @@ echo -n 'GOOGLE_API. '
 export MAILCHIMP_API=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $MAILCHIMP_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
 echo -n 'MAILCHIMP_API. '
 export ADMIN_PASSWORD=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $ADMIN_PASSWORD_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
-<<<<<<< 4a55d4d10da29df01aae600382b6b2aae05c571a
 echo -n 'ADMIN_PASSWORD. '
-=======
 export TWILIO_ACCOUNT_SID=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $TWILIO_ACCOUNT_SID_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
+echo -n 'TWILIO_ACCOUNT_SID. '
 export TWILIO_AUTH_TOKEN=$(aws --region $REGION kms decrypt --ciphertext-blob fileb://<(echo $TWILIO_AUTH_TOKEN_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
->>>>>>> added twilio stuff and admin page
+echo -n 'TWILIO_AUTH_TOKEN. '
 export MAILCHIMP_LIST_ID
 echo -n 'MAILCHIMP_LIST_ID. '
 echo 'Done'
