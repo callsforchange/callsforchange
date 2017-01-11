@@ -88,21 +88,40 @@ functions:
 
 # =--= MISC. AWS RESOURCES =-------------------------------------------------------------=
 
-# resources:
-#   Resources:
-#     usersTable:
-#       Type: AWS::DynamoDB::Table
-#       Properties:
-#         TableName: 52calls-52weeks-users
-#         KeySchema:
-#           - AttributeName: id
-#             KeyType: HASH
-#         AttributeDefinitions:
-#           - AttributeName: id
-#             AttributeType: S
-#         ProvisionedThroughput:
-#           ReadCapacityUnits: 5
-#           WriteCapacityUnits: 5
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: 52calls-52weeks-users
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+          - AttributeName: district
+            KeyType: RANGE
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+          - AttributeName: district
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+    repsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: 52calls-52weeks-representatives
+        KeySchema:
+          - AttributeName: district
+            KeyType: HASH
+        AttributeDefinitions:
+          - AttributeName: district
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
 # 
 #     scheduleTable:
 #       Type: AWS::DynamoDB::Table
