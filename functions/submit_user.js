@@ -2,6 +2,40 @@
 
 var civicinfo = require('../libs/google').civicinfo('v2');
 var mailchimp = require('../libs/mailchimp');
+var AWS = require('aws-sdk');
+
+AWS.config.update({
+  region: "us-west-2"
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+var userObj = {
+  TableName: "users",
+  Item: {
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "phoneNumber": "",
+    "district": "",
+    "street": "",
+    "city": "",
+    "state": "",
+    "zip": 0,
+    "mailChimpStatus": ""
+  }
+};
+var repObj = {
+  TableName: "representatives",
+  Item: {
+    "email": "",
+    "senate1name": "",
+    "senate1number": "",
+    "senate2name": "",
+    "senate2number": "",
+    "repname": "",
+    "repnumber": ""
+  }
+};
 
 module.exports.handler = (event, context, callback) => {
   console.log({
@@ -10,12 +44,16 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
+  userObj.firstName =
+  userObj.lastName =
+  userObj.email = 
+
   new Promise((resolve, reject) => {
     civicinfo.representatives.representativeInfoByAddress({
       address: event.body.address,
       levels: ['country'],
       roles: ['legislatorLowerBody', 'legislatorUpperBody'],
-      fields: 'normalizedInput,officials(name,phones,photoUrl),offices(roles, officialIndices)'
+      fields: 'normalizedInput,officials(name,phones,photoUrl),offices(roles, officialIndices),divisions()'
     }, function(err, data) {
       if (err) reject(err);
       else resolve(data);
@@ -24,6 +62,12 @@ module.exports.handler = (event, context, callback) => {
 
   .then(data => {
     console.log('Received some information from CIVIC API ' + JSON.stringify(data));
+
+    userObj.district = data.normalizedInput.
+    userObj.street = data.normalizedInput.line1;
+    userObj.city = data.normalizedInput.city;
+    userObj.state = data.normalizedInput.state;
+    userObj.zip = data.normalizedInput.zip;
 
     var house_index = data.offices
       .filter(o => o.roles[0] === 'legislatorLowerBody')
@@ -54,6 +98,8 @@ module.exports.handler = (event, context, callback) => {
     console.log(`User subscribed successfully to ${data.list_id}! Look for the confirmation email.`);
     console.log(JSON.stringify(data))
 
+    userObj.mailChimpStatus = "subscribed";
+
     callback(null, {
       event: event,
       context: context,
@@ -67,6 +113,7 @@ module.exports.handler = (event, context, callback) => {
     } else {
       console.log('There was an error subscribing that user');
     }
+    userObj.mailChimpStatus = "errorNotSubscribed";
     callback(JSON.stringify({
       message: 'There was an error subscribing this user',
       error: error
