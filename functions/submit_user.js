@@ -16,6 +16,7 @@ var userObj = {
     "lastName": "",
     "email": "",
     "phoneNumber": "",
+    "preference": "",
     "district": "",
     "street": "",
     "city": "",
@@ -24,10 +25,10 @@ var userObj = {
     "mailChimpStatus": ""
   }
 };
-var repObj = {
+var representativeObj = {
   TableName: "representatives",
   Item: {
-    "email": "",
+    "district": "",
     "senate1name": "",
     "senate1number": "",
     "senate2name": "",
@@ -44,16 +45,18 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
-  userObj.firstName =
-  userObj.lastName =
-  userObj.email = 
+  userObj.email = event.body.email;
+  userObj.firstName = event.body.firstName || "";
+  userObj.lastName = event.body.lastName || "";
+  userObj.preference = event.body.preference || "email";
+  userObj.phoneNumber = event.body.phoneNumber || "";
 
   new Promise((resolve, reject) => {
     civicinfo.representatives.representativeInfoByAddress({
       address: event.body.address,
       levels: ['country'],
       roles: ['legislatorLowerBody', 'legislatorUpperBody'],
-      fields: 'normalizedInput,officials(name,phones,photoUrl),offices(roles, officialIndices),divisions'
+      fields: 'normalizedInput,officials(name,phones,photoUrl),offices(name, roles, officialIndices)'
     }, function(err, data) {
       if (err) reject(err);
       else resolve(data);
@@ -63,7 +66,7 @@ module.exports.handler = (event, context, callback) => {
   .then(data => {
     console.log('Received some information from CIVIC API ' + JSON.stringify(data));
 
-    userObj.district = data.divisions[0] //need to grab the key here and parse it
+    userObj.district = data.offices[0].name.match(/[A-Z]{2}-\d\d?$/);
     userObj.street = data.normalizedInput.line1;
     userObj.city = data.normalizedInput.city;
     userObj.state = data.normalizedInput.state;
@@ -76,6 +79,14 @@ module.exports.handler = (event, context, callback) => {
     var senate_indices = data.offices
       .filter(o => o.roles[0] === 'legislatorUpperBody')
       .map(o => o.officialIndices)[0];
+
+    representativeObj.district = data.offices[0].name.match(/[A-Z]{2}-\d\d?$/);
+    representativeObj.senate1name = data.officials[senate_indices[0]].name;
+    representativeObj.senate1number = data.officials[senate_indices[0]].phones[0] || "";
+    representativeObj.senate2name = data.officials[senate_indices[1]].name;
+    representativeObj.senate2number = data.officials[senate_indices[1]].phones[0] || "";
+    representativeObj.repname = data.officials[house_index].name;
+    representativeObj.repnumber = data.officials[house_index].phones[0] || "";
 
     return mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
       email_address: event.body.email,
@@ -99,6 +110,23 @@ module.exports.handler = (event, context, callback) => {
     console.log(JSON.stringify(data))
 
     userObj.mailChimpStatus = "subscribed";
+    
+    docClient.put(userObj, function(err, data) {
+      if (err) {
+        console.log("Error adding user object to database: ", err);
+      } else {
+        console.log("User input successful: ", userObj.email);
+      }
+    });
+
+    //TODO: Replace this with a bootstrap script for reps table, this does massively redundant table writes - Joe S
+    docClient.put(representativeObj, function(err, data) {
+      if (err) {
+        console.log("Error adding representative to database: ", err);
+      } else { 
+        console.log("Representative input successful: ", representativeObj.district);
+      }
+    });
 
     callback(null, {
       event: event,
