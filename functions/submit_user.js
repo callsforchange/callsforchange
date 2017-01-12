@@ -53,7 +53,7 @@ module.exports.handler = (event, context, callback) => {
       address: event.body.address,
       levels: ['country'],
       roles: ['legislatorLowerBody', 'legislatorUpperBody'],
-      fields: 'normalizedInput,officials(name,phones,photoUrl),offices(roles, officialIndices),divisions()'
+      fields: 'normalizedInput,officials(name,phones,photoUrl),offices(roles, officialIndices),divisions'
     }, function(err, data) {
       if (err) reject(err);
       else resolve(data);
@@ -63,7 +63,7 @@ module.exports.handler = (event, context, callback) => {
   .then(data => {
     console.log('Received some information from CIVIC API ' + JSON.stringify(data));
 
-    userObj.district = data.normalizedInput.
+    userObj.district = data.divisions[0] //need to grab the key here and parse it
     userObj.street = data.normalizedInput.line1;
     userObj.city = data.normalizedInput.city;
     userObj.state = data.normalizedInput.state;
