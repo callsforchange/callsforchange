@@ -93,7 +93,7 @@ resources:
     usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: 52calls-52weeks-users
+        TableName: users
         KeySchema:
           - AttributeName: email
             KeyType: HASH
@@ -111,7 +111,7 @@ resources:
     repsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: 52calls-52weeks-representatives
+        TableName: representatives
         KeySchema:
           - AttributeName: district
             KeyType: HASH
