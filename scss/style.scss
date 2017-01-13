@@ -13,7 +13,7 @@ html, body {
     font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
     color: $brand-black;
     height: 100%;
-    font-size: 16px;
+    font-size: 17px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -42,7 +42,7 @@ h1 {
 
 h2 {
 
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: #fff;
     font-weight: normal;
 }
@@ -64,7 +64,7 @@ h4 {
 }
 
 p {
-    font-size: 1.25em;
+    font-size: 1em;
     line-height: 1.6;
 }
 
@@ -79,7 +79,7 @@ p.xs {
 p.dropcap::first-letter {
     font-size: 3.2em;
     float: left;
-    line-height: 62px;
+    line-height: 1em;
     margin-right: 0.125em;
     font-weight: bold;
     color: $brand-red;
@@ -176,8 +176,8 @@ input[type=text] {
 .signup-form input[type=text],
 .rally-form input[type=text] {
   display: block;
-  height: 60px;
-  font-size: 20px;
+  height: 3em;
+  font-size: 1.1em;
   width: 100%;
   border-radius: 8px;
   margin-bottom: 1em;
@@ -195,8 +195,16 @@ input[type=text] {
 }
 
 .home-hero {
-    height: 320px;
+    height: 500px;
     position: relative;
+
+    .logo {
+      margin-top: 3em;
+    }
+
+     @media screen and (max-width: $collapse-breakpoint) {
+        height: auto;
+    }
 }
 
 @media screen and (max-width: 764px) {
@@ -205,7 +213,8 @@ input[type=text] {
         height: 0;
         width: 100%;
         padding: 0;
-        padding-bottom: 20.479714%
+        padding-bottom: 20.479714%;
+        margin-top: 0;
     }
 
     .logo svg {
@@ -262,7 +271,7 @@ nav {
 
 .signup-form {
     position: absolute;
-    top: -120px;
+    top: -320px;
 
     @media screen and (max-width: $collapse-breakpoint) {
         position: inherit;
