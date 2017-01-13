@@ -204,6 +204,9 @@ nav {
       position: inherit;
       top: 0; } }
 
+.status-panel {
+  margin-top: 5em; }
+
 .status-panel-form {
   margin-top: 15px; }
 
@@ -235,9 +238,15 @@ footer {
     border-bottom: 1px dotted rgba(255, 255, 255, 0.8); }
 
 .rally-header {
-  display: table;
   position: relative;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  align-items: center; }
 
 /*# sourceMappingURL=style.css.map */
