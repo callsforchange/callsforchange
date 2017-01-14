@@ -161,11 +161,15 @@ module.exports.handler = (event, context, callback) => {
 
   // Success, return to user
   .then(() => {
-    callback(null, {
-      event: event,
-      context: context,
-      data: data
-    });
+    const response = {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      body: 'OK'
+    };
+
+    callback(null, response);
   })
 
   // TODO: Handle errors better here -- what caused it and why, better reporting
