@@ -103,6 +103,8 @@ module.exports.handler = (event, context, callback) => {
       email_address: userObj.Item.email,
       status: 'subscribed',
       merge_fields: {
+        FNAME: userObject.Item.firstName || '',
+        LNAME: userObject.Item.lastName || '',
         H_NAME:   data.officials[house_index].name,
         H_PHONE:  _.get(data.officials[house_index], 'phones[0]'),
         H_PHOTO:  data.officials[house_index].photoUrl,
