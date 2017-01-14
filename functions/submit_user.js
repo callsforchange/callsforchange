@@ -148,7 +148,7 @@ module.exports.handler = (event, context, callback) => {
 
     return docClient.put(userObj)
     .then(() => console.log('User input successful: ', userObj.email))
-    .catch(error => console.log('Error adding user object to database: ', error));
+    .catch(error => console.log('Error adding user object to database: ', error))
 
     // Report error to user
     .then(() => {
