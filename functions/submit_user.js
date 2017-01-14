@@ -82,11 +82,13 @@ module.exports.handler = (event, context, callback) => {
   .then(data => {
     console.log('Received some information from CIVIC API ' + JSON.stringify(data));
 
-    var house_rep_office_name = data.offices
+    var district = data.offices
       .filter(o => o.roles[0] === 'legislatorLowerBody')
-      .map(o => o.name)[0];
+      .map(o => o.name)
+      .filter(name => name.match(/[A-Z]{2}-\d\d?$/))
+      .map(name => name.match(/[A-Z]{2}-\d\d?$/)[0])[0];
 
-    userObj.Item.district = house_rep_office_name.match(/[A-Z]{2}-\d\d?$/);
+    userObj.Item.district = district;
     userObj.Item.street = data.normalizedInput.line1;
     userObj.Item.city = data.normalizedInput.city;
     userObj.Item.state = data.normalizedInput.state;
@@ -103,7 +105,7 @@ module.exports.handler = (event, context, callback) => {
     var official_1 = data.officials[senate_indices[0]];
     var official_2 = data.officials[senate_indices[1]];
 
-    representativeObj.Item.district = house_rep_office_name.match(/[A-Z]{2}-\d\d?$/);
+    representativeObj.Item.district = district;
     representativeObj.Item.senate1name = official_1.name;
     representativeObj.Item.senate1number = _.get(official_1, 'phones[0]') || '';
     representativeObj.Item.senate2name = official_2.name;
