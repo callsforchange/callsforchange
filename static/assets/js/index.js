@@ -31,7 +31,7 @@
   }
 
   function submitHandler(event) {
-    form = event.target;
+    form = $(event.target);
     event.preventDefault();
 
     if (!isValid(form)) {
@@ -73,8 +73,8 @@
 
   function showFormSuccess(form) {
     // TODO
+    $(form)[0].reset();
     console.log('Successful form submission for user');
-    form.reset();
   }
 
   function showFormErrors(form) {
@@ -89,6 +89,7 @@
   // offline mode and stats
   function setupStatus(selector) {
     var panel = $(selector);
+    var form = $('#signup');
     if (panel.length === 0) { return; }
 
     // Edit rally name
@@ -114,8 +115,8 @@
     updateTodayCount();
 
     // Online and offline control
-    $('#go-offline').click(goOffline);
-    $('#go-online').click(goOnline);
+    $('#go-offline').click(() => goOffline(form));
+    $('#go-online').click(() => goOnline(form));
     updateOnlineStatus();
 
     // Auto detect offline and auto-switch
@@ -124,31 +125,34 @@
   }
 
   function updateOnlineStatus() {
+    var form = $('#signup');
     if (window.navigator.onLine) {
-      if ($('#signup').data('offline') === undefined) {
+      if (form.data('offline') === undefined) {
         // We haven't set this yet, let's do it now
         // We do not force online in case the user manually disabled it.
-        goOnline();
+        goOnline(form);
       }
       $('#go-online').attr('disabled', false);
       $('#go-online-disabled').addClass('hide');
     } else {
-      goOffline();
+      goOffline(form);
       $('#go-online').attr('disabled', true);
       $('#go-online-disabled').removeClass('hide');
     }
   }
 
-  function goOffline() {
-    var form = $('#signup');
+  function isOffline(form) {
+    return !!form.data('offline');
+  }
+
+  function goOffline(form) {
     form.data('offline', true);
 
     $('#status-online').addClass('hide');
     $('#status-offline').removeClass('hide');
   }
 
-  function goOnline() {
-    var form = $('#signup');
+  function goOnline(form) {
     form.data('offline', false);
 
     $('#status-online').removeClass('hide');
