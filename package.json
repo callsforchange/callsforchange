@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/technologists-for-progress/52calls-52weeks#readme",
   "devDependencies": {
+    "http-server": "^0.9.0",
     "serverless": "~1.2.1"
   },
   "dependencies": {
     "googleapis": "^14.2.0",
+    "lodash": "~4.17.4",
     "mailchimp-api-v3": "^1.7.0"
   }
 }

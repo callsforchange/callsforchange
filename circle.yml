@@ -2,6 +2,12 @@ machine:
   node:
     version: 4.3.2
 
+dependencies:
+  pre:
+    - sudo apt-get update && sudo apt-get install jq
+    - pip install awscli
+    - aws configure set preview.cloudfront true
+
 test:
   override:
     - echo 'no tests!'
@@ -10,8 +16,12 @@ deployment:
   production:
     branch: production
     commands:
-      - ./node_modules/.bin/serverless deploy --region us-west-2 --stage prod
+      - ./bin/deploy prod
+      - aws s3 sync static/ s3://callsforchange.com/
+      - aws --region us-west-2 cloudfront create-invalidation --distribution-id E1YG4R2UNDSCRT --paths '/*'
   staging:
-    branch: master
+    branch: staging
     commands:
-      - ./node_modules/.bin/sls deploy --verbose --region us-east-1 --stage dev
+      - ./bin/deploy dev
+      - aws s3 sync static/ s3://www.52calls-52weeks.com/
+      - aws --region us-east-1 cloudfront create-invalidation --distribution-id E3VA3C4R5I28R2 --paths '/*'
