@@ -60,7 +60,7 @@ p {
   line-height: 1.6; }
 
 p.sm {
-  font-size: 1em; }
+  font-size: 0.9em; }
 
 p.xs {
   font-size: 0.75em; }
@@ -141,6 +141,9 @@ input[type=text] {
   border-radius: 8px;
   margin-bottom: 1em;
   padding: 0 0.5em; }
+  .signup-form input[type=text].with-description,
+  .rally-form input[type=text].with-description {
+    margin-bottom: 0.2em; }
 
 .hero-background {
   background: #1B45E1 url("assets/images/hero-bg.png");
@@ -222,7 +225,7 @@ nav {
   display: block; }
 
 .icon-call {
-  margin: 0.5em 1em 2em 0; }
+  margin: 0.25em 1em 2em 0; }
 
 section {
   border-top: 4px solid #EC1A3D;
@@ -239,7 +242,7 @@ footer {
     color: #fff; }
   footer p {
     color: rgba(255, 255, 255, 0.8); }
-  footer a, footer a:visited {
+  footer a.link, footer a.link:visited {
     color: #fff;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.8); }
 
