@@ -3,6 +3,7 @@
 var civicinfo = require('../libs/google').civicinfo('v2');
 var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
+var _ = require('lodash');
 
 AWS.config.update({
   region: process.env.AWS_REGION
@@ -85,11 +86,14 @@ module.exports.handler = (event, context, callback) => {
       .filter(o => o.roles[0] === 'legislatorUpperBody')
       .map(o => o.officialIndices)[0];
 
+    var official_1 = data.officials[senate_indices[0]];
+    var official_2 = data.officials[senate_indices[1]];
+
     representativeObj.Item.district = data.offices[0].name.match(/[A-Z]{2}-\d\d?$/);
-    representativeObj.Item.senate1name = data.officials[senate_indices[0]].name;
-    representativeObj.Item.senate1number = data.officials[senate_indices[0]].phones[0] || '';
-    representativeObj.Item.senate2name = data.officials[senate_indices[1]].name;
-    representativeObj.Item.senate2number = data.officials[senate_indices[1]].phones[0] || '';
+    representativeObj.Item.senate1name = official_1.name;
+    representativeObj.Item.senate1number = _.get(official_1, 'phones[0]') || '';
+    representativeObj.Item.senate2name = official_2.name;
+    representativeObj.Item.senate2number = _.get(official_2, 'phones[0]') || '';
     representativeObj.Item.repname = data.officials[house_index].name;
     representativeObj.Item.repnumber = data.officials[house_index].phones[0] || '';
 
@@ -99,14 +103,14 @@ module.exports.handler = (event, context, callback) => {
       status: 'subscribed',
       merge_fields: {
         HOUSE_REP_NAME:    data.officials[house_index].name,
-        HOUSE_REP_PHONE:   data.officials[house_index].phones[0],
+        HOUSE_REP_PHONE:   _.get(data.officials[house_index], 'phones[0]'),
         HOUSE_REP_PHOTO:   data.officials[house_index].photoUrl,
-        SENATE_REP1_NAME:  data.officials[senate_indices[0]].name,
-        SENATE_REP1_PHONE: data.officials[senate_indices[0]].phones[0],
-        SENATE_REP1_PHOTO: data.officials[senate_indices[0]].photoUrl,
-        SENATE_REP2_NAME:  data.officials[senate_indices[1]].name,
-        SENATE_REP2_PHONE: data.officials[senate_indices[1]].phones[0],
-        SENATE_REP2_PHOTO: data.officials[senate_indices[1]].photoUrl
+        SENATE_REP1_NAME:  official_1.name,
+        SENATE_REP1_PHONE: _.get(official_1, 'phones[0]'),
+        SENATE_REP1_PHOTO: official_1.photoUrl,
+        SENATE_REP2_NAME:  official_2.name,
+        SENATE_REP2_PHONE: _.get(official_2, 'phones[0]'),
+        SENATE_REP2_PHOTO: official_2.photoUrl
       }
     })
   })
@@ -141,7 +145,7 @@ module.exports.handler = (event, context, callback) => {
     if (error.error) {
       console.log(error.code + ': ' + error.error);
     } else {
-      console.log('There was an error subscribing that user');
+      console.log('There was an error subscribing that user', error);
     }
 
     userObj.Item.mailChimpStatus = 'errorNotSubscribed';
