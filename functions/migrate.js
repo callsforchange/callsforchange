@@ -10,15 +10,15 @@ var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
 
 const expected_merge_fields = {
-  H_NAME:    { display_order: 11, name: 'House Rep. Name',         tag: 'H_NAME',   type: 'text' },
-  H_PHOTO:   { display_order: 12, name: 'House Rep. Photo',        tag: 'H_PHOTO',  type: 'imageurl'},
-  H_PHONE:   { display_order: 13, name: 'House Rep. Phone',        tag: 'H_PHONE',  type: 'phone',   options: { phone_format: 'US' } },
-  S1_NAME:   { display_order: 14, name: 'Senate Rep. 1\'s Name',   tag: 'S1_NAME',  type: 'text' },
-  S1_PHOTO:  { display_order: 15, name: 'Senate Rep. 1\'s Photo',  tag: 'S1_PHOTO', type: 'imageurl'},
-  S1_PHONE:  { display_order: 16, name: 'Senate Rep. 1\'s Phone',  tag: 'S1_PHONE', type: 'phone',   options: { phone_format: 'US' } },
-  S2_NAME:   { display_order: 17, name: 'Senate Rep. 2\'s Name',   tag: 'S2_NAME',  type: 'text' },
-  S2_PHOTO:  { display_order: 18, name: 'Senate Rep. 2\'s Photo',  tag: 'S2_PHOTO', type: 'imageurl'},
-  S2_PHONE:  { display_order: 19, name: 'Senate Rep. 2\'s Phone',  tag: 'S2_PHONE', type: 'phone',   options: { phone_format: 'US' } }
+  H_NAME:    { display_order: 11, name: 'House Rep. Name',        required: false, tag: 'H_NAME',   type: 'text' },
+  H_PHOTO:   { display_order: 12, name: 'House Rep. Photo',       required: false, tag: 'H_PHOTO',  type: 'imageurl'},
+  H_PHONE:   { display_order: 13, name: 'House Rep. Phone',       required: false, tag: 'H_PHONE',  type: 'phone',   options: { phone_format: 'US' } },
+  S1_NAME:   { display_order: 14, name: 'Senate Rep. 1\'s Name',  required: false, tag: 'S1_NAME',  type: 'text' },
+  S1_PHOTO:  { display_order: 15, name: 'Senate Rep. 1\'s Photo', required: false, tag: 'S1_PHOTO', type: 'imageurl'},
+  S1_PHONE:  { display_order: 16, name: 'Senate Rep. 1\'s Phone', required: false, tag: 'S1_PHONE', type: 'phone',   options: { phone_format: 'US' } },
+  S2_NAME:   { display_order: 17, name: 'Senate Rep. 2\'s Name',  required: false, tag: 'S2_NAME',  type: 'text' },
+  S2_PHOTO:  { display_order: 18, name: 'Senate Rep. 2\'s Photo', required: false, tag: 'S2_PHOTO', type: 'imageurl'},
+  S2_PHONE:  { display_order: 19, name: 'Senate Rep. 2\'s Phone', required: false, tag: 'S2_PHONE', type: 'phone',   options: { phone_format: 'US' } }
 };
 
 function list_field_migrate() {
