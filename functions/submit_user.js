@@ -102,15 +102,15 @@ module.exports.handler = (event, context, callback) => {
       email_address: userObj.Item.email,
       status: 'subscribed',
       merge_fields: {
-        HOUSE_REP_NAME:    data.officials[house_index].name,
-        HOUSE_REP_PHONE:   _.get(data.officials[house_index], 'phones[0]'),
-        HOUSE_REP_PHOTO:   data.officials[house_index].photoUrl,
-        SENATE_REP1_NAME:  official_1.name,
-        SENATE_REP1_PHONE: _.get(official_1, 'phones[0]'),
-        SENATE_REP1_PHOTO: official_1.photoUrl,
-        SENATE_REP2_NAME:  official_2.name,
-        SENATE_REP2_PHONE: _.get(official_2, 'phones[0]'),
-        SENATE_REP2_PHOTO: official_2.photoUrl
+        H_NAME:   data.officials[house_index].name,
+        H_PHONE:  _.get(data.officials[house_index], 'phones[0]'),
+        H_PHOTO:  data.officials[house_index].photoUrl,
+        S1_NAME:  official_1.name,
+        S1_PHONE: _.get(official_1, 'phones[0]'),
+        S1_PHOTO: official_1.photoUrl,
+        S2_NAME:  official_2.name,
+        S2_PHONE: _.get(official_2, 'phones[0]'),
+        S2_PHOTO: official_2.photoUrl
       }
     })
   })
