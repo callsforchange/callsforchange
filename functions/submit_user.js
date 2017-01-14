@@ -10,34 +10,6 @@ AWS.config.update({
 });
 
 var docClient = new AWS.DynamoDB.DocumentClient();
-var userObj = {
-  TableName: 'users',
-  Item: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    preference: '',
-    district: '',
-    street: '',
-    city: '',
-    state: '',
-    zip: 0,
-    mailChimpStatus: ''
-  }
-};
-var representativeObj = {
-  TableName: 'representatives',
-  Item: {
-    district: '',
-    senate1name: '',
-    senate1number: '',
-    senate2name: '',
-    senate2number: '',
-    repname: '',
-    repnumber: ''
-  }
-};
 
 module.exports.handler = (event, context, callback) => {
   console.log({
@@ -45,6 +17,35 @@ module.exports.handler = (event, context, callback) => {
     context: JSON.stringify(context),
     event: JSON.stringify(event),
   });
+
+  var userObj = {
+    TableName: 'users',
+    Item: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      preference: '',
+      district: '',
+      street: '',
+      city: '',
+      state: '',
+      zip: 0,
+      mailChimpStatus: ''
+    }
+  };
+  var representativeObj = {
+    TableName: 'representatives',
+    Item: {
+      district: '',
+      senate1name: '',
+      senate1number: '',
+      senate2name: '',
+      senate2number: '',
+      repname: '',
+      repnumber: ''
+    }
+  };
 
   // transform name
   var nameParts = (event.body.full_name || '').split(' ');
@@ -124,7 +125,7 @@ module.exports.handler = (event, context, callback) => {
   })
 
   .then(() => docClient.put(userObj))
-  .then(() => console.log('User input successful: ', userObj.email))
+  .then(() => console.log('User input successful: ', userObj.Item.email))
 
   .then(() =>docClient.put(representativeObj))
   // TODO: Replace this with a bootstrap script for reps table, this does massively redundant table writes - Joe S
@@ -151,7 +152,7 @@ module.exports.handler = (event, context, callback) => {
     userObj.Item.mailChimpStatus = 'errorNotSubscribed';
 
     return docClient.put(userObj)
-    .then(() => console.log('User input successful: ', userObj.email))
+    .then(() => console.log('User input successful: ', userObj.Item.email))
     .catch(error => console.log('Error adding user object to database: ', error))
 
     // Report error to user
