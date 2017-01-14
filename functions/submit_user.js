@@ -157,7 +157,7 @@ module.exports.handler = (event, context, callback) => {
 
   .then(() =>docClientPut(representativeObj))
   // TODO: Replace this with a bootstrap script for reps table, this does massively redundant table writes - Joe S
-  .then(() => console.log('Representative input successful: ', representativeObj.district))
+  .then(() => console.log('Representative input successful: ', representativeObj.Item.district))
 
   // Success, return to user
   .then(() => {
