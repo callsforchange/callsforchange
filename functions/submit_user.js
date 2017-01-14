@@ -141,14 +141,14 @@ module.exports.handler = (event, context, callback) => {
     if (error.error) {
       console.log(error.code + ': ' + error.error);
     } else {
-      console.log('There was an error subscribing that user');
+      console.log('There was an error subscribing that user', error);
     }
 
     userObj.Item.mailChimpStatus = 'errorNotSubscribed';
 
     return docClient.put(userObj)
     .then(() => console.log('User input successful: ', userObj.email))
-    .catch(error => console.log('Error adding user object to database: ', error));
+    .catch(error => console.log('Error adding user object to database: ', error))
 
     // Report error to user
     .then(() => {
