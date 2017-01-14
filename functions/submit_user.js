@@ -99,7 +99,7 @@ module.exports.handler = (event, context, callback) => {
 
     // Send new info to MailChimp
     return mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
-      email_address: event.body.email,
+      email_address: userObj.Item.email,
       status: 'subscribed',
       merge_fields: {
         HOUSE_REP_NAME:    data.officials[house_index].name,
