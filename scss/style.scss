@@ -233,8 +233,10 @@ input[type=text] {
 nav {
     text-align: right;
     margin: 1.25em 0;
+    height: 3em;
+    line-height: 2.6em;
 
-    a {
+    a, a:visited {
         display: inline-block;
         margin: 0 0.75em;
         line-height: 1em;

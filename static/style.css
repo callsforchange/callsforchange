@@ -176,8 +176,10 @@ input[type=text] {
     top: 0; } }
 nav {
   text-align: right;
-  margin: 1.25em 0; }
-  nav a {
+  margin: 1.25em 0;
+  height: 3em;
+  line-height: 2.6em; }
+  nav a, nav a:visited {
     display: inline-block;
     margin: 0 0.75em;
     line-height: 1em;
@@ -185,7 +187,7 @@ nav {
     font-weight: bold;
     border-bottom: 1px dotted #1B45E1;
     transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
-    nav a:hover {
+    nav a:hover, nav a:visited:hover {
       color: #fff;
       line-height: 2.5em;
       border-bottom: 1px dotted #fff;
