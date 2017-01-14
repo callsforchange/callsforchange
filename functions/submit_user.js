@@ -45,15 +45,19 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
-  userObj.Item.email = event.body.email;
-  userObj.Item.firstName = event.body.firstName || '';
-  userObj.Item.lastName = event.body.lastName || '';
-  userObj.Item.preference = event.body.preference || 'email';
-  userObj.Item.phoneNumber = event.body.phoneNumber || '';
+  // transform name
+  var nameParts = (event.body.full_name || '').split(' ');
 
+  userObj.Item.email = event.body.email_address;
+  userObj.Item.firstName = nameParts.shift();
+  userObj.Item.lastName = nameParts.join(' ');
+  userObj.Item.preference = event.body.contact_preference || 'email';
+  userObj.Item.phoneNumber = event.body.phone_number || '';
+
+  // Wrap Civic API call in a promise and call Google
   new Promise((resolve, reject) => {
     civicinfo.representatives.representativeInfoByAddress({
-      address: event.body.address,
+      address: event.body.street_address,
       levels: ['country'],
       roles: ['legislatorLowerBody', 'legislatorUpperBody'],
       fields: 'normalizedInput,officials(name,phones,photoUrl),offices(name, roles, officialIndices)'
@@ -63,6 +67,7 @@ module.exports.handler = (event, context, callback) => {
     });
   })
 
+  // Parse and process rep data
   .then(data => {
     console.log('Received some information from CIVIC API ' + JSON.stringify(data));
 
@@ -88,6 +93,7 @@ module.exports.handler = (event, context, callback) => {
     representativeObj.Item.repname = data.officials[house_index].name;
     representativeObj.Item.repnumber = data.officials[house_index].phones[0] || '';
 
+    // Send new info to MailChimp
     return mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
       email_address: event.body.email,
       status: 'subscribed',
@@ -105,29 +111,23 @@ module.exports.handler = (event, context, callback) => {
     })
   })
 
+  // Once subscribed to MC, save to our DBs for re-processing
   .then(data => {
     console.log(`User subscribed successfully to ${data.list_id}! Look for the confirmation email.`);
     console.log(JSON.stringify(data))
 
     userObj.Item.mailChimpStatus = 'subscribed';
-    
-    docClient.put(userObj, function(err, data) {
-      if (err) {
-        console.log('Error adding user object to database: ', err);
-      } else {
-        console.log('User input successful: ', userObj.email);
-      }
-    });
+  })
 
-    //TODO: Replace this with a bootstrap script for reps table, this does massively redundant table writes - Joe S
-    docClient.put(representativeObj, function(err, data) {
-      if (err) {
-        console.log('Error adding representative to database: ', err);
-      } else { 
-        console.log('Representative input successful: ', representativeObj.district);
-      }
-    });
+  .then(() => docClient.put(userObj))
+  .then(() => console.log('User input successful: ', userObj.email))
 
+  .then(() =>docClient.put(representativeObj))
+  // TODO: Replace this with a bootstrap script for reps table, this does massively redundant table writes - Joe S
+  .then(() => console.log('Representative input successful: ', representativeObj.district))
+
+  // Success, return to user
+  .then(() => {
     callback(null, {
       event: event,
       context: context,
@@ -135,23 +135,27 @@ module.exports.handler = (event, context, callback) => {
     });
   })
 
+  // TODO: Handle errors better here -- what caused it and why, better reporting
+  // Dang, an error.
   .catch(error => {
     if (error.error) {
       console.log(error.code + ': ' + error.error);
     } else {
       console.log('There was an error subscribing that user');
     }
+
     userObj.Item.mailChimpStatus = 'errorNotSubscribed';
-    docClient.put(userObj, function(err, data) {
-      if (err) {
-        console.log('Error adding user object to database: ', err);
-      } else {
-        console.log('User input successful: ', userObj.email);
-      }
-    });
-    callback(JSON.stringify({
-      message: 'There was an error subscribing this user',
-      error: error
-    }));
+
+    return docClient.put(userObj)
+    .then(() => console.log('User input successful: ', userObj.email))
+    .catch(error => console.log('Error adding user object to database: ', error));
+
+    // Report error to user
+    .then(() => {
+      callback(JSON.stringify({
+        message: 'There was an error subscribing this user',
+        error: error
+      }));
+    })
   });
 };
