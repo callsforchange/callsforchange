@@ -11,6 +11,15 @@ AWS.config.update({
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
+function docClientPut(doc) {
+  return new Promise((resolve, reject) => {
+    docClient.put(doc, (err, data) => {
+      if (err) reject(err);
+      else resolve(data);
+    })
+  });
+}
+
 module.exports.handler = (event, context, callback) => {
   console.log({
     message: 'Received a message!',
@@ -126,10 +135,10 @@ module.exports.handler = (event, context, callback) => {
     userObj.Item.mailChimpStatus = 'subscribed';
   })
 
-  .then(() => docClient.put(userObj))
+  .then(() => docClientPut(userObj))
   .then(() => console.log('User input successful: ', userObj.Item.email))
 
-  .then(() =>docClient.put(representativeObj))
+  .then(() =>docClientPut(representativeObj))
   // TODO: Replace this with a bootstrap script for reps table, this does massively redundant table writes - Joe S
   .then(() => console.log('Representative input successful: ', representativeObj.district))
 
@@ -153,7 +162,7 @@ module.exports.handler = (event, context, callback) => {
 
     userObj.Item.mailChimpStatus = 'errorNotSubscribed';
 
-    return docClient.put(userObj)
+    return docClientPut(userObj)
     .then(() => console.log('User input successful: ', userObj.Item.email))
     .catch(error => console.log('Error adding user object to database: ', error))
 
