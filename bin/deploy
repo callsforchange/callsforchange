@@ -36,7 +36,6 @@ echo -n 'MAILCHIMP_API. '
 echo 'Done'
 
 ./node_modules/.bin/serverless deploy --region $AWS_REGION --stage "$STAGE" -v
-
 if [ "$?" -ne "0" ]; then
     echo 'Serverless deploy failed'
     exit 1
@@ -44,3 +43,7 @@ fi
 
 echo 'Running data migrations...'
 ./node_modules/.bin/serverless invoke --region $AWS_REGION --stage "$STAGE" -f migrate
+if [ "$?" -ne "0" ]; then
+    echo 'Data migration failed'
+    exit 1
+fi

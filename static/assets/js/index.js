@@ -32,23 +32,32 @@
 
   function submitHandler(event) {
     form = event.target;
+    event.preventDefault();
 
     if (!isValid(form)) {
       showFormErrors(form);
-      event.preventDefault();
       return;
     }
 
     // data-offline on form to track
     if (isOffline(form)) {
       // save to localStorage
-      form.reset();
       showFormSuccess(form);
-      event.preventDefault();
       return;
     }
 
-    // Fall through allows form to send normally
+    // Fall through allows form to send via AJAX
+    submitFormAjax(form);
+  }
+
+  function submitFormAjax(form) {
+    $.ajax({
+      type: "POST",
+      url: form.attr('action'),
+      data: form.serialize()
+    })
+    .then(data => showFormSuccess(form))
+    .catch(error => showAjaxErrors(form, error));
   }
 
   function apiServer() {
@@ -64,10 +73,17 @@
 
   function showFormSuccess(form) {
     // TODO
+    console.log('Successful form submission for user');
+    form.reset();
   }
 
   function showFormErrors(form) {
     // TODO
+  }
+
+  function showAjaxErrors(form, erorr) {
+    // TODO
+    console.log('Error submitting form', error);
   }
 
   // offline mode and stats
