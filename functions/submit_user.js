@@ -5,7 +5,7 @@ var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
 
 AWS.config.update({
-  region: 'us-west-2'
+  region: process.env.AWS_REGION
 });
 
 var docClient = new AWS.DynamoDB.DocumentClient();
