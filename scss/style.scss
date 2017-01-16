@@ -8,7 +8,6 @@ $brand-transition-curve: cubic-bezier(0.43, 0.58, 0.1, 0.9);
 
 $collapse-breakpoint: 992px;
 
-
 html, body {
     font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
     color: $brand-black;
@@ -17,18 +16,15 @@ html, body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-
 }
 
-
-
-p a, p a:visited {
+p a,
+p a:visited {
     font-weight: bold;
     color: $brand-blue;
     text-decoration: none;
     border-bottom: 1px dotted fade-out($brand-blue, 0.2);
-    
+
     transition: all 0.3s $brand-transition-curve;
     &:hover {
         text-decoration: none;
@@ -41,7 +37,6 @@ h1 {
 }
 
 h2 {
-
     font-size: 1.2em;
     color: #fff;
     font-weight: normal;
@@ -151,7 +146,7 @@ p.dropcap::first-letter {
     &.inverted {
         color: #fff;
         border: 2px solid rgba(255,255,255,0.25);
-        
+
         &:hover {
             color: #fff;
             border: 2px solid rgba(255,255,255,0.4);
@@ -159,7 +154,6 @@ p.dropcap::first-letter {
     }
 
 }
-
 
 // FORMS
 
@@ -187,8 +181,6 @@ input[type=text] {
     margin-bottom: 0.2em;
   }
 }
-
-
 
 // HERO
 
@@ -244,7 +236,7 @@ nav {
         font-weight: bold;
 
         border-bottom: 1px dotted $brand-blue;
-    
+
         transition: all 0.3s $brand-transition-curve;
 
         &:hover {
@@ -283,7 +275,7 @@ nav {
         position: inherit;
         top: 0;
 
-        
+
     }
 }
 
@@ -306,9 +298,8 @@ nav {
 }
 
 #signup {
-    
-}
 
+}
 
 section {
     border-top: 4px solid $brand-red;
@@ -319,7 +310,6 @@ section {
     position: absolute;
     left: -70%;
 }
-
 
 // FOOTER
 
@@ -340,10 +330,6 @@ footer {
         border-bottom: 1px dotted fade-out(#fff, 0.2);
     }
 }
-
-
-
-
 
 // RALLY PAGE
 

@@ -1,3 +1,11 @@
 #!/bin/bash
 
-$(dirname $(dirname $0))/node_modules/.bin/http-server static
+export base_dir=$(dirname $(dirname $0))
+export bin_dir=${base_dir}/node_modules/.bin
+export parallel_cmd="${bin_dir}/llexec --color=always -w cmdname"
+export static_dir=${base_dir}/static
+export style_dir=${base_dir}/scss
+
+${parallel_cmd} ::: \
+  "${bin_dir}/http-server ${static_dir}" \
+  "${bin_dir}/node-sass --source-map ${static_dir}/style.css.map --watch ${style_dir}/style.scss ${static_dir}/style.css"
