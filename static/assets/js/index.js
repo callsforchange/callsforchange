@@ -62,7 +62,8 @@
 
   function apiServer() {
     var location = window.location;
-    return location.protocol + '//' + location.host.replace('www.', API_SUBDOMAIN + '.');
+    var baseDomain = location.host.replace('www.', '');
+    return location.protocol + '//' + API_SUBDOMAIN + '.' + baseDomain;
   }
 
   // Form validation
