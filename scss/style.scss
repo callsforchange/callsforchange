@@ -177,7 +177,7 @@ input[type=text] {
   margin-bottom: 1em;
   padding: 0 0.5em;
 
-   &.with-description {
+  &.with-description {
     margin-bottom: 0.2em;
   }
 }
@@ -265,6 +265,11 @@ nav {
     box-shadow: 0 13px 54px 0 rgba(0,0,0,0.23);
     border-radius: 8px;
     padding: 24px;
+
+    .form-message {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
 }
 
 .signup-form {

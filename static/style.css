@@ -212,6 +212,11 @@ nav {
   box-shadow: 0 13px 54px 0 rgba(0, 0, 0, 0.23);
   border-radius: 8px;
   padding: 24px; }
+  .signup-form .form-message,
+  .rally-form .form-message,
+  .status-panel-form .form-message {
+    margin-top: 10px;
+    margin-bottom: 0; }
 
 .signup-form {
   position: absolute;
