@@ -274,13 +274,15 @@ nav {
     @media screen and (max-width: $collapse-breakpoint) {
         position: inherit;
         top: 0;
-
-
     }
 }
 
 .status-panel {
-  margin-top: 5em;
+  margin-top: 2em;
+
+  .logo {
+    max-width: 419px;
+  }
 }
 
 .status-panel-form {
@@ -333,15 +335,28 @@ footer {
 
 // RALLY PAGE
 
-.rally-header {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  align-items: center;
+@media screen and (min-width: $collapse-breakpoint) {
+    .rally-header {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: $collapse-breakpoint) {
+    .rally-header > .container {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+
+.rally-name {
+    font-size: 120%;
 }
