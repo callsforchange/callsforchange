@@ -51,13 +51,17 @@
   }
 
   function submitFormAjax(form) {
+    lockFormButton(form);
+    clearFormMessage(form);
+
     $.ajax({
       type: "POST",
       url: form.attr('action'),
       data: form.serialize()
     })
     .then(data => showFormSuccess(form))
-    .catch(error => showAjaxErrors(form, error));
+    .catch(error => showAjaxErrors(form, error))
+    .then(() => unlockFormButton(form));
   }
 
   function apiServer() {
@@ -72,10 +76,20 @@
     return true;
   }
 
+  function lockFormButton(form) {
+    var submit = $(form).find('input[type="submit"]');
+    submit.attr('disabled', true);
+  }
+
+  function unlockFormButton(form) {
+    var submit = $(form).find('input[type="submit"]');
+    submit.attr('disabled', false);
+  }
+
   function showFormSuccess(form) {
     // TODO
     $(form)[0].reset();
-    console.log('Successful form submission for user');
+    setFormMessage(form, 'All set, we received your information!');
   }
 
   function showFormErrors(form) {
@@ -83,8 +97,31 @@
   }
 
   function showAjaxErrors(form, erorr) {
-    // TODO
-    console.log('Error submitting form', error);
+    setFormMessage(form, 'Oops! Something went wrong, please check the form and try again.', true);
+  }
+
+  function clearFormMessage(form) {
+    var box = $(form).find('.form-message');
+    box.text('').addClass('hide');
+  }
+
+  function setFormMessage(form, message, isError) {
+    var box = $(form).find('.form-message');
+    if (isError) {
+      box.removeClass('text-success').addClass('text-danger');
+    } else {
+      box.removeClass('text-danger').addClass('text-success');
+    }
+
+    box.text(message).removeClass('hide');
+
+    if (!isError) {
+      setTimeout(function () {
+        box.slideUp("slow", function () {
+          box.addClass('hide').show();
+        });
+      }, 3000);
+    }
   }
 
   // offline mode and stats

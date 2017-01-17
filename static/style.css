@@ -1,19 +1,23 @@
 @font-face {
   font-family: "Fabriga";
   src: url("assets/fonts/Fabriga/Fabriga-Regular.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Regular.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Regular.woff") format("woff"); }
+
 @font-face {
   font-family: "Fabriga";
   font-style: italic;
   src: url("assets/fonts/Fabriga/Fabriga-Italic.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Italic.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Italic.woff") format("woff"); }
+
 @font-face {
   font-family: "Fabriga";
   font-weight: bold;
   src: url("assets/fonts/Fabriga/Fabriga-Bold.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Bold.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Bold.woff") format("woff"); }
+
 @font-face {
   font-family: "Fabriga";
   font-weight: bold;
   font-style: italic;
   src: url("assets/fonts/Fabriga/Fabriga-BoldItalic.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff") format("woff"); }
+
 html, body {
   font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
   color: #122C3F;
@@ -23,13 +27,15 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-p a, p a:visited {
+p a,
+p a:visited {
   font-weight: bold;
   color: #1B45E1;
   text-decoration: none;
   border-bottom: 1px dotted rgba(27, 69, 225, 0.8);
   transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
-  p a:hover, p a:visited:hover {
+  p a:hover,
+  p a:visited:hover {
     text-decoration: none;
     padding-bottom: 0.15em; }
 
@@ -167,13 +173,13 @@ input[type=text] {
     padding: 0;
     padding-bottom: 20.479714%;
     margin-top: 0; }
-
   .logo svg {
     position: absolute;
     height: 100%;
     width: 100%;
     left: 0;
     top: 0; } }
+
 nav {
   text-align: right;
   margin: 1.25em 0;
@@ -206,6 +212,11 @@ nav {
   box-shadow: 0 13px 54px 0 rgba(0, 0, 0, 0.23);
   border-radius: 8px;
   padding: 24px; }
+  .signup-form .form-message,
+  .rally-form .form-message,
+  .status-panel-form .form-message {
+    margin-top: 10px;
+    margin-bottom: 0; }
 
 .signup-form {
   position: absolute;
@@ -216,7 +227,9 @@ nav {
       top: 0; } }
 
 .status-panel {
-  margin-top: 5em; }
+  margin-top: 2em; }
+  .status-panel .logo {
+    max-width: 419px; }
 
 .status-panel-form {
   margin-top: 15px; }
@@ -248,16 +261,25 @@ footer {
     color: #fff;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.8); }
 
-.rally-header {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  align-items: center; }
+@media screen and (min-width: 992px) {
+  .rally-header {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    align-items: center; } }
+
+@media screen and (max-width: 992px) {
+  .rally-header > .container {
+    padding-top: 30px;
+    padding-bottom: 30px; } }
+
+.rally-name {
+  font-size: 120%; }
 
 /*# sourceMappingURL=style.css.map */
