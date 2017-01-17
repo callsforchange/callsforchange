@@ -49,9 +49,11 @@ functions:
   notify-user:
     handler: functions/notify_user.handler
 
-# =--= REGISTRATION AND USER MANAGEMENT =------------------------------------------------=
-  submit-user:
-    handler: functions/submit_user.handler
+# =--= REGISTRATION AND SIGN-UP =--------------------------------------------------------=
+  capture-form-submission:
+    handler: functions/capture/form.handler
+    environment:
+      CAPTURE_FORM_TABLE: ${self:service}-${opt:stage}-capture
     events:
       - http:
           integration: lambda
@@ -59,6 +61,18 @@ functions:
           method: post
           cors: true
 
+  schedule-form-submission-fanout:
+    handler: functions/capture/fanout.handler
+    environment:
+      CAPTURE_FORM_TABLE: ${self:service}-${opt:stage}-capture
+      CAPTURE_FORM_PROCESS: ${self:service}-${opt:stage}-capture-process
+    events:
+      - schedule: cron(0/5 * * * ? *)
+  capture-process:
+    handler: functions/capture/process.handler
+
+
+# =--= USER MANAGEMENT =-----------------------------------------------------------------=
   mc-subscribe:
     handler: functions/mc-subscribe.handler
     events:
@@ -90,6 +104,24 @@ functions:
 
 resources:
   Resources:
+    captureTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${opt:stage}-capture
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+          - AttributeName: district
+            KeyType: RANGE
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+          - AttributeName: district
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
     usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
