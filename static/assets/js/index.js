@@ -59,9 +59,9 @@
       url: form.attr('action'),
       data: form.serialize()
     })
-    .then(data => showFormSuccess(form))
-    .catch(error => showAjaxErrors(form, error))
-    .then(() => unlockFormButton(form));
+    .then(function (data) { showFormSuccess(form); })
+    .catch(function (error) { showAjaxErrors(form, error); })
+    .then(function () { unlockFormButton(form); });
   }
 
   function apiServer() {
@@ -153,8 +153,8 @@
     updateTodayCount();
 
     // Online and offline control
-    $('#go-offline').click(() => goOffline(form));
-    $('#go-online').click(() => goOnline(form));
+    $('#go-offline').click(function () { goOffline(form); });
+    $('#go-online').click(function () { goOnline(form); });
     updateOnlineStatus();
 
     // Auto detect offline and auto-switch
