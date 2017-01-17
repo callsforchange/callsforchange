@@ -31,6 +31,16 @@ function docClientPut(doc) {
   });
 }
 
+function normalizePhoneNumber(number) {
+  var normalized = (number || '').replace(/\D/g,'');
+  if (normalized.length !== 10) {
+    console.log(`Unknown phone format ${number} normalized to ${normalized}!`);
+    return '';
+  } else {
+    return normalized.substr(0,3) + '-' + normalized.substr(3,3) + '-' + normalized.substr(6,4);
+  }
+}
+
 module.exports.handler = (event, context, callback) => {
   console.log({
     message: 'Received a message!',
@@ -74,7 +84,7 @@ module.exports.handler = (event, context, callback) => {
   userObj.Item.firstName = nameParts.shift();
   userObj.Item.lastName = nameParts.join(' ');
   userObj.Item.preference = event.body.contact_preference || 'email';
-  userObj.Item.phoneNumber = event.body.phone_number || '';
+  userObj.Item.phoneNumber = normalizePhoneNumber(event.body.phone_number);
 
   // Wrap Civic API call in a promise and call Google
   new Promise((resolve, reject) => {
@@ -118,11 +128,11 @@ module.exports.handler = (event, context, callback) => {
 
     representativeObj.Item.district = district;
     representativeObj.Item.senate1name = official_1.name;
-    representativeObj.Item.senate1number = _.get(official_1, 'phones[0]') || '';
+    representativeObj.Item.senate1number = normalizePhoneNumber(_.get(official_1, 'phones[0]'));
     representativeObj.Item.senate2name = official_2.name;
-    representativeObj.Item.senate2number = _.get(official_2, 'phones[0]') || '';
+    representativeObj.Item.senate2number = normalizePhoneNumber(_.get(official_2, 'phones[0]'));
     representativeObj.Item.repname = data.officials[house_index].name;
-    representativeObj.Item.repnumber = data.officials[house_index].phones[0] || '';
+    representativeObj.Item.repnumber = normalizePhoneNumber(data.officials[house_index].phones[0]);
 
     // Send new info to MailChimp
     return mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
