@@ -150,13 +150,13 @@ module.exports.handler = (event, context, callback) => {
         FNAME: userObj.Item.firstName || '',
         LNAME: userObj.Item.lastName || '',
         H_NAME:   data.officials[house_index].name,
-        H_PHONE:  _.get(data.officials[house_index], 'phones[0]'),
+        H_PHONE:  normalizePhoneNumber(data.officials[house_index].phones),
         H_PHOTO:  data.officials[house_index].photoUrl,
         S1_NAME:  official_1.name,
-        S1_PHONE: _.get(official_1, 'phones[0]'),
+        S1_PHONE: normalizePhoneNumber(official_1.phones),
         S1_PHOTO: official_1.photoUrl,
         S2_NAME:  official_2.name,
-        S2_PHONE: _.get(official_2, 'phones[0]'),
+        S2_PHONE: normalizePhoneNumber(official_2.phones),
         S2_PHOTO: official_2.photoUrl
       }
     })
