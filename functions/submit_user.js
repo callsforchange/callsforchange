@@ -3,7 +3,6 @@
 var civicinfo = require('../libs/google').civicinfo('v2');
 var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
-var _ = require('lodash');
 
 AWS.config.update({
   region: process.env.AWS_REGION
@@ -29,6 +28,25 @@ function docClientPut(doc) {
       else resolve(data);
     })
   });
+}
+
+function normalizePhoneNumber(number) {
+  var normalized;
+  if (Array.isArray(number)) {
+    normalized = number[0];
+  } else if(number === undefined) {
+    normalized = '';
+  } else {
+    normalized = number;
+  }
+  normalized = normalized.replace(/\D/g,'');
+
+  if (normalized.length !== 10) {
+    console.log(`Unknown phone format '${number}' normalized to '${normalized}'!`);
+    return '';
+  } else {
+    return normalized.substr(0,3) + '-' + normalized.substr(3,3) + '-' + normalized.substr(6,4);
+  }
 }
 
 module.exports.handler = (event, context, callback) => {
@@ -74,7 +92,7 @@ module.exports.handler = (event, context, callback) => {
   userObj.Item.firstName = nameParts.shift();
   userObj.Item.lastName = nameParts.join(' ');
   userObj.Item.preference = event.body.contact_preference || 'email';
-  userObj.Item.phoneNumber = event.body.phone_number || '';
+  userObj.Item.phoneNumber = normalizePhoneNumber(event.body.phone_number);
 
   // Wrap Civic API call in a promise and call Google
   new Promise((resolve, reject) => {
@@ -116,13 +134,13 @@ module.exports.handler = (event, context, callback) => {
     var official_1 = data.officials[senate_indices[0]];
     var official_2 = data.officials[senate_indices[1]];
 
-    representativeObj.Item.district = district;
-    representativeObj.Item.senate1name = official_1.name;
-    representativeObj.Item.senate1number = _.get(official_1, 'phones[0]') || '';
-    representativeObj.Item.senate2name = official_2.name;
-    representativeObj.Item.senate2number = _.get(official_2, 'phones[0]') || '';
-    representativeObj.Item.repname = data.officials[house_index].name;
-    representativeObj.Item.repnumber = data.officials[house_index].phones[0] || '';
+    representativeObj.district = district;
+    representativeObj.senate1name = official_1.name;
+    representativeObj.senate1number = normalizePhoneNumber(official_1.phones);
+    representativeObj.senate2name = official_2.name;
+    representativeObj.senate2number = normalizePhoneNumber(official_2.phones);
+    representativeObj.repname = data.officials[house_index].name;
+    representativeObj.repnumber = normalizePhoneNumber(data.officials[house_index].phones);
 
     // Send new info to MailChimp
     return mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
