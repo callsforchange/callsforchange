@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "googleapis": "^14.2.0",
-    "lodash": "~4.17.4",
     "mailchimp-api-v3": "^1.7.0"
   }
 }
