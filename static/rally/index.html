@@ -40,7 +40,7 @@
 
                     <form id="signup">
                         <input type="text" name="full_name" required placeholder="Your full name">
-                        <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Your street address">
+                        <input type="text" class="with-description" name="street_address" required placeholder="Your street address">
                         <p class="xs">We’ll use your registered voting address to automatically pair you with your members of Congress. </p>
                         <input type="text" name="phone_number" placeholder="Your phone number">
                         <input type="text" name="email_address" required placeholder="Your email address">
@@ -192,22 +192,5 @@
 </script>
 <!-- End Google Analytics -->
 
-<script>
-  var autocomplete;
-
-  function initAutocomplete() {
-    // Create the autocomplete object, restricting the search to geographical
-    // location types.
-    autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('address_autocomplete')),
-        {types: ['geocode']});
-  }
-
-  function toggleAutocomplete() {
-    // TODO: Enable/Disable autocompletion when we are in `offline` mode
-  }
-</script>
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhruvcnGEJvcLzEVldghZJVWowv9afPWU&libraries=places&&callback=initAutocomplete" async defer></script>
 </body>
 </html>
