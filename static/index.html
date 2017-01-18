@@ -8,6 +8,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <meta property='og:locale' content='en_US'/>
+    <meta property='og:type' content='website'/>
+    <meta property='og:title' content='Calls For Change'/>
+    <meta property='og:url' content='https://www.callsforchange.com'/>
+    <meta property='og:site_name' content='Calls For Change'/>
+    <meta property='og:image_url' content='https://www.callsforchange.com/assets/images/og.png'/>
+
     <title>Calls for Change</title>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -21,6 +28,7 @@
             <nav class="col-md-5 col-md-offset-7">
                 <a href="#top">Home</a>
                 <a href="#about">About</a>
+                <a href="#signup" class="btn btn-secondary inverted">Sign Up</a>
             </nav>
         </div>
         <div class="row">
@@ -87,7 +95,7 @@
         </div>
 
         <div class="col-md-5 col-md-offset-1">
-            <div class="signup-form">
+            <div class="signup-form" id="signup">
                 <div class="icon-call pull-left">
                     <svg width="45px" height="50px" viewBox="32 38 45 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g id="call-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(32.000000, 38.000000)">
@@ -108,7 +116,7 @@
 
                 <form id="signup">
                     <input type="text" name="full_name" required placeholder="Your full name">
-                    <input type="text" class="with-description" name="street_address" required placeholder="Your street address">
+                    <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Your street address">
                     <p class="xs">We’ll use your registered voting address to automatically pair you with your members of Congress. </p>
                     <input type="text" name="phone_number" placeholder="Your phone number">
                     <input type="text" name="email_address" required placeholder="Your email address">
@@ -119,6 +127,9 @@
                         </label>
                         <label class="radio-inline">
                             <input type="radio" name="contact_preference" id="preference_sms" value="sms"> SMS
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="contact_preference" id="preference_both" value="both"> Both
                         </label>
                         <label class="radio-inline">Contact preference</label>
                     </div>
@@ -206,5 +217,18 @@
 </script>
 <!-- End Google Analytics -->
 
+<script>
+  var autocomplete;
+
+  function initAutocomplete() {
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('address_autocomplete')),
+        {types: ['address'], componentRestrictions: {country: 'us'} });
+  }
+</script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhruvcnGEJvcLzEVldghZJVWowv9afPWU&libraries=places&&callback=initAutocomplete" async defer></script>
 </body>
 </html>

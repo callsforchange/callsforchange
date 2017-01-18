@@ -112,7 +112,7 @@ module.exports.handler = (event, context, callback) => {
     console.log('Received some information from CIVIC API ' + JSON.stringify(data));
 
     var district = data.offices
-      .filter(o => o.roles[0] === 'legislatorLowerBody')
+      .filter(o => o.roles.indexOf('legislatorLowerBody') >= 0)
       .map(o => o.name)
       .filter(name => name.match(/[A-Z]{2}-\d\d?$/))
       .map(name => name.match(/[A-Z]{2}-\d\d?$/)[0])[0];
@@ -124,11 +124,11 @@ module.exports.handler = (event, context, callback) => {
     userObj.Item.zip = data.normalizedInput.zip;
 
     var house_index = data.offices
-      .filter(o => o.roles[0] === 'legislatorLowerBody')
+      .filter(o => o.roles.indexOf('legislatorLowerBody') >= 0)
       .map(o => o.officialIndices[0])[0];
 
     var senate_indices = data.offices
-      .filter(o => o.roles[0] === 'legislatorUpperBody')
+      .filter(o => o.roles.indexOf('legislatorUpperBody') >= 0)
       .map(o => o.officialIndices)[0];
 
     var official_1 = data.officials[senate_indices[0]];
