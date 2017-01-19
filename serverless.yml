@@ -93,7 +93,7 @@ resources:
     usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: users
+        TableName: users2
         GlobalSecondaryIndexes:
           - IndexName: InsertionTimeStamp
             KeySchema:
