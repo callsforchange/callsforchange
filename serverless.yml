@@ -116,6 +116,8 @@ resources:
             AttributeType: S
           - AttributeName: district
             AttributeType: S
+          - AttributeName: InsertionTimeStamp
+            AttributeType: N
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
