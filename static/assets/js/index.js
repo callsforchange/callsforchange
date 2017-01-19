@@ -27,33 +27,47 @@
 
   function contactChangeHandler(form) {
     var preference = form.find('input[name=contact_preference]:checked').val();
-    form.find('input[name=phone]').attr('required', preference === 'sms');
+    form.find('input[name=phone_number]').attr('required', (preference === 'sms' || preference === 'both'));
   }
 
   function submitHandler(event) {
-    form = event.target;
+    form = $(event.target);
+    event.preventDefault();
 
     if (!isValid(form)) {
       showFormErrors(form);
-      event.preventDefault();
       return;
     }
 
     // data-offline on form to track
     if (isOffline(form)) {
       // save to localStorage
-      form.reset();
       showFormSuccess(form);
-      event.preventDefault();
       return;
     }
 
-    // Fall through allows form to send normally
+    // Fall through allows form to send via AJAX
+    submitFormAjax(form);
+  }
+
+  function submitFormAjax(form) {
+    lockFormButton(form);
+    clearFormMessage(form);
+
+    $.ajax({
+      type: "POST",
+      url: form.attr('action'),
+      data: form.serialize()
+    })
+    .then(function (data) { showFormSuccess(form); })
+    .catch(function (error) { showAjaxErrors(form, error); })
+    .then(function () { unlockFormButton(form); });
   }
 
   function apiServer() {
     var location = window.location;
-    return location.protocol + '//' + location.host.replace('www.', API_SUBDOMAIN + '.');
+    var baseDomain = location.host.replace('www.', '');
+    return location.protocol + '//' + API_SUBDOMAIN + '.' + baseDomain;
   }
 
   // Form validation
@@ -62,17 +76,58 @@
     return true;
   }
 
+  function lockFormButton(form) {
+    var submit = $(form).find('input[type="submit"]');
+    submit.attr('disabled', true);
+  }
+
+  function unlockFormButton(form) {
+    var submit = $(form).find('input[type="submit"]');
+    submit.attr('disabled', false);
+  }
+
   function showFormSuccess(form) {
     // TODO
+    $(form)[0].reset();
+    setFormMessage(form, 'All set, we received your information!  Look for your first text/email from us soon.');
   }
 
   function showFormErrors(form) {
     // TODO
   }
 
+  function showAjaxErrors(form, erorr) {
+    setFormMessage(form, 'Oops! Something went wrong, please check the form and try again.', true);
+  }
+
+  function clearFormMessage(form) {
+    var box = $(form).find('.form-message');
+    box.text('').addClass('hide');
+  }
+
+  function setFormMessage(form, message, isError) {
+    var box = $(form).find('.form-message');
+    if (isError) {
+      box.removeClass('text-success').addClass('text-danger');
+    } else {
+      box.removeClass('text-danger').addClass('text-success');
+    }
+
+    box.text(message).removeClass('hide');
+
+    if (!isError) {
+      setTimeout(function () {
+        box.slideUp("slow", function () {
+          box.addClass('hide').show();
+        });
+      }, 3000);
+    }
+  }
+
   // offline mode and stats
   function setupStatus(selector) {
     var panel = $(selector);
+    var form = $('#signup');
     if (panel.length === 0) { return; }
 
     // Edit rally name
@@ -98,8 +153,8 @@
     updateTodayCount();
 
     // Online and offline control
-    $('#go-offline').click(goOffline);
-    $('#go-online').click(goOnline);
+    $('#go-offline').click(function () { goOffline(form); });
+    $('#go-online').click(function () { goOnline(form); });
     updateOnlineStatus();
 
     // Auto detect offline and auto-switch
@@ -108,31 +163,34 @@
   }
 
   function updateOnlineStatus() {
+    var form = $('#signup');
     if (window.navigator.onLine) {
-      if ($('#signup').data('offline') === undefined) {
+      if (form.data('offline') === undefined) {
         // We haven't set this yet, let's do it now
         // We do not force online in case the user manually disabled it.
-        goOnline();
+        goOnline(form);
       }
       $('#go-online').attr('disabled', false);
       $('#go-online-disabled').addClass('hide');
     } else {
-      goOffline();
+      goOffline(form);
       $('#go-online').attr('disabled', true);
       $('#go-online-disabled').removeClass('hide');
     }
   }
 
-  function goOffline() {
-    var form = $('#signup');
+  function isOffline(form) {
+    return !!form.data('offline');
+  }
+
+  function goOffline(form) {
     form.data('offline', true);
 
     $('#status-online').addClass('hide');
     $('#status-offline').removeClass('hide');
   }
 
-  function goOnline() {
-    var form = $('#signup');
+  function goOnline(form) {
     form.data('offline', false);
 
     $('#status-online').removeClass('hide');

@@ -11,15 +11,15 @@ provider:
     - Effect: "Allow"
       Action:
         - "dynamodb:*"
-      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/*"
+      Resource: "arn:aws:dynamodb:${opt:region}:*:table/*"
     - Effect: "Allow"
       Action:
         - "SNS:Publish"
-      Resource: "arn:aws:sns:${self:provider.region}:*:refresh-users"
+      Resource: "arn:aws:sns:${opt:region}:*:refresh-users"
     - Effect: "Allow"
       Action:
         - "lambda:InvokeFunction"
-      Resource: "arn:aws:lambda:${self:provider.region}:*:function:${self:service}-${opt:stage}-notify-user"
+      Resource: "arn:aws:lambda:${opt:region}:*:function:${self:service}-${opt:stage}-notify-user"
 
   environment:
     STAGE: ${opt:stage}
