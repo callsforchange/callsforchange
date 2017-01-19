@@ -88,9 +88,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="intro">
-                <p>Getting involved in politics doesn’t have to be complicated or confusing. When you join <em>Calls for Change</em>, we'll automatically pair you with your members of Congress and send you a text or email reminder to call them once a week. We’ll also send you information on a suggested topic that we think is important to women and equality more broadly.</p>
+                <p>It's easier than you think to do something to advance women's rights and equality more broadly (<a href="#about">more details</a>).  Calling members of Congress is the most effective way to influence the political process, and Calls for Change makes it <a href="#how-it-works">simple and fast</a>.  Each week we'll send you all the infromation you need — from the right phone number to a sample script — so in just ten minutes you can make sure your voice is heard.</p>
 
-                <p>We know that calls from constituents make a huge difference to members of Congress. With less than 10 minutes a week, we really can change the world.</p>
+                <p>We hope you'll join us.</p>
             </div>
         </div>
 
@@ -111,15 +111,15 @@
                         </g>
                     </svg>
                 </div>
-                <p class="sm">Sign up for weekly reminders* to call your representatives</p>
-                <p class="xs">We’ll never share your personal information.</p>
+                <!-- TODO: form refactor (see google doc) -->
+                <p class="sm">Sign up for everything you need to call your Congress members every week.</p>
 
                 <form id="signup">
                     <input type="text" name="full_name" required placeholder="Your full name">
                     <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Your street address">
                     <p class="xs">We’ll use your registered voting address to automatically pair you with your members of Congress. </p>
-                    <input type="text" name="phone_number" placeholder="Your phone number">
                     <input type="text" name="email_address" required placeholder="Your email address">
+                    <input type="text" name="phone_number" placeholder="Your phone number">
 
                     <div class="btn-group preference" role="group" aria-label="preference">
                         <label class="radio-inline">
@@ -134,9 +134,9 @@
                         <label class="radio-inline">Contact preference</label>
                     </div>
 
-                    <input type="submit" class="btn btn-default" value="Remind me"/>
+                    <input type="submit" class="btn btn-default" value="I'm in!"/>
 
-                    <p class="pull-right xs" style="line-height: 4em;">*Standard SMS rates may apply</p>
+                    <p class="pull-right xs" style="line-height: 4em;">By clicking "I'm In," you accept our <a href="">Privacy Policy</a> and <a href="">Terms of Service</a>.</p>
 
                     <p class="form-message hide"></p>
                 </form>
@@ -159,25 +159,20 @@
             </svg>
         </div>
         <div class="col-md-9 col-md-offset-3">
-            <section class="how-it-works">
+            <section id="how-it-works" class="how-it-works">
                 <h3>How it Works</h3>
                 <ul>
-                    <li>Enter your information on the form on this page. (It only takes 30 seconds!)</li>
-                    <li>Each week, we’ll text or email you talking points on a timely issue and your representatives’ phone numbers for one-tap calling from your smartphone. </li>
-                    <li>That’s it! When you make your calls, you make change happen.</li>
+                    <li>Each week we text and/or email you background info on a timely topic, a sample script, and the phone numbers for your Congress members for one-tap calling from your smartphone.</li>
+                    <li>You make a few quick calls, and your opinion is logged and passed on to your Congress members. (<a href="http://theslot.jezebel.com/how-to-effectively-lobby-your-congressperson-1788958124" target="_blank">Learn more about why calling works</a>)</li>
+                    <li>Every once in awhile, we report out on the progress we’re making together.</li>
+                    <li>That’s it!</li>
                 </ul>
             </section>
             <section id="about">
                 <h3>About Calls for Change</h3>
-                <p class="dropcap">We have learned from other savvy organizations that phone calls to members of congress are an effective way to make your voice heard. Emails are not typically tracked by congressional offices, but phone calls are. Many senators and representatives get a report summarizing the week’s calls and the views of the callers. These views weigh heavily on their decision-making—particularly when they are up for re-election.
-                </p>
-                <p>Our goal at Calls for Change is to make this process as easy as possible. We’ll empower you with clear information about what is happening in politics so you can take action to protect the freedoms of all Americans on an ongoing basis.
-                </p>
-                <h4>Our Mission</h4>
-                <p>To help individuals stay informed and engaged on issues that are critical to preserving equality and freedom for all Americans.</p>
-                <h4>Who we are</h4>
-                <p>Calls for Change was started after the 2016 presidential election by a small group of dedicated volunteers who want to protect the rights of women and advance issues related to social equality more broadly.
-                </p>
+                <p class="dropcap">We are a small group of women and men in Silicon Valley who desperately wanted to find a way stand up for social justice and equality after the 2016 presidential election. Friends kept telling us, “I just want to do something,” but they weren’t sure what that something was. We knew how effective it was to call your Congress members, and we knew how to use technology to make it easy to do. Put the two ideas together, and you get Calls for Change!</p>
+                <p>Calls for Change is a nonprofit organization, and we donate 100% of our time. We focus on issues that matter to us – equal pay and paid family leave, LGBTQ rights, racial justice, health care and education, immigration reform, and other subjects rooted in equality and personal freedom. You may not always agree with us, and that’s O.K. We just hope you’ll still call your Congress members and discuss an issue that matters to you. More than anything else, we want all of us to stay engaged in the political process.</p>
+                <p>If you have any questions or ideas for us, you can always reach our team at <a href="mailto:makecallsforchange@gmail.com">makecallsforchange@gmail.com</a>.</p>
             </section>
 
         </div>
@@ -189,13 +184,8 @@
         <div class="row">
             <div class="col-md-5">
                 <h4>Support Calls for Change</h4>
-                <p>Thank you for helping us send more texts and emails! Please note that donations to Calls for Change are not tax deductible. </p>
+                <p>If you like what we’re doing, please consider donating. No amount is too small, and your donation will help pay for the texts and emails we send you each week. (Please note that donations to Calls for Change are not tax deductible because we’re a 501c4.)</p>
                 <a href="https://gogetfunding.com/calls-for-change/" class="btn btn-default display-block">Donate</a>
-            </div>
-
-            <div class="col-md-6 col-md-offset-1">
-                <h4>Legal Information</h4>
-                <p class="sm">We are currently pursuing our official 501c4 status, which means donations to support our work are not tax deductible. Other legal info can be found in our <a class="link" href="">Terms of Service</a> and <a class="link" href="">Privacy Policy</a>.</p>
             </div>
 
         </div>
