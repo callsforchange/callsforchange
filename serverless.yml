@@ -95,9 +95,9 @@ resources:
       Properties:
         TableName: users
         GlobalSecondaryIndexes:
-          IndexName: InsertionDateTime
+          IndexName: InsertionTimeStamp
           KeySchema: [ 
-            { "AttributeName": "InsertionDateTime", "KeyType": "HASH" }
+            { "AttributeName": "InsertionTimeStamp", "KeyType": "HASH" }
           ],
           Projection: {
             "ProjectionType": "ALL"
@@ -111,7 +111,7 @@ resources:
             KeyType: HASH
           - AttributeName: district
             KeyType: RANGE
-          - AttributeName: InsertionDateTime
+          - AttributeName: InsertionTimeStamp
             KeyType: HASH
         AttributeDefinitions:
           - AttributeName: email
