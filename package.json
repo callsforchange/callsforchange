@@ -18,6 +18,8 @@
   "homepage": "https://github.com/technologists-for-progress/52calls-52weeks#readme",
   "devDependencies": {
     "http-server": "^0.9.0",
+    "llexec": "^1.2.2",
+    "node-sass": "^4.3.0",
     "serverless": "~1.2.1"
   },
   "dependencies": {
