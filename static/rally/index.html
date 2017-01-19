@@ -39,11 +39,12 @@
 
                     <form id="signup">
                         <input type="text" name="full_name" required placeholder="Your full name">
-                        <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Your street address">
-                        <p class="xs">We’ll use your registered voting address to automatically pair you with your members of Congress. </p>
+                        <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Street address (eg: 100 Street Name, City)">
+                        <p class="xs">We’ll use your voting address to automatically find your members of Congress.</p>
                         <input type="text" name="email_address" required placeholder="Your email address">
                         <input type="text" name="phone_number" placeholder="Your phone number">
 
+                        <p class="xs">How would you like us to keep in touch?</p>
                         <div class="btn-group preference" role="group" aria-label="preference">
                             <label class="radio-inline">
                                 <input type="radio" name="contact_preference" id="preference_email" value="email" checked> Email
@@ -54,14 +55,18 @@
                             <label class="radio-inline">
                                 <input type="radio" name="contact_preference" id="preference_both" value="both"> Both
                             </label>
-                            <label class="radio-inline">Contact preference</label>
                         </div>
 
-                        <input type="submit" class="btn btn-default" value="Remind me"/>
+                        <input type="submit" class="btn btn-default" value="I'm in!" />
 
-                        <p class="pull-right xs" style="line-height: 4em;">*Standard SMS rates may apply</p>
+                        <p class="xs">
+                            By clicking "I'm In," you accept our <a href="/pp.pdf">Privacy Policy</a>
+                            and <a href="/tos.pdf">Terms of Service</a>. You'll receive text/emails from
+                            us about once a week, and you can opt out at any time. Standard SMS rates
+                            may apply.
+                        </p>
+
                         <p class="form-message hide"></p>
-
                     </form>
                 </div>
             </div>
@@ -162,16 +167,24 @@
     </div>
 </div>
 
-
-
 <footer>
     <div class="container">
         <div class="row">
-            <div class="col-md-5">
-                <h4>Legal Information</h4>
-                <p class="sm">We are currently pursuing our official 501c4 status, which means donations to support our work are not tax deductible. Other legal info can be found in our <a class="link" href="">Terms of Service</a> and <a class="link" href="">Privacy Policy</a>.</p>
+            <div class="col-md-12">
+                <h4>Support Calls for Change</h4>
+                <p>
+                    If you like what we’re doing, please consider donating. No amount is too small,
+                    and your donation will help pay for the texts and emails we send you each week.
+                    (Please note that donations to Calls for Change are not tax deductible because
+                    we’re a 501c4.)
+                    <a href="https://gogetfunding.com/calls-for-change/" class="link">Donate Now!</a>
+                </p>
+                <p>
+                    &copy; 2017 Calls for Change
+                    | <a href="/tos.pdf" class="link">Terms of Service</a>
+                    | <a href="/pp.pdf" class="link">Privacy Policy</a>
+                </p>
             </div>
-            <div class="col-md-6 col-md-offset-1"></div>
         </div>
     </div>
 </footer>
