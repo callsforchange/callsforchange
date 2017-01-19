@@ -97,8 +97,8 @@ resources:
         GlobalSecondaryIndexes:
           - IndexName: InsertionTimeStamp
             KeySchema:
-              AttributeName: InsertionTimeStamp
-              KeyType: HASH
+              - AttributeName: InsertionTimeStamp
+                KeyType: HASH
             Projection:
               ProjectionType: ALL
             ProvisionedThroughput:
