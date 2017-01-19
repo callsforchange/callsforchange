@@ -94,11 +94,25 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: users
+        GlobalSecondaryIndexes:
+          IndexName: InsertionDateTime
+          KeySchema: [ 
+            { "AttributeName": "InsertionDateTime", "KeyType": "HASH" }
+          ],
+          Projection: {
+            "ProjectionType": "ALL"
+          },
+          ProvisionedThroughput: {
+            "ReadCapacityUnits": { "Ref": 5 },
+            "WriteCapacityUnits": { "Ref": 5 }
+          }
         KeySchema:
           - AttributeName: email
             KeyType: HASH
           - AttributeName: district
             KeyType: RANGE
+          - AttributeName: InsertionDateTime
+            KeyType: HASH
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
