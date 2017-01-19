@@ -22,7 +22,8 @@ var userObj = {
     city: '',
     state: '',
     zip: 0,
-    mailChimpStatus: ''
+    mailChimpStatus: '',
+    InsertionDateTime: 0
   }
 };
 var representativeObj = {
@@ -45,6 +46,7 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
+  userObj.Item.InsertionDateTime = (new Date()).getTime()/1000;
   userObj.Item.email = event.body.email;
   userObj.Item.firstName = event.body.firstName || '';
   userObj.Item.lastName = event.body.lastName || '';
