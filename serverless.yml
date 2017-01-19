@@ -90,20 +90,30 @@ functions:
 
 resources:
   Resources:
-    usersTable:
+    subscribersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: users
+        TableName: subscribers
+        GlobalSecondaryIndexes:
+          - IndexName: InsertionTimeStamp
+            KeySchema:
+              - AttributeName: InsertionTimeStamp
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 5
+              WriteCapacityUnits: 5
         KeySchema:
           - AttributeName: email
             KeyType: HASH
-          - AttributeName: district
+          - AttributeName: InsertionTimeStamp
             KeyType: RANGE
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
-          - AttributeName: district
-            AttributeType: S
+          - AttributeName: InsertionTimeStamp
+            AttributeType: N
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5

@@ -10,6 +10,25 @@ AWS.config.update({
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
+var userObj = {
+  TableName: 'subscribers',
+  Item: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    preference: '',
+    district: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: 0,
+    mailChimpStatus: '',
+    InsertionTimeStamp: 0
+  }
+};
+
+
 function removeEmptyStringElements(obj) {
   for (var prop in obj) {
     if (typeof obj[prop] === 'object') {// dive deeper in
@@ -17,6 +36,7 @@ function removeEmptyStringElements(obj) {
     } else if(obj[prop] === '') {// delete elements that are empty strings
       delete obj[prop];
     }
+
   }
   return obj;
 }
@@ -56,22 +76,6 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
-  var userObj = {
-    TableName: 'users',
-    Item: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      preference: '',
-      district: '',
-      street: '',
-      city: '',
-      state: '',
-      zip: 0,
-      mailChimpStatus: ''
-    }
-  };
   var representativeObj = {
     TableName: 'representatives',
     Item: {
@@ -88,6 +92,7 @@ module.exports.handler = (event, context, callback) => {
   // transform name
   var nameParts = (event.body.full_name || '').split(' ');
 
+  userObj.Item.InsertionTimeStamp = (new Date()).getTime()/1000;
   userObj.Item.email = event.body.email_address;
   userObj.Item.firstName = nameParts.shift();
   userObj.Item.lastName = nameParts.join(' ');

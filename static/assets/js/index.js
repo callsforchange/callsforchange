@@ -89,7 +89,7 @@
   function showFormSuccess(form) {
     // TODO
     $(form)[0].reset();
-    setFormMessage(form, 'All set, we received your information!');
+    setFormMessage(form, 'All set, we received your information!  Look for your first text/email from us soon.');
   }
 
   function showFormErrors(form) {

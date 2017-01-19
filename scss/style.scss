@@ -304,8 +304,9 @@ nav {
     margin: 0.25em 1em 2em 0;
 }
 
-#signup {
-
+#signup .btn-default {
+    position: relative;
+    top: -10px;
 }
 
 section {
