@@ -11,7 +11,7 @@ AWS.config.update({
 var docClient = new AWS.DynamoDB.DocumentClient();
 
 var userObj = {
-  TableName: 'users',
+  TableName: 'subscribers',
   Item: {
     firstName: '',
     lastName: '',

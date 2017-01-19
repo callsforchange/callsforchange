@@ -90,10 +90,10 @@ functions:
 
 resources:
   Resources:
-    usersTable:
+    subscribersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: users2
+        TableName: subscribers
         GlobalSecondaryIndexes:
           - IndexName: InsertionTimeStamp
             KeySchema:
@@ -107,14 +107,10 @@ resources:
         KeySchema:
           - AttributeName: email
             KeyType: HASH
-          - AttributeName: district
-            KeyType: RANGE
           - AttributeName: InsertionTimeStamp
-            KeyType: HASH
+            KeyType: RANGE
         AttributeDefinitions:
           - AttributeName: email
-            AttributeType: S
-          - AttributeName: district
             AttributeType: S
           - AttributeName: InsertionTimeStamp
             AttributeType: N
