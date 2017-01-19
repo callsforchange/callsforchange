@@ -96,16 +96,14 @@ resources:
         TableName: users
         GlobalSecondaryIndexes:
           IndexName: InsertionTimeStamp
-          KeySchema: [ 
-            { "AttributeName": "InsertionTimeStamp", "KeyType": "HASH" }
-          ],
-          Projection: {
-            "ProjectionType": "ALL"
-          },
-          ProvisionedThroughput: {
-            "ReadCapacityUnits": { "Ref": 5 },
-            "WriteCapacityUnits": { "Ref": 5 }
-          }
+          KeySchema:
+            - AttributeName: InsertionTimeStamp
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 5
+            WriteCapacityUnits: 5
         KeySchema:
           - AttributeName: email
             KeyType: HASH
