@@ -93,6 +93,9 @@ p.dropcap::first-letter {
   font-weight: bold;
   color: #EC1A3D; }
 
+li {
+  margin-bottom: 1em; }
+
 .display-block {
   display: block; }
 
