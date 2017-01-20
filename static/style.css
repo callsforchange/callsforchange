@@ -28,14 +28,19 @@ html, body {
   -moz-osx-font-smoothing: grayscale; }
 
 p a,
+li a,
+li a:visited,
 p a:visited {
   font-weight: bold;
-  color: #1B45E1;
+  color: #122C3F;
   text-decoration: none;
   border-bottom: 1px dotted rgba(27, 69, 225, 0.8);
   transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
   p a:hover,
+  li a:hover,
+  li a:visited:hover,
   p a:visited:hover {
+    color: #1B45E1;
     text-decoration: none;
     padding-bottom: 0.15em; }
 
@@ -46,6 +51,15 @@ h2 {
   font-size: 1.2em;
   color: #fff;
   font-weight: normal; }
+  h2.subheader {
+    padding-bottom: 1em;
+    line-height: 1.4em; }
+  @media screen and (min-width: 992px) {
+    h2.subheader {
+      font-size: 1.6em;
+      line-height: 1.6em;
+      padding-top: 2.5em;
+      width: 450px; } }
 
 h3 {
   font-weight: bold;
@@ -81,6 +95,9 @@ p.dropcap::first-letter {
 
 .display-block {
   display: block; }
+
+.disclaimer-text {
+  line-height: 1.4em; }
 
 .btn-default {
   height: 3em;
@@ -151,6 +168,11 @@ input[type=text] {
   .rally-form input[type=text].with-description {
     margin-bottom: 0.2em; }
 
+.signup-form p.lg {
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 1.4; }
+
 .hero-background {
   background: #1B45E1 url("assets/images/hero-bg.png");
   background-repeat: no-repeat;
@@ -199,11 +221,12 @@ nav {
       border-bottom: 1px dotted #fff;
       text-decoration: none; }
 
+.first-line-bold::first-line {
+  font-weight: bold; }
+
 .intro {
-  padding: 4em 0; }
-  @media screen and (max-width: 992px) {
-    .intro {
-      padding: 2em 0; } }
+  padding: 2em 0;
+  font-size: 1.2em; }
 
 .signup-form,
 .rally-form,
@@ -248,7 +271,7 @@ nav {
 
 section {
   border-top: 4px solid #EC1A3D;
-  margin: 2em 0; }
+  margin: 4em 0; }
 
 .illo-comments {
   position: absolute;
@@ -264,6 +287,10 @@ footer {
   footer a.link, footer a.link:visited {
     color: #fff;
     border-bottom: 1px dotted rgba(255, 255, 255, 0.8); }
+  footer .footer-content {
+    padding-top: 2em; }
+  footer .donate-now {
+    padding-bottom: 2em; }
 
 @media screen and (min-width: 992px) {
   .rally-header {

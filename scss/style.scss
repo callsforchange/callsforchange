@@ -19,14 +19,17 @@ html, body {
 }
 
 p a,
+li a,
+li a:visited,
 p a:visited {
     font-weight: bold;
-    color: $brand-blue;
+    color: $brand-black;
     text-decoration: none;
     border-bottom: 1px dotted fade-out($brand-blue, 0.2);
 
     transition: all 0.3s $brand-transition-curve;
     &:hover {
+        color: $brand-blue;
         text-decoration: none;
         padding-bottom:0.15em;
     }
@@ -40,6 +43,20 @@ h2 {
     font-size: 1.2em;
     color: #fff;
     font-weight: normal;
+
+    &.subheader {
+        padding-bottom: 1em;
+        line-height: 1.4em;
+    }
+
+    @media screen and (min-width: $collapse-breakpoint) {
+        &.subheader {
+            font-size: 1.6em;
+            line-height: 1.6em;
+            padding-top: 2.5em;
+            width: 450px;
+        }
+    }
 }
 
 h3 {
@@ -82,6 +99,10 @@ p.dropcap::first-letter {
 
 .display-block {
     display: block;
+}
+
+.disclaimer-text {
+    line-height: 1.4em;
 }
 
 // BUTTONS
@@ -182,6 +203,14 @@ input[type=text] {
   }
 }
 
+.signup-form p.lg {
+    font-weight: bold;
+    font-size: 1.2em;
+    line-height: 1.4;
+}
+
+
+
 // HERO
 
 .hero-background{
@@ -248,14 +277,15 @@ nav {
     }
 }
 
+.first-line-bold::first-line {
+    font-weight: bold;
+}
+
 // INTRO AND SIGNUP
 
 .intro {
-    padding: 4em 0;
-
-    @media screen and (max-width: $collapse-breakpoint) {
-        padding: 2em 0;
-    }
+    padding: 2em 0;
+    font-size: 1.2em;
 }
 
 .signup-form,
@@ -311,7 +341,7 @@ nav {
 
 section {
     border-top: 4px solid $brand-red;
-    margin: 2em 0;
+    margin: 4em 0;
 }
 
 .illo-comments {
@@ -336,6 +366,14 @@ footer {
     a.link, a.link:visited {
         color: #fff;
         border-bottom: 1px dotted fade-out(#fff, 0.2);
+    }
+
+    .footer-content {
+        padding-top: 2em;
+    }
+
+    .donate-now {
+        padding-bottom: 2em;
     }
 }
 
