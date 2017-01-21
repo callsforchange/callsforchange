@@ -265,8 +265,13 @@ nav {
   margin-bottom: 1.5em;
   display: block; }
 
+.call-row {
+  display: flex;
+  padding-bottom: 2em; }
+
 .icon-call {
-  margin: 0.25em 1em 2em 0; }
+  margin: 0.25em 1em 0 0;
+  flex-shrink: 0; }
 
 #signup .btn-default {
   position: relative;
@@ -294,6 +299,10 @@ footer {
     padding-top: 2em; }
   footer .donate-now {
     padding-bottom: 2em; }
+  footer .fb-container {
+    max-width: 100%;
+    overflow: hidden;
+    margin-bottom: 4em; }
 
 @media screen and (min-width: 992px) {
   .rally-header {
