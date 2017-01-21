@@ -102,6 +102,9 @@ li {
 .disclaimer-text {
   line-height: 1.4em; }
 
+.container {
+  overflow: hidden; }
+
 .btn-default {
   height: 3em;
   line-height: 1.647058824em;
