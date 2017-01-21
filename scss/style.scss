@@ -109,10 +109,6 @@ li {
     line-height: 1.4em;
 }
 
-.container {
-    overflow: hidden;
-}
-
 // BUTTONS
 
 .btn-default {
@@ -338,8 +334,13 @@ nav {
   display: block;
 }
 
+.call-row {
+    display: flex;
+    padding-bottom: 2em;
+}
 .icon-call {
-    margin: 0.25em 1em 2em 0;
+    margin: 0.25em 1em 0 0;
+    flex-shrink: 0;
 }
 
 #signup .btn-default {
@@ -382,6 +383,12 @@ footer {
 
     .donate-now {
         padding-bottom: 2em;
+    }
+
+    .fb-container {
+        max-width: 100%;
+        overflow: hidden;
+        margin-bottom: 4em;
     }
 }
 
