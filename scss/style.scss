@@ -182,7 +182,9 @@ li {
 
 // FORMS
 
-input[type=text] {
+input[type=text],
+input[type=tel],
+input[type=email] {
   border: 2px solid rgba(0, 0, 0, 0.15);
   transition: all 0.3s $brand-transition-curve;
 
@@ -193,7 +195,11 @@ input[type=text] {
 }
 
 .signup-form input[type=text],
-.rally-form input[type=text] {
+.signup-form input[type=tel],
+.signup-form input[type=email],
+.rally-form input[type=text],
+.rally-form input[type=tel],
+.rally-form input[type=email] {
   display: block;
   height: 3em;
   font-size: 1.1em;
