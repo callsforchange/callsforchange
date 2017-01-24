@@ -27,6 +27,7 @@
 
   function contactChangeHandler(form) {
     var preference = form.find('input[name=contact_preference]:checked').val();
+    form.find('input[name=email_address]').attr('required', (preference === 'email' || preference === 'both'));
     form.find('input[name=phone_number]').attr('required', (preference === 'sms' || preference === 'both'));
   }
 
