@@ -1,14 +1,9 @@
 'use strict';
 
-var civicinfo = require('../libs/google').civicinfo('v2');
-var mailchimp = require('../libs/mailchimp');
-var AWS = require('aws-sdk');
+const civicinfo = require('../libs/google').civicinfo('v2');
+const mailchimp = require('../libs/mailchimp');
 
-AWS.config.update({
-  region: process.env.AWS_REGION
-});
-
-var docClient = new AWS.DynamoDB.DocumentClient();
+const aws = require('../libs/aws')
 
 var userObj = {
   TableName: 'subscribers',
@@ -27,28 +22,6 @@ var userObj = {
     InsertionTimeStamp: 0
   }
 };
-
-
-function removeEmptyStringElements(obj) {
-  for (var prop in obj) {
-    if (typeof obj[prop] === 'object') {// dive deeper in
-      removeEmptyStringElements(obj[prop]);
-    } else if(obj[prop] === '') {// delete elements that are empty strings
-      delete obj[prop];
-    }
-
-  }
-  return obj;
-}
-
-function docClientPut(doc) {
-  return new Promise((resolve, reject) => {
-    docClient.put(removeEmptyStringElements(doc), (err, data) => {
-      if (err) reject(err);
-      else resolve(data);
-    })
-  });
-}
 
 function normalizePhoneNumber(number) {
   var normalized;
@@ -175,10 +148,10 @@ module.exports.handler = (event, context, callback) => {
     userObj.Item.mailChimpStatus = 'subscribed';
   })
 
-  .then(() => docClientPut(userObj))
+  .then(() => aws.docClientPut(userObj))
   .then(() => console.log('User input successful: ', userObj.Item.email))
 
-  .then(() =>docClientPut(representativeObj))
+  .then(() => aws.docClientPut(representativeObj))
   // TODO: Replace this with a bootstrap script for reps table, this does massively redundant table writes - Joe S
   .then(() => console.log('Representative input successful: ', representativeObj.Item.district))
 
@@ -206,7 +179,7 @@ module.exports.handler = (event, context, callback) => {
 
     userObj.Item.mailChimpStatus = 'errorNotSubscribed';
 
-    return docClientPut(userObj)
+    return aws.docClientPut(userObj)
     .then(() => console.log('User input successful: ', userObj.Item.email))
     .catch(error => console.log('Error adding user object to database: ', error))
 
