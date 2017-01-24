@@ -232,6 +232,8 @@
             <div class="col-md-12 col-lg-5 col-lg-offset-1 footer-content">
                 <h4>Spread the Word!</h4>
                 <div class="fb-container">
+
+                    <div id="fb-root"></div>
                     <div class="fb-like" data-href="https://www.callsforchange.com" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
                 </div>
             </div>
@@ -265,11 +267,11 @@
 
 <!-- Facebook SDK -->
 <script>(function(d, s, id) {
- var js, fjs = d.getElementsByTagName(s)[0];
- if (d.getElementById(id)) return;
- js = d.createElement(s); js.id = id;
- js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1407252195982467";
- fjs.parentNode.insertBefore(js, fjs);
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <script>
