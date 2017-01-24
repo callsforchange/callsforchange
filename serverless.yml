@@ -31,6 +31,7 @@ functions:
 # =--= MIGRATION AND MISC. OPERATIONAL SCRIPTS =-----------------------------------------=
   migrate:
     handler: functions/migrate.handler
+    timeout: 300
 
   robots:
     handler: functions/robots.handler
