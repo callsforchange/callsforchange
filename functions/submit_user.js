@@ -1,6 +1,7 @@
 'use strict';
 
 var civicinfo = require('../libs/google').civicinfo('v2');
+var civicinfo_utils = require('../libs/civicinfo_utils');
 var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
 
@@ -29,25 +30,6 @@ function docClientPut(doc) {
       else resolve(data);
     })
   });
-}
-
-function normalizePhoneNumber(number) {
-  var normalized;
-  if (Array.isArray(number)) {
-    normalized = number[0];
-  } else if(number === undefined) {
-    normalized = '';
-  } else {
-    normalized = number;
-  }
-  normalized = normalized.replace(/\D/g,'');
-
-  if (normalized.length !== 10) {
-    console.log(`Unknown phone format '${number}' normalized to '${normalized}'!`);
-    return '';
-  } else {
-    return normalized.substr(0,3) + '-' + normalized.substr(3,3) + '-' + normalized.substr(6,4);
-  }
 }
 
 module.exports.handler = (event, context, callback) => {
@@ -94,7 +76,7 @@ module.exports.handler = (event, context, callback) => {
   userObj.Item.firstName = event.body.first_name;
   userObj.Item.lastName = event.body.last_name;
   userObj.Item.preference = event.body.contact_preference || 'email';
-  userObj.Item.phoneNumber = normalizePhoneNumber(event.body.phone_number);
+  userObj.Item.phoneNumber = civicinfo_utils.normalizePhoneNumber(event.body.phone_number);
 
   // Wrap Civic API call in a promise and call Google
   new Promise((resolve, reject) => {
@@ -112,37 +94,21 @@ module.exports.handler = (event, context, callback) => {
   // Parse and process rep data
   .then(data => {
     console.log('Received some information from CIVIC API ' + JSON.stringify(data));
+    const res = civicinfo_utils.representativeProcessing(data);
 
-    const district = data.offices
-      .filter(o => o.roles.indexOf('legislatorLowerBody') >= 0)
-      .map(o => o.name)
-      .filter(name => name.match(/[A-Z]{2}-\d\d?$/))
-      .map(name => name.match(/[A-Z]{2}-\d\d?$/)[0])[0];
-
-    userObj.Item.district = district;
+    userObj.Item.district = res.district;
     userObj.Item.street = data.normalizedInput.line1;
     userObj.Item.city = data.normalizedInput.city;
     userObj.Item.state = data.normalizedInput.state;
     userObj.Item.zip = data.normalizedInput.zip;
 
-    const house_index = data.offices
-      .filter(o => o.roles.indexOf('legislatorLowerBody') >= 0)
-      .map(o => o.officialIndices[0])[0];
-
-    const senate_indices = data.offices
-      .filter(o => o.roles.indexOf('legislatorUpperBody') >= 0)
-      .map(o => o.officialIndices)[0];
-
-    const official_1 = data.officials[senate_indices[0]];
-    const official_2 = data.officials[senate_indices[1]];
-
-    representativeObj.Item.district = district;
-    representativeObj.Item.senate1name = official_1.name;
-    representativeObj.Item.senate1number = normalizePhoneNumber(official_1.phones);
-    representativeObj.Item.senate2name = official_2.name;
-    representativeObj.Item.senate2number = normalizePhoneNumber(official_2.phones);
-    representativeObj.Item.repname = data.officials[house_index].name;
-    representativeObj.Item.repnumber = normalizePhoneNumber(data.officials[house_index].phones);
+    representativeObj.Item.district = res.district;
+    representativeObj.Item.senate1name = res.senators[0].name;
+    representativeObj.Item.senate1number = civicinfo_utils.normalizePhoneNumber(res.senators[0].phones);
+    representativeObj.Item.senate2name = res.senators[1].name;
+    representativeObj.Item.senate2number = civicinfo_utils.normalizePhoneNumber(res.senators[1].phones);
+    representativeObj.Item.repname = res.representative.name;
+    representativeObj.Item.repnumber = civicinfo_utils.normalizePhoneNumber(res.representative.phones);
 
     // Send new info to MailChimp
     return mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
@@ -152,13 +118,13 @@ module.exports.handler = (event, context, callback) => {
         FNAME: userObj.Item.firstName || '',
         LNAME: userObj.Item.lastName || '',
         H_NAME:   data.officials[house_index].name,
-        H_PHONE:  normalizePhoneNumber(data.officials[house_index].phones),
+        H_PHONE:  civicinfo_utils.normalizePhoneNumber(data.officials[house_index].phones),
         H_PHOTO:  data.officials[house_index].photoUrl,
         S1_NAME:  official_1.name,
-        S1_PHONE: normalizePhoneNumber(official_1.phones),
+        S1_PHONE: civicinfo_utils.normalizePhoneNumber(official_1.phones),
         S1_PHOTO: official_1.photoUrl,
         S2_NAME:  official_2.name,
-        S2_PHONE: normalizePhoneNumber(official_2.phones),
+        S2_PHONE: civicinfo_utils.normalizePhoneNumber(official_2.phones),
         S2_PHOTO: official_2.photoUrl
       }
     })
