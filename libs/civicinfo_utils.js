@@ -1,6 +1,19 @@
 var civicinfo = require('./google').civicinfo('v2');
 
 module.exports = {
+  
+  removeEmptyStringElements: function(obj) {
+    for (var prop in obj) {
+      if (typeof obj[prop] === 'object') {// dive deeper in
+        removeEmptyStringElements(obj[prop]);
+      } else if(obj[prop] === '') {// delete elements that are empty strings
+        delete obj[prop];
+      }
+
+    }
+    return obj;
+  },
+
 
   normalizePhoneNumber: function normalizePhoneNumber(number) {
     var normalized;

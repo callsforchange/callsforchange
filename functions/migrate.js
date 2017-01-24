@@ -101,7 +101,7 @@ function list_webhook_register() {
 
 function docClientPut(doc) {
   return new Promise((resolve, reject) => {
-    docClient.put(removeEmptyStringElements(doc), (err, data) => {
+    docClient.put(civicinfo_utils.removeEmptyStringElements(doc), (err, data) => {
       if (err) reject(err);
       else resolve(data);
     })
