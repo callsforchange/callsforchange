@@ -38,11 +38,12 @@
                     <p>Sign up for everything you need to call your Congress members every week.</p>
 
                     <form id="signup">
-                        <input type="text" name="full_name" required placeholder="Your full name">
-                        <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Street address (eg: 100 Street Name, City)">
+                        <input type="text" name="full_name" required placeholder="Your full name" />
+                        <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Street address (eg: 100 Street Name, City)" />
                         <p class="xs">We’ll use your voting address to automatically find your members of Congress.</p>
-                        <input type="text" name="email_address" required placeholder="Your email address">
-                        <input type="text" name="phone_number" placeholder="Your phone number">
+                        <input type="email" name="email_address" required placeholder="Your email address" />
+                        <input type="tel" pattern="\(?[0-9]{3}\)?\s?-?[0-9]{3}\s?-?[0-9]{4}" name="phone_number" placeholder="650 123-4567"
+                            oninvalid="this.setCustomValidity('(650) 123-4567')" oninput="setCustomValidity('')" />
 
                         <p class="xs">How would you like us to keep in touch?</p>
                         <div class="btn-group preference" role="group" aria-label="preference">
