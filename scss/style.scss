@@ -340,6 +340,18 @@ nav {
   display: block;
 }
 
+@media screen and (min-width: $collapse-breakpoint) {
+    .name-input-group {
+        .first {
+            padding-right: .5em;
+        }
+
+        .last {
+            padding-left: .5em;
+        }
+    }
+}
+
 .call-row {
     display: flex;
     padding-bottom: 2em;

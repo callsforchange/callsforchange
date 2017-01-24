@@ -89,13 +89,10 @@ module.exports.handler = (event, context, callback) => {
     }
   };
 
-  // transform name
-  var nameParts = (event.body.full_name || '').split(' ');
-
   userObj.Item.InsertionTimeStamp = (new Date()).getTime()/1000;
   userObj.Item.email = event.body.email_address;
-  userObj.Item.firstName = nameParts.shift();
-  userObj.Item.lastName = nameParts.join(' ');
+  userObj.Item.firstName = event.body.first_name;
+  userObj.Item.lastName = event.body.last_name;
   userObj.Item.preference = event.body.contact_preference || 'email';
   userObj.Item.phoneNumber = normalizePhoneNumber(event.body.phone_number);
 
