@@ -105,8 +105,13 @@ li {
     display: block;
 }
 
+.keep-in-touch {
+    margin-bottom: 0;
+}
+
 .disclaimer-text {
     line-height: 1.4em;
+    margin-bottom: 0;
 }
 
 // BUTTONS
@@ -307,8 +312,12 @@ nav {
     padding: 24px;
 
     .form-message {
-        margin-top: 10px;
-        margin-bottom: 0;
+        margin-top: -20px;
+        margin-bottom: 20px;
+
+        &.text-success {
+            font-weight: bold;
+        }
     }
 }
 
