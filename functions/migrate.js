@@ -175,8 +175,8 @@ function repopulate_reps_table() {
 module.exports.handler = (event, context, callback) => {
   Promise.all([
     list_field_migrate(),
-    list_webhook_register(),
-    repopulate_reps_table()
+    list_webhook_register()
+    // repopulate_reps_table() NOT INTENDED FOR EVERY-SINGLE_DEPLOY!
   ]).then(values => {
     callback(null, { values: values });
   })
