@@ -5,34 +5,62 @@
 
 const aws = require('../libs/aws')
 const twilio = require('../libs/twilio')
+let repsCache = {}
+
+function replaceRepInfo (rep, content) {
+  content
+    .replace(
+      '{{ALL_REP_INFO}}',
+      `${rep.repname}: ${rep.repnumber || 'Unknown'}, ${rep.senate1name}: ${rep.senate1number || 'Unknown'}, ${rep.senate2name}: ${rep.senate2number || 'Unknown'}`
+    )
+    .replace(
+      '{{HOUSE_INFO}}',
+      `${rep.repname}: ${rep.repnumber || 'Unknown'}`
+    )
+    .replace(
+      '{{SENATE_INFO}}',
+      `${rep.senate1name}: ${rep.senate1number || 'Unknown'}, ${rep.senate2name}: ${rep.senate2number || 'Unknown'}`
+    )
+  return content
+}
 
 module.exports.handler = (event, context, callback) => {
   let user = event.user;
+  let p;
 
   // fetch reps
-  aws.docClientGet({
-    TableName: 'representatives',
-    Key:{ district: user.district }
-  })
+  if (!repsCache[user.district]) {
+    p = aws.docClientGet({
+      TableName: 'representatives',
+      Key: { district: user.district }
+    })
+  } else {
+    p = Promise.resolve(repsCache[user.district])
+  }
 
   // decide best contact method(s)
-  .then(reps => {
-    return sendText(event.content, event.user.phoneNumber)
+  p.then(rep => {
+    rep = rep.Item
+    if (!repsCache[user.district]) {
+      repsCache[user.district] = rep
+    }
+
+    return twilio.sendText(replaceRepInfo(event.content, rep), user.phoneNumber)
   })
 
   // update user object
   .then(sms => {
     return aws.docClientPut({
       TableName: 'subscribers',
-      Key:{
+      Key: {
         email: user.email,
         InsertionTimeStamp: user.InsertionTimeStamp
       },
-      UpdateExpression: "set lastTexted = :d",
+      UpdateExpression: 'set lastTexted = :d',
       ExpressionAttributeValues: {
-          ":d": new Date().toIsoString()
+        ':d': new Date().toIsoString()
       },
-      ReturnValues: "UPDATED_NEW"
+      ReturnValues: 'UPDATED_NEW'
     })
   })
 
