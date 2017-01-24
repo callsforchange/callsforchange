@@ -11,12 +11,15 @@ function getToday () {
   return new Date().toIsoString().substr(0, 10);
 }
 
+const timeDiff = 1000 * 3600 * 24 * 5 // ms in 5 days
+
 // TODO: Iterate over notifications, and submit async lambda's to notify per-user.
 module.exports.handler = (event, context, callback) => {
   const lambda = aws.lambdaFactory();
 
   const today = getToday();
 
+  // TODO: scan for users with a phone number and contact pref != email
   const params = {};
 
   Promise.all([
@@ -30,14 +33,18 @@ module.exports.handler = (event, context, callback) => {
   // invoke a bunch of lambdas
   .then((users, content) => {
     return Promise.all(users.Items.map(user => {
-      lambda.invoke({
-        FunctionName: process.env.NOTIFY_USER_FUNCTION_NAME,
-        InvocationType: 'Event',
-        Payload: JSON.stringify({
-          user: user,
-          content: content
-        })
-      })
+      if ((new Date()).getTime() - Date.parse(user.lastTexted) > timeDiff) {
+        return lambda.invoke({
+          FunctionName: process.env.NOTIFY_USER_FUNCTION_NAME,
+          InvocationType: 'Event',
+          Payload: JSON.stringify({
+            user: user,
+            content: content
+          })
+        });
+      } else {
+        // recently texted, ignore
+      }
     }));
   })
 
