@@ -27,17 +27,13 @@
 
   function contactChangeHandler(form) {
     var preference = form.find('input[name=contact_preference]:checked').val();
+    form.find('input[name=email_address]').attr('required', (preference === 'email' || preference === 'both'));
     form.find('input[name=phone_number]').attr('required', (preference === 'sms' || preference === 'both'));
   }
 
   function submitHandler(event) {
     form = $(event.target);
     event.preventDefault();
-
-    if (!isValid(form)) {
-      showFormErrors(form);
-      return;
-    }
 
     // data-offline on form to track
     if (isOffline(form)) {
@@ -68,12 +64,6 @@
     var location = window.location;
     var baseDomain = location.host.replace('www.', '');
     return location.protocol + '//' + API_SUBDOMAIN + '.' + baseDomain;
-  }
-
-  // Form validation
-  function isValid(form) {
-    // TODO
-    return true;
   }
 
   function lockFormButton(form) {

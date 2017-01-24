@@ -151,15 +151,23 @@ li {
       color: #fff;
       border: 2px solid rgba(255, 255, 255, 0.4); }
 
-input[type=text] {
+input[type=text],
+input[type=tel],
+input[type=email] {
   border: 2px solid rgba(0, 0, 0, 0.15);
   transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
-  input[type=text]:focus {
+  input[type=text]:focus,
+  input[type=tel]:focus,
+  input[type=email]:focus {
     outline: none;
     border: 2px solid #1B45E1; }
 
 .signup-form input[type=text],
-.rally-form input[type=text] {
+.signup-form input[type=tel],
+.signup-form input[type=email],
+.rally-form input[type=text],
+.rally-form input[type=tel],
+.rally-form input[type=email] {
   display: block;
   height: 3em;
   font-size: 1.1em;
@@ -168,7 +176,11 @@ input[type=text] {
   margin-bottom: 1em;
   padding: 0 0.5em; }
   .signup-form input[type=text].with-description,
-  .rally-form input[type=text].with-description {
+  .signup-form input[type=tel].with-description,
+  .signup-form input[type=email].with-description,
+  .rally-form input[type=text].with-description,
+  .rally-form input[type=tel].with-description,
+  .rally-form input[type=email].with-description {
     margin-bottom: 0.2em; }
 
 .signup-form p.lg {
