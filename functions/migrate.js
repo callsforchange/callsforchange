@@ -6,8 +6,16 @@
  */
 
 var config = require('../libs/config');
+var civicinfo = require('../libs/google').civicinfo('v2');
+var civicinfo_utils = require('../libs/civicinfo_utils');
 var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
+
+AWS.config.update({
+  region: process.env.AWS_REGION
+});
+
+var docClient = new AWS.DynamoDB.DocumentClient();
 
 const expected_merge_fields = {
   H_NAME:    { display_order: 11, name: 'House Rep. Name',        required: false, tag: 'H_NAME',   type: 'text' },
@@ -91,10 +99,84 @@ function list_webhook_register() {
   });
 }
 
+function docClientPut(doc) {
+  return new Promise((resolve, reject) => {
+    docClient.put(civicinfo_utils.removeEmptyStringElements(doc), (err, data) => {
+      if (err) reject(err);
+      else resolve(data);
+    })
+  });
+}
+
+function repopulate_reps_table() {
+  return new Promise((resolve, reject) => {
+    docClient.scan({
+      TableName: 'subscribers',
+      Select: 'SPECIFIC_ATTRIBUTES',
+      AttributesToGet: [
+        'email',
+        'street',
+        'city',
+        'state',
+        'zip'
+      ]
+    }, function(err, data) {
+      if(err) reject(err);
+      else resolve(data);
+    })
+  })
+
+  .then(all_subscribers => {
+    return Promise.all(all_subscribers.Items.map(subscriber => {
+      var representativeObj = {
+        TableName: 'representatives',
+        Item: {
+          district: '',
+          senate1name: '',
+          senate1number: '',
+          senate2name: '',
+          senate2number: '',
+          repname: '',
+          repnumber: ''
+        }
+      };
+
+      return new Promise((resolve, reject) => {
+        civicinfo.representatives.representativeInfoByAddress({
+          address: `${subscriber.street} ${subscriber.city} ${subscriber.state} ${subscriber.zip}`,
+          levels: ['country'],
+          roles: ['legislatorLowerBody', 'legislatorUpperBody'],
+          fields: 'normalizedInput,officials(name,phones,photoUrl),offices(name, roles, officialIndices)'
+        }, function(err, data) {
+          if (err) reject(err);
+          else resolve(data);
+        })
+      })
+      .then(civic => {
+        const res = civicinfo_utils.representativeProcessing(civic);
+
+        representativeObj.Item.district = res.district;
+        representativeObj.Item.senate1name = res.senators[0].name;
+        representativeObj.Item.senate1number = civicinfo_utils.normalizePhoneNumber(res.senators[0].phones);
+        representativeObj.Item.senate2name = res.senators[1].name;
+        representativeObj.Item.senate2number = civicinfo_utils.normalizePhoneNumber(res.senators[1].phones);
+        representativeObj.Item.repname = res.representative.name;
+        representativeObj.Item.repnumber = civicinfo_utils.normalizePhoneNumber(res.representative.phones);
+
+        console.log('Rep: ' + JSON.stringify(representativeObj));
+      })
+
+      .then(() => docClientPut(representativeObj))
+      .catch(error => console.log('CIVIC Parsing error:' + JSON.stringify(error)));
+    }));
+  });
+}
+
 module.exports.handler = (event, context, callback) => {
   Promise.all([
     list_field_migrate(),
-    list_webhook_register()
+    list_webhook_register(),
+    repopulate_reps_table()
   ]).then(values => {
     callback(null, { values: values });
   })
