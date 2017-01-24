@@ -36,5 +36,24 @@ module.exports.handler = (event, context, callback) => {
     }
   };
 
-  docClientPut(ingestObj);
-}
+  return docClientPut(ingestObj)
+  .then(() => {
+  console.log('User save successful: ', ingestObj.Item.email)
+    const response = {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      body: 'OK'
+    };
+
+    callback(null, response);
+  })
+  .catch(error => {
+    console.log('Error saving user info: ', error);
+    callback(JSON.stringify({
+      message: 'There was an error subscribing this user',
+      error: error
+    }));
+  });
+};
