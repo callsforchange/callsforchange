@@ -90,6 +90,20 @@ functions:
 
 resources:
   Resources:
+    ingestTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ingest
+        KeySchema:
+          - AttributeName: InsertionTimeStamp
+            KeyType: RANGE
+        AttributeDefinitions:
+          - AttributeName: InsertionTimeStamp
+            AttributeType: N
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
     subscribersTable:
       Type: AWS::DynamoDB::Table
       Properties:
