@@ -35,11 +35,6 @@
     form = $(event.target);
     event.preventDefault();
 
-    if (!isValid(form)) {
-      showFormErrors(form);
-      return;
-    }
-
     // data-offline on form to track
     if (isOffline(form)) {
       // save to localStorage
@@ -69,12 +64,6 @@
     var location = window.location;
     var baseDomain = location.host.replace('www.', '');
     return location.protocol + '//' + API_SUBDOMAIN + '.' + baseDomain;
-  }
-
-  // Form validation
-  function isValid(form) {
-    // TODO
-    return true;
   }
 
   function lockFormButton(form) {
