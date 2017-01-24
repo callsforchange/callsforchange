@@ -163,9 +163,10 @@ function repopulate_reps_table() {
         representativeObj.Item.repname = res.representative.name;
         representativeObj.Item.repnumber = civicinfo_utils.normalizePhoneNumber(res.representative.phones);
 
-        console.log('Returning rep: ' + JSON.stringify(representativeObj));
-        return docClientPut(representativeObj);
+        return representativeObj;
       })
+
+      .then(rep => docClientPut(rep))
       .catch(error => console.log('CIVIC Parsing error:' + JSON.stringify(error)));
     }));
   });
