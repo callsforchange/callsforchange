@@ -99,8 +99,12 @@ li {
 .display-block {
   display: block; }
 
+.keep-in-touch {
+  margin-bottom: 0; }
+
 .disclaimer-text {
-  line-height: 1.4em; }
+  line-height: 1.4em;
+  margin-bottom: 0; }
 
 .btn-default {
   height: 3em;
@@ -245,16 +249,23 @@ nav {
 
 .signup-form,
 .rally-form,
-.status-panel-form {
+.status-panel-form,
+.thank-you-box {
   background: #FFFFFF;
   box-shadow: 0 13px 54px 0 rgba(0, 0, 0, 0.23);
   border-radius: 8px;
   padding: 24px; }
   .signup-form .form-message,
   .rally-form .form-message,
-  .status-panel-form .form-message {
-    margin-top: 10px;
-    margin-bottom: 0; }
+  .status-panel-form .form-message,
+  .thank-you-box .form-message {
+    margin-top: -20px;
+    margin-bottom: 20px; }
+    .signup-form .form-message.text-success,
+    .rally-form .form-message.text-success,
+    .status-panel-form .form-message.text-success,
+    .thank-you-box .form-message.text-success {
+      font-weight: bold; }
 
 .signup-form {
   position: absolute;
@@ -276,6 +287,12 @@ nav {
 .rally-form .preference {
   margin-bottom: 1.5em;
   display: block; }
+
+@media screen and (min-width: 992px) {
+  .name-input-group .first {
+    padding-right: .5em; }
+  .name-input-group .last {
+    padding-left: .5em; } }
 
 .call-row {
   display: flex;

@@ -38,14 +38,15 @@
                     <p>Sign up for everything you need to call your Congress members every week.</p>
 
                     <form id="signup">
-                        <input type="text" name="full_name" required placeholder="Your full name" />
+                        <input type="text" name="first_name" required placeholder="Your first name" />
+                        <input type="text" name="last_name" required placeholder="Your last name" />
                         <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Street address (eg: 100 Street Name, City)" />
                         <p class="xs">We’ll use your voting address to automatically find your members of Congress.</p>
                         <input type="email" name="email_address" required placeholder="Your email address" />
                         <input type="tel" pattern="\(?[0-9]{3}\)?\s?-?[0-9]{3}\s?-?[0-9]{4}" name="phone_number" placeholder="650 123-4567"
                             oninvalid="this.setCustomValidity('(650) 123-4567')" oninput="setCustomValidity('')" />
 
-                        <p class="xs">How would you like us to keep in touch?</p>
+                        <p class="xs keep-in-touch">How would you like us to keep in touch?</p>
                         <div class="btn-group preference" role="group" aria-label="preference">
                             <label class="radio-inline">
                                 <input type="radio" name="contact_preference" id="preference_email" value="email" checked> Email
@@ -58,16 +59,15 @@
                             </label>
                         </div>
 
-                        <input type="submit" class="btn btn-default" value="I'm in!" />
+                        <p class="form-message hide"></p>
+                        <p><input type="submit" class="btn btn-default" value="I'm in!" /></p>
 
-                        <p class="xs">
+                        <p class="xs disclaimer-text">
                             By clicking "I'm In," you accept our <a href="/pp.pdf">Privacy Policy</a>
                             and <a href="/tos.pdf">Terms of Service</a>. You'll receive text/emails from
                             us about once a week, and you can opt out at any time. Standard SMS rates
                             may apply.
                         </p>
-
-                        <p class="form-message hide"></p>
                     </form>
                 </div>
             </div>

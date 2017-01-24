@@ -110,7 +110,7 @@
         box.slideUp("slow", function () {
           box.addClass('hide').show();
         });
-      }, 3000);
+      }, 10000);
     }
   }
 
