@@ -249,19 +249,22 @@ nav {
 
 .signup-form,
 .rally-form,
-.status-panel-form {
+.status-panel-form,
+.thank-you-box {
   background: #FFFFFF;
   box-shadow: 0 13px 54px 0 rgba(0, 0, 0, 0.23);
   border-radius: 8px;
   padding: 24px; }
   .signup-form .form-message,
   .rally-form .form-message,
-  .status-panel-form .form-message {
+  .status-panel-form .form-message,
+  .thank-you-box .form-message {
     margin-top: -20px;
     margin-bottom: 20px; }
     .signup-form .form-message.text-success,
     .rally-form .form-message.text-success,
-    .status-panel-form .form-message.text-success {
+    .status-panel-form .form-message.text-success,
+    .thank-you-box .form-message.text-success {
       font-weight: bold; }
 
 .signup-form {
