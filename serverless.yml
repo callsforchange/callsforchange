@@ -26,6 +26,8 @@ provider:
     GOOGLE_API: ${env:GOOGLE_API}
     MAILCHIMP_API: ${env:MAILCHIMP_API}
     MAILCHIMP_LIST_ID: ${env:MAILCHIMP_LIST_ID}
+    TWILIO_ACCOUNT_SID: ${env:TWILIO_ACCOUNT_SID}
+    TWILIO_AUTH_TOKEN: ${env:TWILIO_AUTH_TOKEN}
 
 functions:
 # =--= MIGRATION AND MISC. OPERATIONAL SCRIPTS =-----------------------------------------=
@@ -43,11 +45,11 @@ functions:
   schedule-fanout:
     handler: functions/schedule_fanout.handler
     environment:
-      SUBMIT_USER_FUNCTION_NAME: ${self:service}-${opt:stage}-notify-user
+      NOTIFY_USER_FUNCTION_NAME: ${self:service}-${opt:stage}-text-user
     events:
       - schedule: cron(0/15 * * * ? *)
-  notify-user:
-    handler: functions/notify_user.handler
+  text-user:
+    handler: functions/text_user.handler
 
 # =--= REGISTRATION AND USER MANAGEMENT =------------------------------------------------=
   submit-user:
@@ -128,6 +130,24 @@ resources:
         AttributeDefinitions:
           - AttributeName: district
             AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+    messagesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: messages
+        KeySchema:
+          - AttributeName: sendOn
+            KeyType: HASH
+          - AttributeName: processed
+            KeyType: HASH
+        AttributeDefinitions:
+          - AttributeName: sendOn # datetime string
+            AttributeType: S
+          - AttributeName: processed
+            AttributeType: B
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
