@@ -99,8 +99,12 @@ li {
 .display-block {
   display: block; }
 
+.keep-in-touch {
+  margin-bottom: 0; }
+
 .disclaimer-text {
-  line-height: 1.4em; }
+  line-height: 1.4em;
+  margin-bottom: 0; }
 
 .btn-default {
   height: 3em;
@@ -151,15 +155,23 @@ li {
       color: #fff;
       border: 2px solid rgba(255, 255, 255, 0.4); }
 
-input[type=text] {
+input[type=text],
+input[type=tel],
+input[type=email] {
   border: 2px solid rgba(0, 0, 0, 0.15);
   transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
-  input[type=text]:focus {
+  input[type=text]:focus,
+  input[type=tel]:focus,
+  input[type=email]:focus {
     outline: none;
     border: 2px solid #1B45E1; }
 
 .signup-form input[type=text],
-.rally-form input[type=text] {
+.signup-form input[type=tel],
+.signup-form input[type=email],
+.rally-form input[type=text],
+.rally-form input[type=tel],
+.rally-form input[type=email] {
   display: block;
   height: 3em;
   font-size: 1.1em;
@@ -168,7 +180,11 @@ input[type=text] {
   margin-bottom: 1em;
   padding: 0 0.5em; }
   .signup-form input[type=text].with-description,
-  .rally-form input[type=text].with-description {
+  .signup-form input[type=tel].with-description,
+  .signup-form input[type=email].with-description,
+  .rally-form input[type=text].with-description,
+  .rally-form input[type=tel].with-description,
+  .rally-form input[type=email].with-description {
     margin-bottom: 0.2em; }
 
 .signup-form p.lg {
@@ -233,16 +249,23 @@ nav {
 
 .signup-form,
 .rally-form,
-.status-panel-form {
+.status-panel-form,
+.thank-you-box {
   background: #FFFFFF;
   box-shadow: 0 13px 54px 0 rgba(0, 0, 0, 0.23);
   border-radius: 8px;
   padding: 24px; }
   .signup-form .form-message,
   .rally-form .form-message,
-  .status-panel-form .form-message {
-    margin-top: 10px;
-    margin-bottom: 0; }
+  .status-panel-form .form-message,
+  .thank-you-box .form-message {
+    margin-top: -20px;
+    margin-bottom: 20px; }
+    .signup-form .form-message.text-success,
+    .rally-form .form-message.text-success,
+    .status-panel-form .form-message.text-success,
+    .thank-you-box .form-message.text-success {
+      font-weight: bold; }
 
 .signup-form {
   position: absolute;
@@ -264,6 +287,12 @@ nav {
 .rally-form .preference {
   margin-bottom: 1.5em;
   display: block; }
+
+@media screen and (min-width: 992px) {
+  .name-input-group .first {
+    padding-right: .5em; }
+  .name-input-group .last {
+    padding-left: .5em; } }
 
 .call-row {
   display: flex;

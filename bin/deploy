@@ -20,6 +20,9 @@ case $STAGE in
     exit 1
 esac
 
+TWILIO_SID_ENCRYPTED='AQECAHjpYz8DbAx51vlUqg/ksRQ6E+Q39Tci7KFTEct4HULyDAAAAIAwfgYJKoZIhvcNAQcGoHEwbwIBADBqBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDKra9IbYWvcNbur+/wIBEIA9B+ZXp4+Lg3Qun2l3a05VgqYcrZ9CK2bRGiCH6b6yP74YNZVO8o5YE0ceMQOydK5gpHcgNiU9cxK16mUW1Q=='
+TWILIO_AUTH_TOKEN_ENCRYPTED='AQECAHjpYz8DbAx51vlUqg/ksRQ6E+Q39Tci7KFTEct4HULyDAAAAH4wfAYJKoZIhvcNAQcGoG8wbQIBADBoBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDDnm91gdd5A+d8zXsgIBEIA7VmdC18j6iPhJpHULPKU3u3kQFmlDcMBKGtVUaN1OPUAhi5wkf/BFHlxl2zf5YZycsfu438tvVdme53c='
+
 echo -n 'Decrypt and export environment variables: '
 
 # Export useful stuff
@@ -33,6 +36,10 @@ export GOOGLE_API=$(aws --region us-east-1 kms decrypt --ciphertext-blob fileb:/
 echo -n 'GOOGLE_API. '
 export MAILCHIMP_API=$(aws --region us-east-1 kms decrypt --ciphertext-blob fileb://<(echo $MAILCHIMP_API_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
 echo -n 'MAILCHIMP_API. '
+export TWILIO_SID=$(aws --region us-east-1 kms decrypt --ciphertext-blob fileb://<(echo $TWILIO_SID_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
+echo -n 'TWILIO_SID. '
+export TWILIO_AUTH_TOKEN=$(aws --region us-east-1 kms decrypt --ciphertext-blob fileb://<(echo $TWILIO_AUTH_TOKEN_ENCRYPTED | base64 --decode) | jq -r '.Plaintext' | base64 --decode)
+echo -n 'TWILIO_AUTH_TOKEN. '
 echo 'Done'
 
 ./node_modules/.bin/serverless deploy --region $AWS_REGION --stage "$STAGE" -v

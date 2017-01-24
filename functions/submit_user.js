@@ -10,25 +10,6 @@ AWS.config.update({
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
-var userObj = {
-  TableName: 'subscribers',
-  Item: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    preference: '',
-    district: '',
-    street: '',
-    city: '',
-    state: '',
-    zip: 0,
-    mailChimpStatus: '',
-    InsertionTimeStamp: 0
-  }
-};
-
-
 function removeEmptyStringElements(obj) {
   for (var prop in obj) {
     if (typeof obj[prop] === 'object') {// dive deeper in
@@ -76,6 +57,25 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
+  var userObj = {
+    TableName: 'subscribers',
+    Item: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      preference: '',
+      district: '',
+      street: '',
+      city: '',
+      state: '',
+      zip: 0,
+      mailChimpStatus: '',
+      InsertionTimeStamp: 0
+    }
+  };
+
+
   var representativeObj = {
     TableName: 'representatives',
     Item: {
@@ -89,13 +89,10 @@ module.exports.handler = (event, context, callback) => {
     }
   };
 
-  // transform name
-  var nameParts = (event.body.full_name || '').split(' ');
-
   userObj.Item.InsertionTimeStamp = (new Date()).getTime()/1000;
   userObj.Item.email = event.body.email_address;
-  userObj.Item.firstName = nameParts.shift();
-  userObj.Item.lastName = nameParts.join(' ');
+  userObj.Item.firstName = event.body.first_name;
+  userObj.Item.lastName = event.body.last_name;
   userObj.Item.preference = event.body.contact_preference || 'email';
   userObj.Item.phoneNumber = normalizePhoneNumber(event.body.phone_number);
 
@@ -116,7 +113,7 @@ module.exports.handler = (event, context, callback) => {
   .then(data => {
     console.log('Received some information from CIVIC API ' + JSON.stringify(data));
 
-    var district = data.offices
+    const district = data.offices
       .filter(o => o.roles.indexOf('legislatorLowerBody') >= 0)
       .map(o => o.name)
       .filter(name => name.match(/[A-Z]{2}-\d\d?$/))
@@ -128,24 +125,24 @@ module.exports.handler = (event, context, callback) => {
     userObj.Item.state = data.normalizedInput.state;
     userObj.Item.zip = data.normalizedInput.zip;
 
-    var house_index = data.offices
+    const house_index = data.offices
       .filter(o => o.roles.indexOf('legislatorLowerBody') >= 0)
       .map(o => o.officialIndices[0])[0];
 
-    var senate_indices = data.offices
+    const senate_indices = data.offices
       .filter(o => o.roles.indexOf('legislatorUpperBody') >= 0)
       .map(o => o.officialIndices)[0];
 
-    var official_1 = data.officials[senate_indices[0]];
-    var official_2 = data.officials[senate_indices[1]];
+    const official_1 = data.officials[senate_indices[0]];
+    const official_2 = data.officials[senate_indices[1]];
 
-    representativeObj.district = district;
-    representativeObj.senate1name = official_1.name;
-    representativeObj.senate1number = normalizePhoneNumber(official_1.phones);
-    representativeObj.senate2name = official_2.name;
-    representativeObj.senate2number = normalizePhoneNumber(official_2.phones);
-    representativeObj.repname = data.officials[house_index].name;
-    representativeObj.repnumber = normalizePhoneNumber(data.officials[house_index].phones);
+    representativeObj.Item.district = district;
+    representativeObj.Item.senate1name = official_1.name;
+    representativeObj.Item.senate1number = normalizePhoneNumber(official_1.phones);
+    representativeObj.Item.senate2name = official_2.name;
+    representativeObj.Item.senate2number = normalizePhoneNumber(official_2.phones);
+    representativeObj.Item.repname = data.officials[house_index].name;
+    representativeObj.Item.repnumber = normalizePhoneNumber(data.officials[house_index].phones);
 
     // Send new info to MailChimp
     return mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {

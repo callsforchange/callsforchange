@@ -105,8 +105,13 @@ li {
     display: block;
 }
 
+.keep-in-touch {
+    margin-bottom: 0;
+}
+
 .disclaimer-text {
     line-height: 1.4em;
+    margin-bottom: 0;
 }
 
 // BUTTONS
@@ -182,7 +187,9 @@ li {
 
 // FORMS
 
-input[type=text] {
+input[type=text],
+input[type=tel],
+input[type=email] {
   border: 2px solid rgba(0, 0, 0, 0.15);
   transition: all 0.3s $brand-transition-curve;
 
@@ -193,7 +200,11 @@ input[type=text] {
 }
 
 .signup-form input[type=text],
-.rally-form input[type=text] {
+.signup-form input[type=tel],
+.signup-form input[type=email],
+.rally-form input[type=text],
+.rally-form input[type=tel],
+.rally-form input[type=email] {
   display: block;
   height: 3em;
   font-size: 1.1em;
@@ -294,15 +305,20 @@ nav {
 
 .signup-form,
 .rally-form,
-.status-panel-form {
+.status-panel-form,
+.thank-you-box {
     background: #FFFFFF;
     box-shadow: 0 13px 54px 0 rgba(0,0,0,0.23);
     border-radius: 8px;
     padding: 24px;
 
     .form-message {
-        margin-top: 10px;
-        margin-bottom: 0;
+        margin-top: -20px;
+        margin-bottom: 20px;
+
+        &.text-success {
+            font-weight: bold;
+        }
     }
 }
 
@@ -332,6 +348,18 @@ nav {
 .rally-form .preference {
   margin-bottom: 1.5em;
   display: block;
+}
+
+@media screen and (min-width: $collapse-breakpoint) {
+    .name-input-group {
+        .first {
+            padding-right: .5em;
+        }
+
+        .last {
+            padding-left: .5em;
+        }
+    }
 }
 
 .call-row {
