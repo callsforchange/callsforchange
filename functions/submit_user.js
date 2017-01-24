@@ -105,15 +105,15 @@ module.exports.handler = (event, context, callback) => {
       merge_fields: {
         FNAME: userObj.Item.firstName || '',
         LNAME: userObj.Item.lastName || '',
-        H_NAME:   data.officials[house_index].name,
-        H_PHONE:  civicinfo_utils.normalizePhoneNumber(data.officials[house_index].phones),
-        H_PHOTO:  data.officials[house_index].photoUrl,
-        S1_NAME:  official_1.name,
-        S1_PHONE: civicinfo_utils.normalizePhoneNumber(official_1.phones),
-        S1_PHOTO: official_1.photoUrl,
-        S2_NAME:  official_2.name,
-        S2_PHONE: civicinfo_utils.normalizePhoneNumber(official_2.phones),
-        S2_PHOTO: official_2.photoUrl
+        H_NAME:   res.representative.name,
+        H_PHONE:  civicinfo_utils.normalizePhoneNumber(res.representative.phones),
+        H_PHOTO:  res.representative.photoUrl,
+        S1_NAME:  res.senators[0].name,
+        S1_PHONE: civicinfo_utils.normalizePhoneNumber(res.senators[0].phones),
+        S1_PHOTO: res.senators[0].photoUrl,
+        S2_NAME:  res.senators[1].name,
+        S2_PHONE: civicinfo_utils.normalizePhoneNumber(res.senators[1].phones),
+        S2_PHOTO: res.senators[1].photoUrl
       }
     })
   })
