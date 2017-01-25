@@ -99,32 +99,18 @@ function list_webhook_register() {
   });
 }
 
-function docClientPut(doc) {
-  return new Promise((resolve, reject) => {
-    docClient.put(civicinfo_utils.removeEmptyStringElements(doc), (err, data) => {
-      if (err) reject(err);
-      else resolve(data);
-    })
-  });
-}
-
 function repopulate_reps_table() {
-  return new Promise((resolve, reject) => {
-    docClient.scan({
-      TableName: 'subscribers',
-      Select: 'SPECIFIC_ATTRIBUTES',
-      AttributesToGet: [
-        'email',
-        'street',
-        'city',
-        'state',
-        'zip'
-      ]
-    }, function(err, data) {
-      if(err) reject(err);
-      else resolve(data);
-    })
-  })
+  return docClient.scan({
+    TableName: 'subscribers',
+    Select: 'SPECIFIC_ATTRIBUTES',
+    AttributesToGet: [
+      'email',
+      'street',
+      'city',
+      'state',
+      'zip'
+    ]
+  }).promise()
 
   .then(all_subscribers => {
     return Promise.all(all_subscribers.Items.map(subscriber => {
@@ -166,7 +152,7 @@ function repopulate_reps_table() {
         console.log('Rep: ' + JSON.stringify(representativeObj));
       })
 
-      .then(() => docClientPut(representativeObj))
+      .then(() => docClient.put(civicinfo_utils.removeEmptyStringElements(representativeObj)))
       .catch(error => console.log('CIVIC Parsing error:' + JSON.stringify(error)));
     }));
   });
