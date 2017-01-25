@@ -141,13 +141,9 @@ resources:
         KeySchema:
           - AttributeName: sendOn
             KeyType: HASH
-          - AttributeName: processed
-            KeyType: HASH
         AttributeDefinitions:
           - AttributeName: sendOn # datetime string
             AttributeType: S
-          - AttributeName: processed
-            AttributeType: B
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
