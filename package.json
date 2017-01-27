@@ -20,10 +20,30 @@
     "http-server": "^0.9.0",
     "llexec": "^1.2.2",
     "node-sass": "^4.3.0",
+    "scriptkit": "0.0.18",
     "serverless": "~1.2.1"
   },
   "dependencies": {
     "googleapis": "^14.2.0",
     "mailchimp-api-v3": "^1.7.0"
+  },
+  "scriptkit": {
+    "files": {
+      "static/assets/js/_dist/location-search.js": "static/assets/js/location-search.js"
+    },
+    "test": {
+      "enabled": false
+    },
+    "eslint": {
+      "enabled": false
+    },
+    "serve": {
+      "enabled": false
+    },
+    "scripts": {
+      "babel": {
+        "exclude": []
+      }
+    }
   }
 }

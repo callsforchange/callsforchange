@@ -8,4 +8,5 @@ export style_dir=${base_dir}/scss
 
 ${parallel_cmd} ::: \
   "${bin_dir}/http-server ${static_dir}" \
-  "${bin_dir}/node-sass --source-map ${static_dir}/style.css.map --watch ${style_dir}/style.scss ${static_dir}/style.css"
+  "${bin_dir}/node-sass --source-map ${static_dir}/style.css.map --watch ${style_dir}/style.scss ${static_dir}/style.css" \
+  "${bin_dir}/scriptkit dev"

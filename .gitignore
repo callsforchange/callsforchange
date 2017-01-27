@@ -49,3 +49,4 @@ jspm_packages
 .idea/vcs.xml
 
 .idea/workspace.xml
+static/assets/js/_dist/
