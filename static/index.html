@@ -145,7 +145,12 @@
                             <input type="text" name="last_name" required placeholder="Last name" />
                         </div>
                     </div>
-                    <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Street address" />
+                    <div class="location-search" data-module="LocationSearch" data-module-apikey="AIzaSyBhruvcnGEJvcLzEVldghZJVWowv9afPWU">
+                      <input id="address_autocomplete" type="text" data-name="input" data-action="search" data-action-type="input" class="with-description" name="street_address" required placeholder="Street address" />
+                      <div data-name="resultsContainer">
+                        <ul data-name="results"></ul>
+                      </div>
+                    </div>
                     <p class="xs">We’ll use your voting address to find your members of Congress.</p>
                     <input type="email" name="email_address" required placeholder="Your email address" />
                     <input type="tel" pattern="\(?[0-9]{3}\)?\s?-?[0-9]{3}\s?-?[0-9]{4}" name="phone_number" placeholder="Your phone number (123-456-7890)"
@@ -265,7 +270,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="/assets/js/index.js"></script>
+<script src="/assets/js/_dist/app.js"></script>
 <!-- Google Analytics -->
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -287,18 +292,5 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-<script>
-  var autocomplete;
-
-  function initAutocomplete() {
-    // Create the autocomplete object, restricting the search to geographical
-    // location types.
-    autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('address_autocomplete')),
-        {types: ['address'], componentRestrictions: {country: 'us'} });
-  }
-</script>
-
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhruvcnGEJvcLzEVldghZJVWowv9afPWU&libraries=places&&callback=initAutocomplete" async defer></script>
 </body>
 </html>

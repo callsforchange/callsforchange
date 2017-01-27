@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/technologists-for-progress/52calls-52weeks#readme",
   "devDependencies": {
+    "@firstandthird/complete": "^1.0.0-beta.3",
     "http-server": "^0.9.0",
     "llexec": "^1.2.2",
     "node-sass": "^4.3.0",
@@ -29,7 +30,7 @@
   },
   "scriptkit": {
     "files": {
-      "static/assets/js/_dist/location-search.js": "static/assets/js/location-search.js"
+      "static/assets/js/_dist/app.js": "static/assets/js/app.js"
     },
     "test": {
       "enabled": false
@@ -41,6 +42,7 @@
       "enabled": false
     },
     "scripts": {
+      "name": "callsforchange",
       "babel": {
         "exclude": []
       }
