@@ -64,7 +64,7 @@ h3 {
     font-weight: bold;
     text-transform: uppercase;
     color: $brand-blue;
-    letter-spacing: 0.5px;
+    letter-spacing: -0.33px;
     margin: 1em 0;
 }
 
@@ -83,7 +83,8 @@ p {
 }
 
 p.lg {
-    font-size: 1.352941176em;
+    font-size: 1.176470588em;
+    letter-spacing: -0.34px;
     color: $brand-black;
 }
 
