@@ -228,10 +228,28 @@ input[type=email] {
 
 // HERO
 
-.hero-background{
-    background: $brand-blue url("assets/images/hero-bg.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+.hero-background {
+    background: $brand-blue;
+   
+    position: relative;
+
+    &::before {
+        opacity: 0;
+        content: "";
+        position: absolute;
+        background: url("assets/images/hero-bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        transition: 0.3s;
+    }
+
+    &.loaded::before {
+        opacity: 1;
+    }
 }
 
 .home-hero {

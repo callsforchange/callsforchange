@@ -9,6 +9,16 @@
     SAVED_CONTACTS_KEY: 'saved-contacts'
   }
 
+  //Fade hero image after it's loaded
+  function fadeHeroImage() {
+    var img = new Image ();
+    img.onload = function () {
+      $(".hero-background").toggleClass("loaded");
+    };
+    img.src = "/assets/images/hero-bg.png";
+
+  }
+
   // form setup (domain) & hooks
   function setupForm(selector) {
     var form = $(selector);
@@ -223,6 +233,7 @@
   function start() {
     setupForm('#signup');
     setupStatus('#status');
+    fadeHeroImage();
   }
   start();
 
