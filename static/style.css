@@ -49,12 +49,12 @@ h2 {
   font-weight: normal; }
   h2.subheader {
     padding-bottom: 1em;
-    line-height: 1.4em; }
+    line-height: 1.352941176em; }
   @media screen and (min-width: 992px) {
     h2.subheader {
-      font-size: 1.6em;
-      line-height: 1.6em;
-      padding-top: 2.5em;
+      font-size: 1.352941176em;
+      line-height: 1.352941176em;
+      padding-top: 1em;
       width: 450px; } }
 
 h3 {
@@ -172,8 +172,8 @@ input[type=email] {
 .rally-form input[type=tel],
 .rally-form input[type=email] {
   display: block;
-  height: 3em;
-  font-size: 1.1em;
+  height: 2.75em;
+  font-size: 1em;
   width: 100%;
   border-radius: 8px;
   margin-bottom: 1em;
@@ -188,7 +188,7 @@ input[type=email] {
 
 .signup-form p.lg {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.117647059em;
   line-height: 1.4; }
 
 .hero-background {
@@ -210,10 +210,10 @@ input[type=email] {
     opacity: 1; }
 
 .home-hero {
-  height: 500px;
+  height: 440px;
   position: relative; }
   .home-hero .logo {
-    margin-top: 3em; }
+    margin-top: 2em; }
   @media screen and (max-width: 992px) {
     .home-hero {
       height: auto; } }
@@ -244,7 +244,7 @@ nav {
     line-height: 1em;
     color: #fff;
     font-weight: bold;
-    border-bottom: 1px dotted #1B45E1;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0);
     transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
     nav a:hover, nav a:visited:hover {
       color: #fff;
@@ -341,7 +341,11 @@ footer {
   footer .fb-container {
     max-width: 100%;
     overflow: hidden;
-    margin-bottom: 4em; }
+    margin-bottom: 4em;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    border-radius: 6px; }
 
 @media screen and (min-width: 992px) {
   .rally-header {
