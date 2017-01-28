@@ -27,8 +27,7 @@ p a,
 li a,
 li a:visited,
 p a:visited {
-  font-weight: bold;
-  color: rgba(18, 44, 63, 0.9);
+  color: #122C3F;
   text-decoration: none;
   border-bottom: 1px dotted rgba(27, 69, 225, 0.8);
   transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
@@ -73,10 +72,12 @@ h4 {
 
 p {
   font-size: 1em;
-  line-height: 1.6; }
+  line-height: 1.6;
+  color: rgba(18, 44, 63, 0.8); }
 
 p.lg {
-  font-size: 1.352941176em; }
+  font-size: 1.352941176em;
+  color: #122C3F; }
 
 p.sm {
   font-size: 0.9em; }
@@ -314,7 +315,12 @@ nav {
 
 #signup .btn-default {
   position: relative;
-  top: -10px; }
+  top: -10px;
+  padding: 0 3em; }
+  @media screen and (max-width: 992px) {
+    #signup .btn-default {
+      display: block;
+      width: 100%; } }
 
 section {
   border-top: 2px solid #EC1A3D;

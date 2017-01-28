@@ -22,8 +22,9 @@ p a,
 li a,
 li a:visited,
 p a:visited {
-    font-weight: bold;
-    color: fade-out($brand-black, 0.1);
+    //font-weight: bold;
+    //color: fade-out($brand-black, 0.1);
+    color: $brand-black;
     text-decoration: none;
     border-bottom: 1px dotted fade-out($brand-blue, 0.2);
 
@@ -78,10 +79,12 @@ h4 {
 p {
     font-size: 1em;
     line-height: 1.6;
+    color: fade-out($brand-black, 0.2)
 }
 
 p.lg {
     font-size: 1.352941176em;
+    color: $brand-black;
 }
 
 p.sm {
@@ -396,6 +399,12 @@ nav {
 #signup .btn-default {
     position: relative;
     top: -10px;
+    padding: 0 3em;
+
+    @media screen and (max-width: $collapse-breakpoint) {
+        display: block;
+        width: 100%;
+    }
 }
 
 section {
