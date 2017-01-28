@@ -48,6 +48,7 @@ h2 {
     &.subheader {
         padding-bottom: 1em;
         line-height: 1.352941176em;
+        letter-spacing: -0.32px;
     }
 
     @media screen and (min-width: $collapse-breakpoint) {

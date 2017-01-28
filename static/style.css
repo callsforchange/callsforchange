@@ -48,7 +48,8 @@ h2 {
   font-weight: normal; }
   h2.subheader {
     padding-bottom: 1em;
-    line-height: 1.352941176em; }
+    line-height: 1.352941176em;
+    letter-spacing: -0.32px; }
   @media screen and (min-width: 992px) {
     h2.subheader {
       font-size: 1.352941176em;
