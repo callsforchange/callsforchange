@@ -36,26 +36,14 @@ module.exports.handler = (event, context, callback) => {
     }
   };
 
-
-  var representativeObj = {
-    TableName: 'representatives',
-    Item: {
-      district: '',
-      senate1name: '',
-      senate1number: '',
-      senate2name: '',
-      senate2number: '',
-      repname: '',
-      repnumber: ''
-    }
-  };
-
   userObj.Item.InsertionTimeStamp = (new Date()).getTime()/1000;
   userObj.Item.email = event.body.email_address;
   userObj.Item.firstName = event.body.first_name;
   userObj.Item.lastName = event.body.last_name;
   userObj.Item.preference = event.body.contact_preference || 'email';
   userObj.Item.phoneNumber = civicinfo_utils.normalizePhoneNumber(event.body.phone_number);
+
+  var res;
 
   // Wrap Civic API call in a promise and call Google
   new Promise((resolve, reject) => {
@@ -70,40 +58,42 @@ module.exports.handler = (event, context, callback) => {
     });
   })
 
-  // Parse and process rep data
-  .then(data => {
-    console.log('Received some information from CIVIC API ' + JSON.stringify(data));
-    const res = civicinfo_utils.representativeProcessing(data);
+  // Enrich the data with manually crawled data from local storage
+  .then(civicInfoResponse => {
+    res = civicinfo_utils.representativeProcessing(civicInfoResponse);
 
     userObj.Item.district = res.district;
-    userObj.Item.street = data.normalizedInput.line1;
-    userObj.Item.city = data.normalizedInput.city;
-    userObj.Item.state = data.normalizedInput.state;
-    userObj.Item.zip = data.normalizedInput.zip;
+    userObj.Item.street = civicInfoResponse.normalizedInput.line1;
+    userObj.Item.city = civicInfoResponse.normalizedInput.city;
+    userObj.Item.state = civicInfoResponse.normalizedInput.state;
+    userObj.Item.zip = civicInfoResponse.normalizedInput.zip;
 
-    representativeObj.Item.district = res.district;
-    representativeObj.Item.senate1name = res.senators[0].name;
-    representativeObj.Item.senate1number = civicinfo_utils.normalizePhoneNumber(res.senators[0].phones);
-    representativeObj.Item.senate2name = res.senators[1].name;
-    representativeObj.Item.senate2number = civicinfo_utils.normalizePhoneNumber(res.senators[1].phones);
-    representativeObj.Item.repname = res.representative.name;
-    representativeObj.Item.repnumber = civicinfo_utils.normalizePhoneNumber(res.representative.phones);
+    return docClient.get({
+      TableName: 'representatives',
+      Key: {
+        'district': res.district
+      },
+    }).promise();
+  })
 
-    // Send new info to MailChimp
+  // Parse and process rep data
+  .then(representatives => {
+    // {"Item":{"district":"NY-23","senate2number":"202-224-6542","senate1name":"Kirsten E. Gillibrand","senate2name":"Charles E. Schumer","senate1number":"202-224-4451","repnumber":"202-225-3161","repname":" Tom Reed"}}
+
     return mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
       email_address: userObj.Item.email,
       status: 'subscribed',
       merge_fields: {
         FNAME: userObj.Item.firstName || '',
         LNAME: userObj.Item.lastName || '',
-        H_NAME:   res.representative.name,
-        H_PHONE:  civicinfo_utils.normalizePhoneNumber(res.representative.phones),
+        H_NAME:   representatives.Item.repname,
+        H_PHONE:  representatives.Item.repnumber,
+        S1_NAME:  representatives.Item.senate1name,
+        S1_PHONE: representatives.Item.senate1number,
+        S2_NAME:  representatives.Item.senate2name,
+        S2_PHONE: representatives.Item.senate2number,
         H_PHOTO:  res.representative.photoUrl,
-        S1_NAME:  res.senators[0].name,
-        S1_PHONE: civicinfo_utils.normalizePhoneNumber(res.senators[0].phones),
         S1_PHOTO: res.senators[0].photoUrl,
-        S2_NAME:  res.senators[1].name,
-        S2_PHONE: civicinfo_utils.normalizePhoneNumber(res.senators[1].phones),
         S2_PHOTO: res.senators[1].photoUrl
       }
     })
@@ -119,10 +109,6 @@ module.exports.handler = (event, context, callback) => {
 
   .then(() => docClient.put(civicinfo_utils.removeEmptyStringElements(userObj)).promise())
   .then(() => console.log('User input successful: ', userObj.Item.email))
-
-  .then(() =>docClient.put(civicinfo_utils.removeEmptyStringElements(representativeObj)).promise())
-  // TODO: Replace this with a bootstrap script for reps table, this does massively redundant table writes - Joe S
-  .then(() => console.log('Representative input successful: ', representativeObj.Item.district))
 
   // Success, return to user
   .then(() => {
