@@ -335,6 +335,12 @@ nav {
 .intro {
     padding: 2em 0;
     //font-size: 1.2em;
+    a {
+      color: fade-out($brand-black, 0.2)
+    }
+    p {
+      padding-bottom: 20px;
+    }
 }
 
 .signup-form,
