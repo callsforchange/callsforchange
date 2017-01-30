@@ -1,0 +1,802 @@
+[
+  {
+    "state": "tn",
+    "url": "http://www.alexander.senate.gov/",
+    "last_name": "Alexander",
+    "first_name": "Lamar",
+    "party": "R",
+    "phone_number": "(202) 224-4944"
+  },
+  {
+    "state": "wi",
+    "url": "http://www.baldwin.senate.gov/",
+    "last_name": "Baldwin",
+    "first_name": "Tammy",
+    "party": "D",
+    "phone_number": "(202) 224-5653"
+  },
+  {
+    "state": "wy",
+    "url": "http://www.barrasso.senate.gov",
+    "last_name": "Barrasso",
+    "first_name": "John",
+    "party": "R",
+    "phone_number": "(202) 224-6441"
+  },
+  {
+    "state": "co",
+    "url": "http://www.bennet.senate.gov",
+    "last_name": "Bennet",
+    "first_name": "Michael F.",
+    "party": "D",
+    "phone_number": "(202) 224-5852"
+  },
+  {
+    "state": "ct",
+    "url": "http://www.blumenthal.senate.gov",
+    "last_name": "Blumenthal",
+    "first_name": "Richard",
+    "party": "D",
+    "phone_number": "(202) 224-2823"
+  },
+  {
+    "state": "mo",
+    "url": "http://www.blunt.senate.gov",
+    "last_name": "Blunt",
+    "first_name": "Roy",
+    "party": "R",
+    "phone_number": "(202) 224-5721"
+  },
+  {
+    "state": "nj",
+    "url": "http://www.booker.senate.gov",
+    "last_name": "Booker",
+    "first_name": "Cory A.",
+    "party": "D",
+    "phone_number": "(202) 224-3224"
+  },
+  {
+    "state": "ar",
+    "url": "http://www.boozman.senate.gov/",
+    "last_name": "Boozman",
+    "first_name": "John",
+    "party": "R",
+    "phone_number": "(202) 224-4843"
+  },
+  {
+    "state": "oh",
+    "url": "http://www.brown.senate.gov/",
+    "last_name": "Brown",
+    "first_name": "Sherrod",
+    "party": "D",
+    "phone_number": "(202) 224-2315"
+  },
+  {
+    "state": "nc",
+    "url": "http://www.burr.senate.gov",
+    "last_name": "Burr",
+    "first_name": "Richard",
+    "party": "R",
+    "phone_number": "(202) 224-3154"
+  },
+  {
+    "state": "wa",
+    "url": "http://www.cantwell.senate.gov",
+    "last_name": "Cantwell",
+    "first_name": "Maria",
+    "party": "D",
+    "phone_number": "(202) 224-3441"
+  },
+  {
+    "state": "wv",
+    "url": "http://www.capito.senate.gov",
+    "last_name": "Capito",
+    "first_name": "Shelley Moore",
+    "party": "R",
+    "phone_number": "(202) 224-6472"
+  },
+  {
+    "state": "md",
+    "url": "http://www.cardin.senate.gov/",
+    "last_name": "Cardin",
+    "first_name": "Benjamin L.",
+    "party": "D",
+    "phone_number": "(202) 224-4524"
+  },
+  {
+    "state": "de",
+    "url": "http://www.carper.senate.gov",
+    "last_name": "Carper",
+    "first_name": "Thomas R.",
+    "party": "D",
+    "phone_number": "(202) 224-2441"
+  },
+  {
+    "state": "pa",
+    "url": "http://www.casey.senate.gov/",
+    "last_name": "Casey",
+    "first_name": "\"Robert P. Jr.\"",
+    "party": "D",
+    "phone_number": "(202) 224-6324"
+  },
+  {
+    "state": "la",
+    "url": "http://www.cassidy.senate.gov",
+    "last_name": "Cassidy",
+    "first_name": "Bill",
+    "party": "R",
+    "phone_number": "(202) 224-5824"
+  },
+  {
+    "state": "ms",
+    "url": "http://www.cochran.senate.gov",
+    "last_name": "Cochran",
+    "first_name": "Thad",
+    "party": "R",
+    "phone_number": "(202) 224-5054"
+  },
+  {
+    "state": "me",
+    "url": "http://www.collins.senate.gov",
+    "last_name": "Collins",
+    "first_name": "Susan M.",
+    "party": "R",
+    "phone_number": "(202) 224-2523"
+  },
+  {
+    "state": "de",
+    "url": "http://www.coons.senate.gov/",
+    "last_name": "Coons",
+    "first_name": "Christopher A.",
+    "party": "D",
+    "phone_number": "(202) 224-5042"
+  },
+  {
+    "state": "tn",
+    "url": "http://www.corker.senate.gov/",
+    "last_name": "Corker",
+    "first_name": "Bob",
+    "party": "R",
+    "phone_number": "(202) 224-3344"
+  },
+  {
+    "state": "tx",
+    "url": "http://www.cornyn.senate.gov/",
+    "last_name": "Cornyn",
+    "first_name": "John",
+    "party": "R",
+    "phone_number": "(202) 224-2934"
+  },
+  {
+    "state": "nv",
+    "url": "//www.cortezmasto.senate.gov",
+    "last_name": "Cortez Masto",
+    "first_name": "Catherine",
+    "party": "D",
+    "phone_number": "(202) 224-3542"
+  },
+  {
+    "state": "ar",
+    "url": "http://www.cotton.senate.gov",
+    "last_name": "Cotton",
+    "first_name": "Tom",
+    "party": "R",
+    "phone_number": "(202) 224-2353"
+  },
+  {
+    "state": "id",
+    "url": "http://www.crapo.senate.gov",
+    "last_name": "Crapo",
+    "first_name": "Mike",
+    "party": "R",
+    "phone_number": "(202) 224-6142"
+  },
+  {
+    "state": "tx",
+    "url": "http://www.cruz.senate.gov",
+    "last_name": "Cruz",
+    "first_name": "Ted",
+    "party": "R",
+    "phone_number": "(202) 224-5922"
+  },
+  {
+    "state": "mt",
+    "url": "http://www.daines.senate.gov",
+    "last_name": "Daines",
+    "first_name": "Steve",
+    "party": "R",
+    "phone_number": "(202) 224-2651"
+  },
+  {
+    "state": "in",
+    "url": "http://www.donnelly.senate.gov",
+    "last_name": "Donnelly",
+    "first_name": "Joe",
+    "party": "D",
+    "phone_number": "(202) 224-4814"
+  },
+  {
+    "state": "il",
+    "url": "//www.duckworth.senate.gov",
+    "last_name": "Duckworth",
+    "first_name": "Tammy",
+    "party": "D",
+    "phone_number": "(202) 224-2854"
+  },
+  {
+    "state": "il",
+    "url": "http://www.durbin.senate.gov",
+    "last_name": "Durbin",
+    "first_name": "Richard J.",
+    "party": "D",
+    "phone_number": "(202) 224-2152"
+  },
+  {
+    "state": "wy",
+    "url": "http://www.enzi.senate.gov",
+    "last_name": "Enzi",
+    "first_name": "Michael B.",
+    "party": "R",
+    "phone_number": "(202) 224-3424"
+  },
+  {
+    "state": "ia",
+    "url": "http://www.ernst.senate.gov",
+    "last_name": "Ernst",
+    "first_name": "Joni",
+    "party": "R",
+    "phone_number": "(202) 224-3254"
+  },
+  {
+    "state": "ca",
+    "url": "http://www.feinstein.senate.gov",
+    "last_name": "Feinstein",
+    "first_name": "Dianne",
+    "party": "D",
+    "phone_number": "(202) 224-3841"
+  },
+  {
+    "state": "ne",
+    "url": "http://www.fischer.senate.gov",
+    "last_name": "Fischer",
+    "first_name": "Deb",
+    "party": "R",
+    "phone_number": "(202) 224-6551"
+  },
+  {
+    "state": "az",
+    "url": "http://www.flake.senate.gov",
+    "last_name": "Flake",
+    "first_name": "Jeff",
+    "party": "R",
+    "phone_number": "(202) 224-4521"
+  },
+  {
+    "state": "mn",
+    "url": "http://www.franken.senate.gov",
+    "last_name": "Franken",
+    "first_name": "Al",
+    "party": "D",
+    "phone_number": "(202) 224-5641"
+  },
+  {
+    "state": "co",
+    "url": "http://www.gardner.senate.gov",
+    "last_name": "Gardner",
+    "first_name": "Cory",
+    "party": "R",
+    "phone_number": "(202) 224-5941"
+  },
+  {
+    "state": "ny",
+    "url": "http://www.gillibrand.senate.gov",
+    "last_name": "Gillibrand",
+    "first_name": "Kirsten E.",
+    "party": "D",
+    "phone_number": "(202) 224-4451"
+  },
+  {
+    "state": "sc",
+    "url": "http://www.lgraham.senate.gov/",
+    "last_name": "Graham",
+    "first_name": "Lindsey",
+    "party": "R",
+    "phone_number": "(202) 224-5972"
+  },
+  {
+    "state": "ia",
+    "url": "http://www.grassley.senate.gov",
+    "last_name": "Grassley",
+    "first_name": "Chuck",
+    "party": "R",
+    "phone_number": "(202) 224-3744"
+  },
+  {
+    "state": "ca",
+    "url": "//www.harris.senate.gov",
+    "last_name": "Harris",
+    "first_name": "Kamala D.",
+    "party": "D",
+    "phone_number": "(202) 224-3553"
+  },
+  {
+    "state": "nh",
+    "url": "//www.hassan.senate.gov",
+    "last_name": "Hassan",
+    "first_name": "Margaret Wood",
+    "party": "D",
+    "phone_number": "(202) 224-3324"
+  },
+  {
+    "state": "ut",
+    "url": "http://www.hatch.senate.gov/",
+    "last_name": "Hatch",
+    "first_name": "Orrin G.",
+    "party": "R",
+    "phone_number": "(202) 224-5251"
+  },
+  {
+    "state": "nm",
+    "url": "http://www.heinrich.senate.gov/",
+    "last_name": "Heinrich",
+    "first_name": "Martin",
+    "party": "D",
+    "phone_number": "(202) 224-5521"
+  },
+  {
+    "state": "nd",
+    "url": "http://www.heitkamp.senate.gov/",
+    "last_name": "Heitkamp",
+    "first_name": "Heidi",
+    "party": "D",
+    "phone_number": "(202) 224-2043"
+  },
+  {
+    "state": "nv",
+    "url": "http://www.heller.senate.gov/",
+    "last_name": "Heller",
+    "first_name": "Dean",
+    "party": "R",
+    "phone_number": "(202) 224-6244"
+  },
+  {
+    "state": "hi",
+    "url": "http://www.hirono.senate.gov/",
+    "last_name": "Hirono",
+    "first_name": "Mazie K.",
+    "party": "D",
+    "phone_number": "(202) 224-6361"
+  },
+  {
+    "state": "nd",
+    "url": "http://www.hoeven.senate.gov",
+    "last_name": "Hoeven",
+    "first_name": "John",
+    "party": "R",
+    "phone_number": "(202) 224-2551"
+  },
+  {
+    "state": "ok",
+    "url": "http://www.inhofe.senate.gov/",
+    "last_name": "Inhofe",
+    "first_name": "James M.",
+    "party": "R",
+    "phone_number": "(202) 224-4721"
+  },
+  {
+    "state": "ga",
+    "url": "http://www.isakson.senate.gov",
+    "last_name": "Isakson",
+    "first_name": "Johnny",
+    "party": "R",
+    "phone_number": "(202) 224-3643"
+  },
+  {
+    "state": "wi",
+    "url": "http://www.ronjohnson.senate.gov/",
+    "last_name": "Johnson",
+    "first_name": "Ron",
+    "party": "R",
+    "phone_number": "(202) 224-5323"
+  },
+  {
+    "state": "va",
+    "url": "http://www.kaine.senate.gov/",
+    "last_name": "Kaine",
+    "first_name": "Tim",
+    "party": "D",
+    "phone_number": "(202) 224-4024"
+  },
+  {
+    "state": "la",
+    "url": "//www.kennedy.senate.gov",
+    "last_name": "Kennedy",
+    "first_name": "John",
+    "party": "R",
+    "phone_number": "(202) 224-4623"
+  },
+  {
+    "state": "me",
+    "url": "http://www.king.senate.gov/",
+    "last_name": "King",
+    "first_name": "\"Angus S. Jr.\"",
+    "party": "I",
+    "phone_number": "(202) 224-5344"
+  },
+  {
+    "state": "mn",
+    "url": "http://www.klobuchar.senate.gov/",
+    "last_name": "Klobuchar",
+    "first_name": "Amy",
+    "party": "D",
+    "phone_number": "(202) 224-3244"
+  },
+  {
+    "state": "ok",
+    "url": "http://www.lankford.senate.gov",
+    "last_name": "Lankford",
+    "first_name": "James",
+    "party": "R",
+    "phone_number": "(202) 224-5754"
+  },
+  {
+    "state": "vt",
+    "url": "http://www.leahy.senate.gov/",
+    "last_name": "Leahy",
+    "first_name": "Patrick J.",
+    "party": "D",
+    "phone_number": "(202) 224-4242"
+  },
+  {
+    "state": "ut",
+    "url": "http://www.lee.senate.gov/",
+    "last_name": "Lee",
+    "first_name": "Mike",
+    "party": "R",
+    "phone_number": "(202) 224-5444"
+  },
+  {
+    "state": "wv",
+    "url": "http://www.manchin.senate.gov/",
+    "last_name": "Manchin",
+    "first_name": "\"Joe III\"",
+    "party": "D",
+    "phone_number": "(202) 224-3954"
+  },
+  {
+    "state": "ma",
+    "url": "http://www.markey.senate.gov/",
+    "last_name": "Markey",
+    "first_name": "Edward J.",
+    "party": "D",
+    "phone_number": "(202) 224-2742"
+  },
+  {
+    "state": "az",
+    "url": "http://www.mccain.senate.gov/",
+    "last_name": "McCain",
+    "first_name": "John",
+    "party": "R",
+    "phone_number": "(202) 224-2235"
+  },
+  {
+    "state": "mo",
+    "url": "http://www.mccaskill.senate.gov/",
+    "last_name": "McCaskill",
+    "first_name": "Claire",
+    "party": "D",
+    "phone_number": "(202) 224-6154"
+  },
+  {
+    "state": "ky",
+    "url": "http://www.mcconnell.senate.gov/",
+    "last_name": "McConnell",
+    "first_name": "Mitch",
+    "party": "R",
+    "phone_number": "(202) 224-2541"
+  },
+  {
+    "state": "nj",
+    "url": "http://www.menendez.senate.gov/",
+    "last_name": "Menendez",
+    "first_name": "Robert",
+    "party": "D",
+    "phone_number": "(202) 224-4744"
+  },
+  {
+    "state": "or",
+    "url": "http://www.merkley.senate.gov",
+    "last_name": "Merkley",
+    "first_name": "Jeff",
+    "party": "D",
+    "phone_number": "(202) 224-3753"
+  },
+  {
+    "state": "ks",
+    "url": "http://www.moran.senate.gov",
+    "last_name": "Moran",
+    "first_name": "Jerry",
+    "party": "R",
+    "phone_number": "(202) 224-6521"
+  },
+  {
+    "state": "ak",
+    "url": "http://www.murkowski.senate.gov/",
+    "last_name": "Murkowski",
+    "first_name": "Lisa",
+    "party": "R",
+    "phone_number": "(202) 224-6665"
+  },
+  {
+    "state": "ct",
+    "url": "http://www.murphy.senate.gov/",
+    "last_name": "Murphy",
+    "first_name": "Christopher",
+    "party": "D",
+    "phone_number": "(202) 224-4041"
+  },
+  {
+    "state": "wa",
+    "url": "http://www.murray.senate.gov/",
+    "last_name": "Murray",
+    "first_name": "Patty",
+    "party": "D",
+    "phone_number": "(202) 224-2621"
+  },
+  {
+    "state": "fl",
+    "url": "http://www.billnelson.senate.gov/",
+    "last_name": "Nelson",
+    "first_name": "Bill",
+    "party": "D",
+    "phone_number": "(202) 224-5274"
+  },
+  {
+    "state": "ky",
+    "url": "http://www.paul.senate.gov",
+    "last_name": "Paul",
+    "first_name": "Rand",
+    "party": "R",
+    "phone_number": "(202) 224-4343"
+  },
+  {
+    "state": "ga",
+    "url": "http://www.perdue.senate.gov",
+    "last_name": "Perdue",
+    "first_name": "David",
+    "party": "R",
+    "phone_number": "(202) 224-3521"
+  },
+  {
+    "state": "mi",
+    "url": "http://www.peters.senate.gov",
+    "last_name": "Peters",
+    "first_name": "Gary C.",
+    "party": "D",
+    "phone_number": "(202) 224-6221"
+  },
+  {
+    "state": "oh",
+    "url": "http://www.portman.senate.gov",
+    "last_name": "Portman",
+    "first_name": "Rob",
+    "party": "R",
+    "phone_number": "(202) 224-3353"
+  },
+  {
+    "state": "ri",
+    "url": "http://www.reed.senate.gov/",
+    "last_name": "Reed",
+    "first_name": "Jack",
+    "party": "D",
+    "phone_number": "(202) 224-4642"
+  },
+  {
+    "state": "id",
+    "url": "http://www.risch.senate.gov",
+    "last_name": "Risch",
+    "first_name": "James E.",
+    "party": "R",
+    "phone_number": "(202) 224-2752"
+  },
+  {
+    "state": "ks",
+    "url": "http://www.roberts.senate.gov/",
+    "last_name": "Roberts",
+    "first_name": "Pat",
+    "party": "R",
+    "phone_number": "(202) 224-4774"
+  },
+  {
+    "state": "sd",
+    "url": "http://www.rounds.senate.gov",
+    "last_name": "Rounds",
+    "first_name": "Mike",
+    "party": "R",
+    "phone_number": "(202) 224-5842"
+  },
+  {
+    "state": "fl",
+    "url": "http://www.rubio.senate.gov",
+    "last_name": "Rubio",
+    "first_name": "Marco",
+    "party": "R",
+    "phone_number": "(202) 224-3041"
+  },
+  {
+    "state": "vt",
+    "url": "http://www.sanders.senate.gov/",
+    "last_name": "Sanders",
+    "first_name": "Bernard",
+    "party": "I",
+    "phone_number": "(202) 224-5141"
+  },
+  {
+    "state": "ne",
+    "url": "http://www.sasse.senate.gov",
+    "last_name": "Sasse",
+    "first_name": "Ben",
+    "party": "R",
+    "phone_number": "(202) 224-4224"
+  },
+  {
+    "state": "hi",
+    "url": "http://www.schatz.senate.gov",
+    "last_name": "Schatz",
+    "first_name": "Brian",
+    "party": "D",
+    "phone_number": "(202) 224-3934"
+  },
+  {
+    "state": "ny",
+    "url": "http://www.schumer.senate.gov/",
+    "last_name": "Schumer",
+    "first_name": "Charles E.",
+    "party": "D",
+    "phone_number": "(202) 224-6542"
+  },
+  {
+    "state": "sc",
+    "url": "http://www.scott.senate.gov/",
+    "last_name": "Scott",
+    "first_name": "Tim",
+    "party": "R",
+    "phone_number": "(202) 224-6121"
+  },
+  {
+    "state": "al",
+    "url": "http://www.sessions.senate.gov/",
+    "last_name": "Sessions",
+    "first_name": "Jeff",
+    "party": "R",
+    "phone_number": "(202) 224-4124"
+  },
+  {
+    "state": "nh",
+    "url": "http://www.shaheen.senate.gov",
+    "last_name": "Shaheen",
+    "first_name": "Jeanne",
+    "party": "D",
+    "phone_number": "(202) 224-2841"
+  },
+  {
+    "state": "al",
+    "url": "http://www.shelby.senate.gov/",
+    "last_name": "Shelby",
+    "first_name": "Richard C.",
+    "party": "R",
+    "phone_number": "(202) 224-5744"
+  },
+  {
+    "state": "mi",
+    "url": "http://www.stabenow.senate.gov/",
+    "last_name": "Stabenow",
+    "first_name": "Debbie",
+    "party": "D",
+    "phone_number": "(202) 224-4822"
+  },
+  {
+    "state": "ak",
+    "url": "http://www.sullivan.senate.gov",
+    "last_name": "Sullivan",
+    "first_name": "Dan",
+    "party": "R",
+    "phone_number": "(202) 224-3004"
+  },
+  {
+    "state": "mt",
+    "url": "http://www.tester.senate.gov/",
+    "last_name": "Tester",
+    "first_name": "Jon",
+    "party": "D",
+    "phone_number": "(202) 224-2644"
+  },
+  {
+    "state": "sd",
+    "url": "http://www.thune.senate.gov/",
+    "last_name": "Thune",
+    "first_name": "John",
+    "party": "R",
+    "phone_number": "(202) 224-2321"
+  },
+  {
+    "state": "nc",
+    "url": "http://www.tillis.senate.gov",
+    "last_name": "Tillis",
+    "first_name": "Thom",
+    "party": "R",
+    "phone_number": "(202) 224-6342"
+  },
+  {
+    "state": "pa",
+    "url": "http://www.toomey.senate.gov/",
+    "last_name": "Toomey",
+    "first_name": "Patrick J.",
+    "party": "R",
+    "phone_number": "(202) 224-4254"
+  },
+  {
+    "state": "nm",
+    "url": "http://www.tomudall.senate.gov",
+    "last_name": "Udall",
+    "first_name": "Tom",
+    "party": "D",
+    "phone_number": "(202) 224-6621"
+  },
+  {
+    "state": "md",
+    "url": "http://www.vanhollen.senate.gov",
+    "last_name": "Van Hollen",
+    "first_name": "Chris",
+    "party": "D",
+    "phone_number": "(202) 224-4654"
+  },
+  {
+    "state": "va",
+    "url": "http://www.warner.senate.gov",
+    "last_name": "Warner",
+    "first_name": "Mark R.",
+    "party": "D",
+    "phone_number": "(202) 224-2023"
+  },
+  {
+    "state": "ma",
+    "url": "http://www.warren.senate.gov",
+    "last_name": "Warren",
+    "first_name": "Elizabeth",
+    "party": "D",
+    "phone_number": "(202) 224-4543"
+  },
+  {
+    "state": "ri",
+    "url": "http://www.whitehouse.senate.gov/",
+    "last_name": "Whitehouse",
+    "first_name": "Sheldon",
+    "party": "D",
+    "phone_number": "(202) 224-2921"
+  },
+  {
+    "state": "ms",
+    "url": "http://www.wicker.senate.gov",
+    "last_name": "Wicker",
+    "first_name": "Roger F.",
+    "party": "R",
+    "phone_number": "(202) 224-6253"
+  },
+  {
+    "state": "or",
+    "url": "http://www.wyden.senate.gov/",
+    "last_name": "Wyden",
+    "first_name": "Ron",
+    "party": "D",
+    "phone_number": "(202) 224-5244"
+  },
+  {
+    "state": "in",
+    "url": "//www.young.senate.gov",
+    "last_name": "Young",
+    "first_name": "Todd",
+    "party": "R",
+    "phone_number": "(202) 224-5623"
+  }
+]

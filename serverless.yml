@@ -33,6 +33,10 @@ functions:
     handler: functions/migrate.handler
     timeout: 300
 
+  rehydrate:
+    handler: functions/rehydrate.handler
+    timeout: 300
+
   robots:
     handler: functions/robots.handler
     events:
@@ -60,6 +64,9 @@ functions:
           method: post
           cors: true
 
+  mc-sync:
+    handler: functions/mc-sync.handler
+    timeout: 300
   mc-subscribe:
     handler: functions/mc-subscribe.handler
     events:
