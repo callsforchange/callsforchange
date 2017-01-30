@@ -131,7 +131,7 @@ li {
 
 .btn-default {
     height: 3em;
-    line-height: 1.647058824em;
+    line-height: 3em;
     background: $brand-red;
 
     color: #fff;
@@ -320,6 +320,9 @@ nav {
             border-bottom: 1px dotted #fff;
             text-decoration: none;
         }
+    }
+    a.btn {
+      padding-top: 10px;
     }
 }
 
