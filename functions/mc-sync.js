@@ -16,13 +16,15 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
-  return Promise.all(
-    mailchimp.get(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`)
+  var promise = Promise.resolve(true);
+  for(var count = 0; count < 2000; count+= 10) {
+    promise.then(new Promise((resolve) => setTimeout(resolve, 500)))
+    .then(mailchimp.get(`/lists/${process.env.MAILCHIMP_LIST_ID}/members?offset=${count}`)
     .then(mc_response => {
       console.log(JSON.stringify(mc_response.members));
 
       var mailchimp_id;
-      mc_response.members.map(member => {
+      return Promise.all(mc_response.members.map(member => {
         mailchimp_id = member.id;
         
         console.log(`Member: ${JSON.stringify(member)}`);
@@ -64,9 +66,12 @@ module.exports.handler = (event, context, callback) => {
         .catch(error => {
           console.log('There was an error ' + JSON.stringify(error));
         });
-      })
-    })
-  )
+      }));
+    }));
+  }
+
+  return promise
+
   // Success, return to user
   .then(() => {
     const response = {
