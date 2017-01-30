@@ -121,6 +121,10 @@ li {
 .disclaimer-text {
     line-height: 1.4em;
     margin-bottom: 0;
+    a {
+      color: fade-out($brand-black, 0.2);
+      border-color: fade-out($brand-black, 0.2);
+    }
 }
 
 // BUTTONS
