@@ -64,6 +64,9 @@ functions:
           method: post
           cors: true
 
+  mc-sync:
+    handler: functions/mc-sync.handler
+    timeout: 300
   mc-subscribe:
     handler: functions/mc-subscribe.handler
     events:
