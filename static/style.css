@@ -31,7 +31,6 @@ p a,
 li a,
 li a:visited,
 p a:visited {
-  font-weight: bold;
   color: #122C3F;
   text-decoration: none;
   border-bottom: 1px dotted rgba(27, 69, 225, 0.8);
@@ -53,19 +52,20 @@ h2 {
   font-weight: normal; }
   h2.subheader {
     padding-bottom: 1em;
-    line-height: 1.4em; }
+    line-height: 1.352941176em;
+    letter-spacing: -0.32px; }
   @media screen and (min-width: 992px) {
     h2.subheader {
-      font-size: 1.6em;
-      line-height: 1.6em;
-      padding-top: 2.5em;
+      font-size: 1.352941176em;
+      line-height: 1.352941176em;
+      padding-top: 1em;
       width: 450px; } }
 
 h3 {
   font-weight: bold;
   text-transform: uppercase;
   color: #1B45E1;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.33px;
   margin: 1em 0; }
 
 h4 {
@@ -77,7 +77,13 @@ h4 {
 
 p {
   font-size: 1em;
-  line-height: 1.6; }
+  line-height: 1.6;
+  color: rgba(18, 44, 63, 0.8); }
+
+p.lg {
+  font-size: 1.176470588em;
+  letter-spacing: -0.34px;
+  color: #122C3F; }
 
 p.sm {
   font-size: 0.9em; }
@@ -105,10 +111,13 @@ li {
 .disclaimer-text {
   line-height: 1.4em;
   margin-bottom: 0; }
+  .disclaimer-text a {
+    color: rgba(18, 44, 63, 0.8);
+    border-color: rgba(18, 44, 63, 0.8); }
 
 .btn-default {
   height: 3em;
-  line-height: 1.647058824em;
+  line-height: 3em;
   background: #EC1A3D;
   color: #fff;
   font-size: 1em;
@@ -173,8 +182,8 @@ input[type=email] {
 .rally-form input[type=tel],
 .rally-form input[type=email] {
   display: block;
-  height: 3em;
-  font-size: 1.1em;
+  height: 2.75em;
+  font-size: 1em;
   width: 100%;
   border-radius: 8px;
   margin-bottom: 1em;
@@ -189,22 +198,41 @@ input[type=email] {
 
 .signup-form p.lg {
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 1.117647059em;
   line-height: 1.4; }
 
 .hero-background {
-  background: #1B45E1 url("assets/images/hero-bg.png");
-  background-repeat: no-repeat;
-  background-size: cover; }
+  background: #1B45E1;
+  position: relative; }
+  .hero-background::before {
+    opacity: 0;
+    content: "";
+    position: absolute;
+    background: url("assets/images/hero-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transition: 0.3s; }
+    @media screen and (min-width: 1200px) {
+      .hero-background::before {
+        background-position-y: -50px; } }
+  .hero-background.loaded::before {
+    opacity: 1; }
 
 .home-hero {
-  height: 500px;
+  height: 320px;
   position: relative; }
   .home-hero .logo {
-    margin-top: 3em; }
+    margin-top: 2em; }
   @media screen and (max-width: 992px) {
     .home-hero {
       height: auto; } }
+  .home-hero .fb-container {
+    height: 30px;
+    padding: 20px 0; }
 
 @media screen and (max-width: 764px) {
   .logo {
@@ -232,20 +260,25 @@ nav {
     line-height: 1em;
     color: #fff;
     font-weight: bold;
-    border-bottom: 1px dotted #1B45E1;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0);
     transition: all 0.3s cubic-bezier(0.43, 0.58, 0.1, 0.9); }
     nav a:hover, nav a:visited:hover {
       color: #fff;
       line-height: 2.5em;
       border-bottom: 1px dotted #fff;
       text-decoration: none; }
+  nav a.btn {
+    padding-top: 10px; }
 
 .first-line-bold::first-line {
   font-weight: bold; }
 
 .intro {
-  padding: 2em 0;
-  font-size: 1.2em; }
+  padding: 2em 0; }
+  .intro a {
+    color: rgba(18, 44, 63, 0.8); }
+  .intro p {
+    padding-bottom: 20px; }
 
 .signup-form,
 .rally-form,
@@ -269,7 +302,7 @@ nav {
 
 .signup-form {
   position: absolute;
-  top: -320px; }
+  top: -260px; }
   @media screen and (max-width: 992px) {
     .signup-form {
       position: inherit;
@@ -304,15 +337,24 @@ nav {
 
 #signup .btn-default {
   position: relative;
-  top: -10px; }
+  top: -10px;
+  padding: 0 3em; }
+  @media screen and (max-width: 992px) {
+    #signup .btn-default {
+      display: block;
+      width: 100%; } }
 
 section {
-  border-top: 4px solid #EC1A3D;
+  border-top: 2px solid #EC1A3D;
   margin: 4em 0; }
 
 .illo-comments {
   position: absolute;
   left: -70%; }
+
+@media screen and (min-width: 992px) {
+  .how-it-works {
+    margin-top: 8em; } }
 
 footer {
   background-color: #1B45E1;
@@ -331,7 +373,11 @@ footer {
   footer .fb-container {
     max-width: 100%;
     overflow: hidden;
-    margin-bottom: 4em; }
+    margin-bottom: 4em;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    border-radius: 6px; }
 
 @media screen and (min-width: 992px) {
   .rally-header {

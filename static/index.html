@@ -46,11 +46,21 @@
 <div class="home-hero hero-background">
     <div class="container">
         <div class="row">
-            <nav class="col-md-5 col-md-offset-7">
+            <nav class="col-md-5 col-md-offset-5 hidden-md hidden-lg">
                 <a href="#top">Home</a>
                 <a href="#about">About</a>
                 <a href="#signup-form" class="btn btn-secondary inverted">Sign Up</a>
             </nav>
+            <div class="col-md-2 col-md-offset-10 col-sm-offset-0 hidden-sm hidden-xs fb-container">
+                <div class="fb-like"
+                  data-href="https://www.facebook.com/callsforchange"
+                  data-layout="button_count"
+                  data-action="like"
+                  data-show-faces="true"
+                  data-size="large"
+                  data-share="true">
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -100,6 +110,7 @@
                     </svg>
                 </div>
                 <h2 class="subheader">Together, we can make a difference in just 10 minutes a week</h2>
+
             </div>
         </div>
     </div>
@@ -109,9 +120,21 @@
     <div class="row">
         <div class="col-md-7">
             <div class="intro">
-                <p><strong>It's easier than you think to do something to advance women and equality.</strong> Calling members of Congress is <a href="https://www.nytimes.com/2016/11/22/us/politics/heres-why-you-should-call-not-email-your-legislators.html">one of the most effective ways</a> to influence the political process, and Calls for Change makes it <a href="#how-it-works">simple and fast</a>. Each week we'll send you all the information you need &mdash; from the right phone number to a sample script &mdash; so in just ten minutes you can make sure your voice is heard. <a href="#about">Learn more about the issues we’re focused on</a>.</p>
+                <p><strong>It's easier than you think to do something to advance women and equality.</strong> Calling members of Congress is one of the <a href="https://www.nytimes.com/2016/11/22/us/politics/heres-why-you-should-call-not-email-your-legislators.html">most effective ways</a> to influence the political process, and Calls for Change makes it <a href="#how-it-works">simple and fast</a>. Each week we'll send you all the information you need &mdash; from the right phone number to a sample script &mdash; so in just ten minutes you can make sure your voice is heard. <a href="#about">Learn more about the issues we’re focused on</a>.</p>
 
                 <p>We hope you'll join us.</p>
+                <div class="visible-xs visible-sm fb-container">
+                    <div class="fb-like"
+                      data-href="https://www.facebook.com/callsforchange"
+                      data-layout="button_count"
+                      data-action="like"
+                      data-show-faces="true"
+                      data-size="large"
+                      data-share="true">
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
@@ -147,8 +170,8 @@
                     </div>
                     <input id="address_autocomplete" type="text" class="with-description" name="street_address" required placeholder="Street address" />
                     <p class="xs">We’ll use your voting address to find your members of Congress.</p>
-                    <input type="email" name="email_address" required placeholder="Your email address" />
-                    <input type="tel" pattern="\(?[0-9]{3}\)?\s?-?[0-9]{3}\s?-?[0-9]{4}" name="phone_number" placeholder="Your phone number (123-456-7890)"
+                    <input type="email" name="email_address" required placeholder="Email address" />
+                    <input type="tel" pattern="\(?[0-9]{3}\)?\s?-?[0-9]{3}\s?-?[0-9]{4}" name="phone_number" placeholder="Phone number (123-456-7890)"
                         oninvalid="this.setCustomValidity('(650) 123-4567')" oninput="setCustomValidity('')" />
 
                     <p class="xs keep-in-touch">How would you like us to keep in touch?</p>
@@ -198,7 +221,8 @@
                 <h3>How it Works</h3>
                 <ul>
                     <li>
-                    We follow everything from public debates on important issues to bills going through the legislative process so we know what deserves our collective attention at any given moment.
+                    We follow everything from public debates on issues to bills going through the legislative process.
+                    <!-- We follow everything from public debates on important issues to bills going through the legislative process so we know what deserves our collective attention at any given moment. -->
                     </li><li>
                     Each week we text and/or email you background info on a timely topic, a sample script, and the phone numbers for your members of Congress for one-tap calling from your smartphone.
                     </li><li>
@@ -208,7 +232,6 @@
                     </li><li>
                     That’s it!
                     </li>
-                <p>We’ll keep an eye out for bills heading to the floor, key appointments, and recent executive orders to focus our efforts on the issues that deserve our attention right now.</p>
                 </ul>
             </section>
             <section id="about">
