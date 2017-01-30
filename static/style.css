@@ -111,10 +111,13 @@ li {
 .disclaimer-text {
   line-height: 1.4em;
   margin-bottom: 0; }
+  .disclaimer-text a {
+    color: rgba(18, 44, 63, 0.8);
+    border-color: rgba(18, 44, 63, 0.8); }
 
 .btn-default {
   height: 3em;
-  line-height: 1.647058824em;
+  line-height: 3em;
   background: #EC1A3D;
   color: #fff;
   font-size: 1em;
@@ -213,17 +216,23 @@ input[type=email] {
     top: 0;
     bottom: 0;
     transition: 0.3s; }
+    @media screen and (min-width: 1200px) {
+      .hero-background::before {
+        background-position-y: -50px; } }
   .hero-background.loaded::before {
     opacity: 1; }
 
 .home-hero {
-  height: 440px;
+  height: 320px;
   position: relative; }
   .home-hero .logo {
     margin-top: 2em; }
   @media screen and (max-width: 992px) {
     .home-hero {
       height: auto; } }
+  .home-hero .fb-container {
+    height: 30px;
+    padding: 20px 0; }
 
 @media screen and (max-width: 764px) {
   .logo {
@@ -258,12 +267,18 @@ nav {
       line-height: 2.5em;
       border-bottom: 1px dotted #fff;
       text-decoration: none; }
+  nav a.btn {
+    padding-top: 10px; }
 
 .first-line-bold::first-line {
   font-weight: bold; }
 
 .intro {
   padding: 2em 0; }
+  .intro a {
+    color: rgba(18, 44, 63, 0.8); }
+  .intro p {
+    padding-bottom: 20px; }
 
 .signup-form,
 .rally-form,
@@ -287,7 +302,7 @@ nav {
 
 .signup-form {
   position: absolute;
-  top: -320px; }
+  top: -260px; }
   @media screen and (max-width: 992px) {
     .signup-form {
       position: inherit;
@@ -336,6 +351,10 @@ section {
 .illo-comments {
   position: absolute;
   left: -70%; }
+
+@media screen and (min-width: 992px) {
+  .how-it-works {
+    margin-top: 8em; } }
 
 footer {
   background-color: #1B45E1;

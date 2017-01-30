@@ -121,13 +121,17 @@ li {
 .disclaimer-text {
     line-height: 1.4em;
     margin-bottom: 0;
+    a {
+      color: fade-out($brand-black, 0.2);
+      border-color: fade-out($brand-black, 0.2);
+    }
 }
 
 // BUTTONS
 
 .btn-default {
     height: 3em;
-    line-height: 1.647058824em;
+    line-height: 3em;
     background: $brand-red;
 
     color: #fff;
@@ -254,6 +258,9 @@ input[type=email] {
         top: 0;
         bottom: 0;
         transition: 0.3s;
+        @media screen and (min-width: 1200px) {
+          background-position-y: -50px;
+        }
     }
 
     &.loaded::before {
@@ -262,7 +269,7 @@ input[type=email] {
 }
 
 .home-hero {
-    height: 440px;
+    height: 320px;
     position: relative;
 
     .logo {
@@ -271,6 +278,11 @@ input[type=email] {
 
      @media screen and (max-width: $collapse-breakpoint) {
         height: auto;
+    }
+
+    .fb-container {
+      height: 30px;
+      padding: 20px 0;
     }
 }
 
@@ -317,6 +329,9 @@ nav {
             text-decoration: none;
         }
     }
+    a.btn {
+      padding-top: 10px;
+    }
 }
 
 .first-line-bold::first-line {
@@ -328,6 +343,12 @@ nav {
 .intro {
     padding: 2em 0;
     //font-size: 1.2em;
+    a {
+      color: fade-out($brand-black, 0.2)
+    }
+    p {
+      padding-bottom: 20px;
+    }
 }
 
 .signup-form,
@@ -351,7 +372,7 @@ nav {
 
 .signup-form {
     position: absolute;
-    top: -320px;
+    top: -260px;
 
     @media screen and (max-width: $collapse-breakpoint) {
         position: inherit;
@@ -417,6 +438,12 @@ section {
 .illo-comments {
     position: absolute;
     left: -70%;
+}
+
+@media screen and (min-width: $collapse-breakpoint) {
+  .how-it-works {
+    margin-top: 8em;
+  }
 }
 
 // FOOTER
