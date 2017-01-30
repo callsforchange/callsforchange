@@ -17,8 +17,8 @@ module.exports.handler = (event, context, callback) => {
   });
 
   var promise = Promise.resolve(true);
-  for(var count = 0; count < 2000; count+= 10) {
-    promise.then(new Promise((resolve) => setTimeout(resolve, 500)))
+  for(var count = 0; count < 2000; count+= 5) {
+    promise.then(new Promise((resolve) => setTimeout(resolve, 2000)))
     .then(mailchimp.get(`/lists/${process.env.MAILCHIMP_LIST_ID}/members?offset=${count}`)
     .then(mc_response => {
       console.log(JSON.stringify(mc_response.members));
