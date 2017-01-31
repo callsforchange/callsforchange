@@ -1,5 +1,6 @@
 'use strict';
 
+var sleep = require('system-sleep');
 var mailchimp = require('../libs/mailchimp');
 var AWS = require('aws-sdk');
 
@@ -16,17 +17,18 @@ module.exports.handler = (event, context, callback) => {
     event: JSON.stringify(event),
   });
 
+  const batch_size = 300;
   var promise = Promise.resolve(true);
-  for(var count = 0; count < 2000; count+= 5) {
-    promise.then(new Promise((resolve) => setTimeout(resolve, 2000)))
-    .then(mailchimp.get(`/lists/${process.env.MAILCHIMP_LIST_ID}/members?offset=${count}`)
+  for(var count = 0; count < 2100; count += batch_size) {
+    sleep(200);
+    promise.then(mailchimp.get(`/lists/${process.env.MAILCHIMP_LIST_ID}/members?offset=${count}&limit=${batch_size}`))
     .then(mc_response => {
       console.log(JSON.stringify(mc_response.members));
 
       var mailchimp_id;
       return Promise.all(mc_response.members.map(member => {
         mailchimp_id = member.id;
-        
+
         console.log(`Member: ${JSON.stringify(member)}`);
         return docClient.query({
           TableName: 'subscribers',
@@ -51,23 +53,33 @@ module.exports.handler = (event, context, callback) => {
         })
 
         .then(representatives => {
-          return mailchimp.patch(`lists/${process.env.MAILCHIMP_LIST_ID}/members/${member.id}`, {
-            merge_fields: {
-              H_NAME:   representatives.Item.repname,
-              H_PHONE:  representatives.Item.repnumber,
-              S1_NAME:  representatives.Item.senate1name,
-              S1_PHONE: representatives.Item.senate1number,
-              S2_NAME:  representatives.Item.senate2name,
-              S2_PHONE: representatives.Item.senate2number,
+          return {
+            method: 'POST',
+            path: `lists/${process.env.MAILCHIMP_LIST_ID}/members/${member.id}`,
+            body: {
+              merge_fields: {
+                H_NAME:   representatives.Item.repname,
+                H_PHONE:  representatives.Item.repnumber,
+                S1_NAME:  representatives.Item.senate1name,
+                S1_PHONE: representatives.Item.senate1number,
+                S2_NAME:  representatives.Item.senate2name,
+                S2_PHONE: representatives.Item.senate2number,
+              }
             }
-          });
+          };
         })
 
         .catch(error => {
           console.log('There was an error ' + JSON.stringify(error));
         });
-      }));
-    }));
+      }))
+
+      .then(all_results => {
+        console.log(`Results: ${JSON.stringify(all_results)}`);
+        return mailchimp.post('/batches', all_results);
+      });
+
+    });
   }
 
   return promise
