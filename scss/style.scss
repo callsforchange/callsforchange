@@ -349,6 +349,11 @@ nav {
     p {
       padding-bottom: 20px;
     }
+    @media screen and (min-width: $collapse-breakpoint) {
+      background-image: url('assets/images/arrow.svg');
+      background-repeat: no-repeat;
+      background-position: 230px bottom;
+    }
 }
 
 .signup-form,

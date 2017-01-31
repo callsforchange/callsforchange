@@ -279,6 +279,11 @@ nav {
     color: rgba(18, 44, 63, 0.8); }
   .intro p {
     padding-bottom: 20px; }
+  @media screen and (min-width: 992px) {
+    .intro {
+      background-image: url("assets/images/arrow.svg");
+      background-repeat: no-repeat;
+      background-position: 230px bottom; } }
 
 .signup-form,
 .rally-form,
