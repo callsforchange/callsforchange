@@ -243,7 +243,7 @@ input[type=email] {
 
 .hero-background {
     background: $brand-blue;
-   
+
     position: relative;
 
     &::before {
@@ -266,6 +266,12 @@ input[type=email] {
     &.loaded::before {
         opacity: 1;
     }
+
+    .instruction {
+        height: 30px;
+        padding: 20px 0;
+        color: #FFF;
+    }
 }
 
 .home-hero {
@@ -282,8 +288,17 @@ input[type=email] {
 
     .fb-container {
       height: 30px;
-      padding: 20px 0;
+      padding-top: 10px;
+
+      .fb-like {
+        background-color: rgba(0,0,0,0.2);
+        padding: 10px;
+      }
     }
+}
+
+.form-and-blurb {
+    padding-top: 10px;
 }
 
 @media screen and (max-width: 764px) {
@@ -342,7 +357,8 @@ nav {
 
 .intro {
     padding: 2em 0;
-    //font-size: 1.2em;
+    font-size: 1.1em;
+    color: #000;
     a {
       color: fade-out($brand-black, 0.2)
     }

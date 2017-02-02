@@ -221,6 +221,10 @@ input[type=email] {
         background-position-y: -50px; } }
   .hero-background.loaded::before {
     opacity: 1; }
+  .hero-background .instruction {
+    height: 30px;
+    padding: 20px 0;
+    color: #FFF; }
 
 .home-hero {
   height: 320px;
@@ -232,7 +236,13 @@ input[type=email] {
       height: auto; } }
   .home-hero .fb-container {
     height: 30px;
-    padding: 20px 0; }
+    padding-top: 10px; }
+    .home-hero .fb-container .fb-like {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 10px; }
+
+.form-and-blurb {
+  padding-top: 10px; }
 
 @media screen and (max-width: 764px) {
   .logo {
@@ -274,7 +284,9 @@ nav {
   font-weight: bold; }
 
 .intro {
-  padding: 2em 0; }
+  padding: 2em 0;
+  font-size: 1.1em;
+  color: #000; }
   .intro a {
     color: rgba(18, 44, 63, 0.8); }
   .intro p {
