@@ -243,7 +243,7 @@ input[type=email] {
 
 .hero-background {
     background: $brand-blue;
-   
+
     position: relative;
 
     &::before {
@@ -266,6 +266,13 @@ input[type=email] {
     &.loaded::before {
         opacity: 1;
     }
+
+    .instruction {
+        height: 30px;
+        padding: 20px 0;
+        color: #FFF;
+        text-align: right;
+    }
 }
 
 .home-hero {
@@ -282,8 +289,18 @@ input[type=email] {
 
     .fb-container {
       height: 30px;
-      padding: 20px 0;
+      padding-top: 10px;
+
+      .fb-like {
+        background-color: rgba(0,0,0,0.4);
+        padding: 8px;
+        border-radius: 6px;
+      }
     }
+}
+
+.form-and-blurb {
+    padding-top: 10px;
 }
 
 @media screen and (max-width: 764px) {
@@ -342,7 +359,7 @@ nav {
 
 .intro {
     padding: 2em 0;
-    //font-size: 1.2em;
+    font-size: 1.1em;
     a {
       color: fade-out($brand-black, 0.2)
     }
@@ -442,7 +459,7 @@ section {
 
 @media screen and (min-width: $collapse-breakpoint) {
   .how-it-works {
-    margin-top: 8em;
+    margin-top: 4em;
   }
 }
 
