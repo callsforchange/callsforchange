@@ -1,23 +1,19 @@
 @font-face {
   font-family: "Fabriga";
   src: url("assets/fonts/Fabriga/Fabriga-Regular.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Regular.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Regular.woff") format("woff"); }
-
 @font-face {
   font-family: "Fabriga";
   font-style: italic;
   src: url("assets/fonts/Fabriga/Fabriga-Italic.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Italic.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Italic.woff") format("woff"); }
-
 @font-face {
   font-family: "Fabriga";
   font-weight: bold;
   src: url("assets/fonts/Fabriga/Fabriga-Bold.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-Bold.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-Bold.woff") format("woff"); }
-
 @font-face {
   font-family: "Fabriga";
   font-weight: bold;
   font-style: italic;
   src: url("assets/fonts/Fabriga/Fabriga-BoldItalic.eot") format("eot"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff2") format("woff2"), url("assets/fonts/Fabriga/Fabriga-BoldItalic.woff") format("woff"); }
-
 html, body {
   font-family: "Fabriga", -apple-system-body, Helvetica, sans-serif;
   color: #122C3F;
@@ -224,7 +220,8 @@ input[type=email] {
   .hero-background .instruction {
     height: 30px;
     padding: 20px 0;
-    color: #FFF; }
+    color: #FFF;
+    text-align: right; }
 
 .home-hero {
   height: 320px;
@@ -238,8 +235,9 @@ input[type=email] {
     height: 30px;
     padding-top: 10px; }
     .home-hero .fb-container .fb-like {
-      background-color: rgba(0, 0, 0, 0.2);
-      padding: 10px; }
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 8px;
+      border-radius: 6px; }
 
 .form-and-blurb {
   padding-top: 10px; }
@@ -252,13 +250,13 @@ input[type=email] {
     padding: 0;
     padding-bottom: 20.479714%;
     margin-top: 0; }
+
   .logo svg {
     position: absolute;
     height: 100%;
     width: 100%;
     left: 0;
     top: 0; } }
-
 nav {
   text-align: right;
   margin: 1.25em 0;
@@ -285,8 +283,7 @@ nav {
 
 .intro {
   padding: 2em 0;
-  font-size: 1.1em;
-  color: #000; }
+  font-size: 1.1em; }
   .intro a {
     color: rgba(18, 44, 63, 0.8); }
   .intro p {
@@ -338,7 +335,6 @@ nav {
     padding-right: .5em; }
   .name-input-group .last {
     padding-left: .5em; } }
-
 .call-row {
   display: flex;
   padding-bottom: 2em; }
@@ -367,7 +363,6 @@ section {
 @media screen and (min-width: 992px) {
   .how-it-works {
     margin-top: 8em; } }
-
 footer {
   background-color: #1B45E1;
   padding-bottom: 2em; }
@@ -403,12 +398,10 @@ footer {
     -webkit-align-items: center;
     -webkit-box-align: center;
     align-items: center; } }
-
 @media screen and (max-width: 992px) {
   .rally-header > .container {
     padding-top: 30px;
     padding-bottom: 30px; } }
-
 .rally-name {
   font-size: 120%; }
 

@@ -271,6 +271,7 @@ input[type=email] {
         height: 30px;
         padding: 20px 0;
         color: #FFF;
+        text-align: right;
     }
 }
 
@@ -291,8 +292,9 @@ input[type=email] {
       padding-top: 10px;
 
       .fb-like {
-        background-color: rgba(0,0,0,0.2);
-        padding: 10px;
+        background-color: rgba(0,0,0,0.4);
+        padding: 8px;
+        border-radius: 6px;
       }
     }
 }
@@ -358,7 +360,6 @@ nav {
 .intro {
     padding: 2em 0;
     font-size: 1.1em;
-    color: #000;
     a {
       color: fade-out($brand-black, 0.2)
     }
