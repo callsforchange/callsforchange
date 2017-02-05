@@ -90,6 +90,9 @@
     // TODO
     $(form)[0].reset();
     setFormMessage(form, 'All set, we received your information!  Look for your first text/email from us soon.');
+    if (typeof window.fbq !== 'undefined') {
+      fbq('track', 'CompleteRegistration', { value: 1.00, currency: 'USD' });
+    }
   }
 
   function showFormErrors(form) {
