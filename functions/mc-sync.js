@@ -43,7 +43,7 @@ function transformMemberToUpdate(member) {
         member.merge_fields.S1_PHONE !== representatives.Item.senate1number ||
         member.merge_fields.S2_NAME  !== representatives.Item.senate2name   ||
         member.merge_fields.S2_PHONE !== representatives.Item.senate2number) {
-      return {
+      const update = {
         method: 'PATCH',
         path: `lists/${process.env.MAILCHIMP_LIST_ID}/members/${member.id}`,
         body: JSON.stringify({
@@ -57,6 +57,8 @@ function transformMemberToUpdate(member) {
           }
         })
       };
+      console.log(JSON.stringify(update));
+      return update;
     } else {
       console.log('Skipping pre-filled ' + member.email_address);
       return Promise.resolve(false);
@@ -75,6 +77,7 @@ function processBatch(count, batch_size) {
 
   .then(all_results => {
     const filtered_results = all_results.filter(res => res != false);
+    console.log(JSON.stringify(filtered_results));
     if (filtered_results.length > 0) {
       console.log('Applying batches: ', filtered_results);
       return mailchimp.post('/batches', {
