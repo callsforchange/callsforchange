@@ -12,7 +12,6 @@ In the root directory of the repo, run this command:
 `sass --watch scss/style.scss:static/style.css`
 
 
-
 ### Regenerating the representatives table
 Grab the data from [here](https://www.senate.gov/general/contact_information/senators_cfm.xml) and
 send it through [this online tool](http://xmlgrid.net/xml2text.html) to get the list of members in a
