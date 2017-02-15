@@ -24,4 +24,5 @@ and rogue commas (found in some names):
 ```
 %s/("([^,]*),([^,]*)"/\1 \2/g
 ```
-and of course check the data to make sure it looks legit.  Then manually deploy and invoke the `rehydrate` command.
+and of course check the data to make sure it looks legit.  
+Then manually deploy and invoke the `rehydrate` command.
